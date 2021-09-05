@@ -1,0 +1,23 @@
+cluster.name: elk-cluster-01
+node.name: es-master-01
+node.roles: [master, remote_cluster_client, data_hot, data_content, ingest, ml, transform]
+network.host: elk-es-master-01-pod.elknet
+http.port: 9200
+transport.port: 9300
+discovery.type: single-node
+bootstrap.memory_lock: true
+indices.fielddata.cache.size: 20%
+xpack.license.self_generated.type: basic
+xpack.security.enabled: true
+xpack.security.http.ssl.enabled: true
+xpack.security.http.ssl.keystore.path: "elastic-http.p12"
+xpack.security.http.ssl.verification_mode: certificate
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.verification_mode: full
+xpack.security.transport.ssl.client_authentication: required
+xpack.security.transport.ssl.keystore.path: elastic-transport.p12
+xpack.security.transport.ssl.truststore.path: elastic-transport.p12
+xpack.monitoring.collection.enabled: true
+s3.client.default.protocol: http
+s3.client.default.endpoint: "elk-minio-01-pod.elknet:9000"
+s3.client.default.path_style_access: "true"

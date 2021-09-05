@@ -1,0 +1,40 @@
+cluster.name: elk-cluster-01
+node.name: es-warm-02
+node.roles: [data_warm]
+network.host: SERVER_IP
+http.port: 9200
+transport.port: 9300
+discovery.seed_hosts:
+  - SERVER_IP_FOR_es-coord-01:9300
+  - SERVER_IP_FOR_es-master-01:9300
+  - SERVER_IP_FOR_es-master-02:9300
+  - SERVER_IP_FOR_es-master-03:9300
+  - SERVER_IP_FOR_es-hot-01:9300
+  - SERVER_IP_FOR_es-hot-02:9300
+  - SERVER_IP_FOR_es-warm-01:9300
+  - SERVER_IP_FOR_es-warm-02:9300
+  - SERVER_IP_FOR_es-cold-01:9300
+  - SERVER_IP_FOR_es-cold-02:9300
+  - SERVER_IP_FOR_es-ml-01:9300
+  - SERVER_IP_FOR_es-ingest-01:9300
+  - SERVER_IP_FOR_es-transform-01:9300
+cluster.initial_master_nodes:
+  - es-master-01
+  - es-master-02
+  - es-master-03
+bootstrap.memory_lock: true
+indices.fielddata.cache.size: 20%
+xpack.license.self_generated.type: basic
+xpack.security.enabled: true
+xpack.security.http.ssl.enabled: true
+xpack.security.http.ssl.keystore.path: "elastic-http.p12"
+xpack.security.http.ssl.verification_mode: full
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.verification_mode: full
+xpack.security.transport.ssl.client_authentication: required
+xpack.security.transport.ssl.keystore.path: elastic-transport.p12
+xpack.security.transport.ssl.truststore.path: elastic-transport.p12
+xpack.monitoring.collection.enabled: true
+s3.client.default.protocol: http
+s3.client.default.endpoint: "SERVER_IP_FOR_minio-01:9000"
+s3.client.default.path_style_access: "true"

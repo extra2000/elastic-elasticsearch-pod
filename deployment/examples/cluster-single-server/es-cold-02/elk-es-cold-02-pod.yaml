@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: elk-es-cold-02-pod
+  name: elk-es-cold-02-pod
+  annotations:
+    seccomp.security.alpha.kubernetes.io/pod: localhost/default.json
+spec:
+  restartPolicy: OnFailure
+  hostNetwork: false
+  containers:
+  - name: es-cold-02
+    image: localhost/extra2000/elastic/elasticsearch
+    securityContext:
+      runAsGroup: 1000
+      runAsUser: 1000
+      allowPrivilegeEscalation: false
+      privileged: false
+      capabilities:
+        add: []
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+      seLinuxOptions:
+        type: elk_es_cold_02_pod_es_cold_02.process
+    resources:
+      requests:
+        memory: 1000Mi
+        cpu: 1000m
+      limits:
+        memory: 1000Mi
+        cpu: 1000m
+    ports:
+    - containerPort: 9200
+      hostPort: 9209
+      hostIP: 0.0.0.0
+      protocol: tcp
+    - containerPort: 9300
+      hostPort: 9309
+      hostIP: 0.0.0.0
+      protocol: tcp
+    env:
+    - name: ES_JAVA_OPTS
+      valueFrom:
+        configMapKeyRef:
+          name: es-cold-02-configmap
+          key: env_java_opts
+    volumeMounts:
+    - mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+      name: es-cold-02-yml
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/elastic-ca.p12
+      name: es-cold-02-ssl-ca
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/elastic-transport.p12
+      name: es-cold-02-ssl-transport
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/elastic-http.p12
+      name: es-cold-02-ssl-http
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/elasticsearch.keystore
+      name: es-cold-02-keystore
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/data
+      name: es-cold-02-data
+  volumes:
+  - name: es-cold-02-yml
+    hostPath:
+      path: ./configs/es-cold-02.yml
+  - name: es-cold-02-ssl-ca
+    hostPath:
+      path: ./secrets/elastic-ca.p12
+  - name: es-cold-02-ssl-transport
+    hostPath:
+      path: ./secrets/certificate-bundle/es-cold-02/es-cold-02.p12
+  - name: es-cold-02-ssl-http
+    hostPath:
+      path: ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12
+  - name: es-cold-02-keystore
+    hostPath:
+      path: ./secrets/es-cold-02.keystore
+  - name: es-cold-02-data
+    persistentVolumeClaim:
+      claimName: elk-es-cold-02-data

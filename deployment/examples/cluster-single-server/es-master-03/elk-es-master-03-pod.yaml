@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: elk-es-master-03-pod
+  name: elk-es-master-03-pod
+  annotations:
+    seccomp.security.alpha.kubernetes.io/pod: localhost/default.json
+spec:
+  restartPolicy: OnFailure
+  hostNetwork: false
+  containers:
+  - name: es-master-03
+    image: localhost/extra2000/elastic/elasticsearch
+    securityContext:
+      runAsGroup: 1000
+      runAsUser: 1000
+      allowPrivilegeEscalation: false
+      privileged: false
+      capabilities:
+        add: []
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+      seLinuxOptions:
+        type: elk_es_master_03_pod_es_master_03.process
+    resources:
+      requests:
+        memory: 1000Mi
+        cpu: 1000m
+      limits:
+        memory: 1000Mi
+        cpu: 1000m
+    ports:
+    - containerPort: 9200
+      hostPort: 9203
+      hostIP: 0.0.0.0
+      protocol: tcp
+    - containerPort: 9300
+      hostPort: 9303
+      hostIP: 0.0.0.0
+      protocol: tcp
+    env:
+    - name: ES_JAVA_OPTS
+      valueFrom:
+        configMapKeyRef:
+          name: es-master-03-configmap
+          key: env_java_opts
+    volumeMounts:
+    - mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+      name: es-master-03-yml
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/elastic-ca.p12
+      name: es-master-03-ssl-ca
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/elastic-transport.p12
+      name: es-master-03-ssl-transport
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/elastic-http.p12
+      name: es-master-03-ssl-http
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/elasticsearch.keystore
+      name: es-master-03-keystore
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/data
+      name: es-master-03-data
+  volumes:
+  - name: es-master-03-yml
+    hostPath:
+      path: ./configs/es-master-03.yml
+  - name: es-master-03-ssl-ca
+    hostPath:
+      path: ./secrets/elastic-ca.p12
+  - name: es-master-03-ssl-transport
+    hostPath:
+      path: ./secrets/certificate-bundle/es-master-03/es-master-03.p12
+  - name: es-master-03-ssl-http
+    hostPath:
+      path: ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12
+  - name: es-master-03-keystore
+    hostPath:
+      path: ./secrets/es-master-03.keystore
+  - name: es-master-03-data
+    persistentVolumeClaim:
+      claimName: elk-es-master-03-data
