@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v1.0.0...v1.0.1) (2021-09-08)
+
+
+### Fixes
+
+* **host_preparations:** add `git` installation ([e5d5e77](https://github.com/extra2000/elastic-elasticsearch-pod/commit/e5d5e77307c3c3d5298f41c3414a850263fc954c))
+
 ## 1.0.0 (2021-09-06)
 
 
