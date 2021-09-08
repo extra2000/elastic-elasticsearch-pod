@@ -3,6 +3,15 @@ Host Preparations
 
 Preparing hosts for deploying Elasticsearch Cluster.
 
+Git Installations
+-----------------
+
+Execute the following command to install Git:
+
+.. code-block:: bash
+
+    sudo dnf install git
+
 Podman Installations
 --------------------
 
