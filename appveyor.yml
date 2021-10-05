@@ -1,4 +1,4 @@
-os: Ubuntu
+os: Ubuntu2004
 platform:
   - x64
 install:
