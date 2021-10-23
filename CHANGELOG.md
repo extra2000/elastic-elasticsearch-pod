@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.1.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v1.0.1...v1.1.0) (2021-10-23)
+
+
+### Features
+
+* **dockerfile:** upgrade Elasticsearch from `7.14.1` to `7.15.0` ([548f0fd](https://github.com/extra2000/elastic-elasticsearch-pod/commit/548f0fdc62c1b83976810f65b5ce8e3502441038))
+
+
+### Documentations
+
+* **configs:** add empty `reindex.remote.whitelist` ([4ff2439](https://github.com/extra2000/elastic-elasticsearch-pod/commit/4ff2439700422be8a309651b7bbb951989bb6e96))
+
+
+### Continuous Integrations
+
+* **appveyor:** ensure certificates always latest ([2a132d7](https://github.com/extra2000/elastic-elasticsearch-pod/commit/2a132d7d404e7876b28cc44da9cfac000586cd04))
+* **appveyor:** upgrade Ubuntu from `18.04` to `20.04` ([50cf0cb](https://github.com/extra2000/elastic-elasticsearch-pod/commit/50cf0cb0949f51b2c2a2ef1b53b43c71ead855a1))
+
 ### [1.0.1](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v1.0.0...v1.0.1) (2021-09-08)
 
 
