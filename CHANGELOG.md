@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v1.2.0...v1.3.0) (2021-11-02)
+
+
+### Features
+
+* **deployment:** add general single instance deployment ([3ca2618](https://github.com/extra2000/elastic-elasticsearch-pod/commit/3ca2618b99a807173f36f93be91979e2a1f33f37))
+
+
+### Documentations
+
+* **deployment:** add docs for general single instance deployment ([87ff57f](https://github.com/extra2000/elastic-elasticsearch-pod/commit/87ff57f05217241f6132375e05a1a2c275df0a0a))
+
 ## [1.2.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v1.1.0...v1.2.0) (2021-10-25)
 
 
