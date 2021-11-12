@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v1.3.1...v1.4.0) (2021-11-12)
+
+
+### Features
+
+* **es:** update from version `7.15.1` to `7.15.2` ([d7a5d95](https://github.com/extra2000/elastic-elasticsearch-pod/commit/d7a5d95c9146f1a86b135db44632a6e94c369142))
+
 ### [1.3.1](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v1.3.0...v1.3.1) (2021-11-02)
 
 
