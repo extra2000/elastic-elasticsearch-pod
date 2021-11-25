@@ -16,6 +16,14 @@ Getting Started
 
 Make sure to create global secrets according to Chapter :ref:`creating_global_secrets`.
 
+Create directory and clone our repository:
+
+.. code-block:: bash
+
+    mkdir ~/extra2000
+    cd ~/extra2000
+    git clone https://github.com/extra2000/elastic-elasticsearch-pod.git
+
 ``cd`` into ``elastic-elasticsearch-pod/deployment/examples/``:
 
 .. code-block:: bash
