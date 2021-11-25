@@ -51,7 +51,7 @@ Ensure the ``./_global_secrets_`` directory is labeled as ``container_file_t``:
 
 .. code-block:: bash
 
-    podman run -it --network none --rm -v ./_global_secrets_:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil ca --out /tmp/secrets/elastic-ca.p12
+    podman run -it --network none --rm -v ./_global_secrets_:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil ca --ca-dn "CN=Extra2000 Elastic Stack" --out /tmp/secrets/elastic-ca.p12
 
 .. note::
 
