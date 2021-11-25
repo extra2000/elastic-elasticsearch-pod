@@ -56,3 +56,9 @@ Ensure the ``./_global_secrets_`` directory is labeled as ``container_file_t``:
 .. note::
 
     You can use password ``abcde12345`` for the testing purpose.
+
+Check and make sure the CA certificate is correct:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in _global_secrets_/elastic-ca.p12 -nodes | openssl x509 -noout -text | less
