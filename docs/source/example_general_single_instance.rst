@@ -172,6 +172,12 @@ Extract the certificate archive:
 
     unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
 
+Verify the ``es-master-01.p12`` certificate:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/certificate-bundle/es-master-01/es-master-01.p12 -nodes | openssl x509 -noout -text | less
+
 Creating HTTP SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -213,6 +219,13 @@ Extract the certificate archive:
 .. code-block:: bash
 
     unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
+
+Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
+    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
 
 Creating Keystore
 ~~~~~~~~~~~~~~~~~

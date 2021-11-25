@@ -192,6 +192,12 @@ Extract the certificate archive:
 
     unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
 
+Verify the ``es-master-01.p12`` certificate:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/certificate-bundle/es-master-01/es-master-01.p12 -nodes | openssl x509 -noout -text | less
+
 Creating HTTP SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -233,6 +239,13 @@ Extract the certificate archive:
 .. code-block:: bash
 
     unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
+
+Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
+    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
 
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
@@ -324,6 +337,12 @@ Extract the certificate archive:
 
     unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
 
+Verify the ``es-master-02.p12`` certificate:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/certificate-bundle/es-master-02/es-master-02.p12 -nodes | openssl x509 -noout -text | less
+
 Creating HTTP SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -365,6 +384,13 @@ Extract the certificate archive:
 .. code-block:: bash
 
     unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
+
+Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
+    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
 
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
@@ -456,6 +482,12 @@ Extract the certificate archive:
 
     unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
 
+Verify the ``es-master-03.p12`` certificate:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/certificate-bundle/es-master-03/es-master-03.p12 -nodes | openssl x509 -noout -text | less
+
 Creating HTTP SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -497,6 +529,13 @@ Extract the certificate archive:
 .. code-block:: bash
 
     unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
+
+Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
+    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
 
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
@@ -588,6 +627,12 @@ Extract the certificate archive:
 
     unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
 
+Verify the ``es-hot-01.p12`` certificate:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/certificate-bundle/es-hot-01/es-hot-01.p12 -nodes | openssl x509 -noout -text | less
+
 Creating HTTP SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -629,6 +674,13 @@ Extract the certificate archive:
 .. code-block:: bash
 
     unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
+
+Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
+    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
 
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
@@ -720,6 +772,12 @@ Extract the certificate archive:
 
     unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
 
+Verify the ``es-hot-02.p12`` certificate:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/certificate-bundle/es-hot-02/es-hot-02.p12 -nodes | openssl x509 -noout -text | less
+
 Creating HTTP SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -761,6 +819,13 @@ Extract the certificate archive:
 .. code-block:: bash
 
     unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
+
+Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
+    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
 
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
@@ -852,6 +917,12 @@ Extract the certificate archive:
 
     unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
 
+Verify the ``es-warm-01.p12`` certificate:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/certificate-bundle/es-warm-01/es-warm-01.p12 -nodes | openssl x509 -noout -text | less
+
 Creating HTTP SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -893,6 +964,13 @@ Extract the certificate archive:
 .. code-block:: bash
 
     unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
+
+Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
+    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
 
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
@@ -984,6 +1062,12 @@ Extract the certificate archive:
 
     unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
 
+Verify the ``es-warm-02.p12`` certificate:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/certificate-bundle/es-warm-02/es-warm-02.p12 -nodes | openssl x509 -noout -text | less
+
 Creating HTTP SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1025,6 +1109,13 @@ Extract the certificate archive:
 .. code-block:: bash
 
     unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
+
+Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
+    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
 
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
@@ -1116,6 +1207,12 @@ Extract the certificate archive:
 
     unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
 
+Verify the ``es-cold-01.p12`` certificate:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/certificate-bundle/es-cold-01/es-cold-01.p12 -nodes | openssl x509 -noout -text | less
+
 Creating HTTP SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1157,6 +1254,13 @@ Extract the certificate archive:
 .. code-block:: bash
 
     unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
+
+Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
+    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
 
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
@@ -1248,6 +1352,12 @@ Extract the certificate archive:
 
     unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
 
+Verify the ``es-cold-02.p12`` certificate:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/certificate-bundle/es-cold-02/es-cold-02.p12 -nodes | openssl x509 -noout -text | less
+
 Creating HTTP SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1301,6 +1411,13 @@ Extract the certificate archive:
 .. code-block:: bash
 
     unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
+
+Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
+    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
 
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
@@ -1392,6 +1509,12 @@ Extract the certificate archive:
 
     unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
 
+Verify the ``es-ml-01.p12`` certificate:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/certificate-bundle/es-ml-01/es-ml-01.p12 -nodes | openssl x509 -noout -text | less
+
 Creating HTTP SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1433,6 +1556,13 @@ Extract the certificate archive:
 .. code-block:: bash
 
     unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
+
+Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
+    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
 
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
@@ -1522,6 +1652,12 @@ Extract the certificate archive:
 
     unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
 
+Verify the ``es-ingest-01.p12`` certificate:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/certificate-bundle/es-ingest-01/es-ingest-01.p12 -nodes | openssl x509 -noout -text | less
+
 Creating HTTP SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1565,6 +1701,13 @@ Extract the certificate archive:
 .. code-block:: bash
 
     unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
+
+Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
+    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
 
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
@@ -1654,6 +1797,12 @@ Extract the certificate archive:
 
     unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
 
+Verify the ``es-transform-01.p12`` certificate:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/certificate-bundle/es-transform-01/es-transform-01.p12 -nodes | openssl x509 -noout -text | less
+
 Creating HTTP SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1697,6 +1846,13 @@ Extract the certificate archive:
 .. code-block:: bash
 
     unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
+
+Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
+    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
 
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
@@ -1786,6 +1942,12 @@ Extract the certificate archive:
 
     unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
 
+Verify the ``es-coord-01.p12`` certificate:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/certificate-bundle/es-coord-01/es-coord-01.p12 -nodes | openssl x509 -noout -text | less
+
 Creating HTTP SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1829,6 +1991,13 @@ Extract the certificate archive:
 .. code-block:: bash
 
     unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
+
+Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
+
+.. code-block:: bash
+
+    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
+    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
 
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
