@@ -123,7 +123,7 @@ Create transport SSL certificate:
    * - Enter name for directories and files of ``es-master-01``
      - ``es-master-01``
    * - Enter IP Addresses for instance
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Enter DNS names for instance
      - ``SERVER_FQDN``, ``localhost``
    * - Would you like to specify another instance?
@@ -173,7 +173,7 @@ Creating HTTP SSL Certificate
    * - Which hostnames will be used to connect to your nodes?
      - ``SERVER_FQDN``, ``localhost``
    * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Other certificate options. Do you wish to change any of these options? [y/N]
      - ``n``
    * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
@@ -268,7 +268,7 @@ Create transport SSL certificate:
    * - Enter name for directories and files of ``es-master-02``
      - ``es-master-02``
    * - Enter IP Addresses for instance
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Enter DNS names for instance
      - ``SERVER_FQDN``, ``localhost``
    * - Would you like to specify another instance?
@@ -318,7 +318,7 @@ Creating HTTP SSL Certificate
    * - Which hostnames will be used to connect to your nodes?
      - ``SERVER_FQDN``, ``localhost``
    * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Other certificate options. Do you wish to change any of these options? [y/N]
      - ``n``
    * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
@@ -413,7 +413,7 @@ Create transport SSL certificate:
    * - Enter name for directories and files of ``es-master-03``
      - ``es-master-03``
    * - Enter IP Addresses for instance
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Enter DNS names for instance
      - ``SERVER_FQDN``, ``localhost``
    * - Would you like to specify another instance?
@@ -463,7 +463,7 @@ Creating HTTP SSL Certificate
    * - Which hostnames will be used to connect to your nodes?
      - ``SERVER_FQDN``, ``localhost``
    * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Other certificate options. Do you wish to change any of these options? [y/N]
      - ``n``
    * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
@@ -558,7 +558,7 @@ Create transport SSL certificate:
    * - Enter name for directories and files of ``es-hot-01``
      - ``es-hot-01``
    * - Enter IP Addresses for instance
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Enter DNS names for instance
      - ``SERVER_FQDN``, ``localhost``
    * - Would you like to specify another instance?
@@ -608,7 +608,7 @@ Creating HTTP SSL Certificate
    * - Which hostnames will be used to connect to your nodes?
      - ``SERVER_FQDN``, ``localhost``
    * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Other certificate options. Do you wish to change any of these options? [y/N]
      - ``n``
    * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
@@ -703,7 +703,7 @@ Create transport SSL certificate:
    * - Enter name for directories and files of ``es-hot-02``
      - ``es-hot-02``
    * - Enter IP Addresses for instance
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Enter DNS names for instance
      - ``SERVER_FQDN``, ``localhost``
    * - Would you like to specify another instance?
@@ -848,7 +848,7 @@ Create transport SSL certificate:
    * - Enter name for directories and files of ``es-warm-01``
      - ``es-warm-01``
    * - Enter IP Addresses for instance
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Enter DNS names for instance
      - ``SERVER_FQDN``, ``localhost``
    * - Would you like to specify another instance?
@@ -993,7 +993,7 @@ Create transport SSL certificate:
    * - Enter name for directories and files of ``es-warm-02``
      - ``es-warm-02``
    * - Enter IP Addresses for instance
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Enter DNS names for instance
      - ``SERVER_FQDN``, ``localhost``
    * - Would you like to specify another instance?
@@ -1043,7 +1043,7 @@ Creating HTTP SSL Certificate
    * - Which hostnames will be used to connect to your nodes?
      - ``SERVER_FQDN``, ``localhost``
    * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Other certificate options. Do you wish to change any of these options? [y/N]
      - ``n``
    * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
@@ -1138,7 +1138,7 @@ Create transport SSL certificate:
    * - Enter name for directories and files of ``es-cold-01``
      - ``es-cold-01``
    * - Enter IP Addresses for instance
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Enter DNS names for instance
      - ``SERVER_FQDN``, ``localhost``
    * - Would you like to specify another instance?
@@ -1188,7 +1188,7 @@ Creating HTTP SSL Certificate
    * - Which hostnames will be used to connect to your nodes?
      - ``SERVER_FQDN``, ``localhost``
    * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Other certificate options. Do you wish to change any of these options? [y/N]
      - ``n``
    * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
@@ -1283,7 +1283,7 @@ Create transport SSL certificate:
    * - Enter name for directories and files of ``es-cold-02``
      - ``es-cold-02``
    * - Enter IP Addresses for instance
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Enter DNS names for instance
      - ``SERVER_FQDN``, ``localhost``
    * - Would you like to specify another instance?
@@ -1345,7 +1345,7 @@ Ensure the ``./secrets`` directory is labeled as ``container_file_t``:
    * - Which hostnames will be used to connect to your nodes?
      - ``SERVER_FQDN``, ``localhost``
    * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Other certificate options. Do you wish to change any of these options? [y/N]
      - ``n``
    * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
@@ -1440,7 +1440,7 @@ Create transport SSL certificate:
    * - Enter name for directories and files of ``es-ml-01``
      - ``es-ml-01``
    * - Enter IP Addresses for instance
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Enter DNS names for instance
      - ``SERVER_FQDN``, ``localhost``
    * - Would you like to specify another instance?
@@ -1490,7 +1490,7 @@ Creating HTTP SSL Certificate
    * - Which hostnames will be used to connect to your nodes?
      - ``SERVER_FQDN``, ``localhost``
    * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Other certificate options. Do you wish to change any of these options? [y/N]
      - ``n``
    * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
@@ -1583,7 +1583,7 @@ Create transport SSL certificate:
    * - Enter name for directories and files of ``es-ingest-01``
      - ``es-ingest-01``
    * - Enter IP Addresses for instance
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Enter DNS names for instance
      - ``SERVER_FQDN``, ``localhost``
    * - Would you like to specify another instance?
@@ -1635,7 +1635,7 @@ Create HTTP SSL certificate:
    * - Which hostnames will be used to connect to your nodes?
      - ``SERVER_FQDN``, ``localhost``
    * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Other certificate options. Do you wish to change any of these options? [y/N]
      - ``n``
    * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
@@ -1728,7 +1728,7 @@ Create transport SSL certificate:
    * - Enter name for directories and files of ``es-transform-01``
      - ``es-transform-01``
    * - Enter IP Addresses for instance
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Enter DNS names for instance
      - ``SERVER_FQDN``, ``localhost``
    * - Would you like to specify another instance?
@@ -1780,7 +1780,7 @@ Create HTTP SSL certificate:
    * - Which hostnames will be used to connect to your nodes?
      - ``SERVER_FQDN``, ``localhost``
    * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Other certificate options. Do you wish to change any of these options? [y/N]
      - ``n``
    * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
@@ -1873,7 +1873,7 @@ Create transport SSL certificate:
    * - Enter name for directories and files of ``es-coord-01``
      - ``es-coord-01``
    * - Enter IP Addresses for instance
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Enter DNS names for instance
      - ``SERVER_FQDN``, ``localhost``
    * - Would you like to specify another instance?
@@ -1925,7 +1925,7 @@ Create HTTP SSL certificate:
    * - Which hostnames will be used to connect to your nodes?
      - ``SERVER_FQDN``, ``localhost``
    * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``,``127.0.0.1``
+     - ``SERVER_IP``, ``127.0.0.1``
    * - Other certificate options. Do you wish to change any of these options? [y/N]
      - ``n``
    * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
