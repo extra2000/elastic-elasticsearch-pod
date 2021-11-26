@@ -26,7 +26,6 @@ Build our Elasticsearch image:
 
 .. code-block:: bash
 
-    sudo podman build -t extra2000/elastic/elasticsearch -f Dockerfile.aarch64 .
     podman build -t extra2000/elastic/elasticsearch -f Dockerfile.aarch64 .
 
 Create Podman Network (the ``elknet``)
@@ -276,14 +275,14 @@ Deploy ``es-master-01``
 
 .. code-block:: bash
 
-    sudo podman play kube --network elknet --configmap configmaps/es-master-01.yaml elk-es-master-01-pod.yaml
+    podman play kube --network elknet --configmap configmaps/es-master-01.yaml elk-es-master-01-pod.yaml
 
 Setup Elasticsearch REST API Credentials
 ----------------------------------------
 
 .. code-block:: bash
 
-    sudo podman exec -it elk-es-master-01-pod-es-master-01 elasticsearch-setup-passwords interactive
+    podman exec -it elk-es-master-01-pod-es-master-01 elasticsearch-setup-passwords interactive
 
 .. note::
 
@@ -294,7 +293,7 @@ Check Cluster Health
 
 .. code-block:: bash
 
-    sudo podman run -it --rm --network elknet docker.io/curlimages/curl --insecure --user elastic:abcde12345 https://elk-es-master-01-pod.elknet:9200/_cluster/health/?pretty
+    podman run -it --rm --network elknet docker.io/curlimages/curl --insecure --user elastic:abcde12345 https://elk-es-master-01-pod.elknet:9200/_cluster/health/?pretty
 
 If success, the command above should produce the following output:
 

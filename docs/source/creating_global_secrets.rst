@@ -29,7 +29,6 @@ Build our Elasticsearch image:
 
 .. code-block:: bash
 
-    sudo podman build -t extra2000/elastic/elasticsearch -f Dockerfile.amd64 .
     podman build -t extra2000/elastic/elasticsearch -f Dockerfile.amd64 .
 
 .. _creating-ca-certificate:

@@ -34,7 +34,6 @@ Build our Elasticsearch image:
 
 .. code-block:: bash
 
-    sudo podman build -t extra2000/elastic/elasticsearch -f Dockerfile.amd64 .
     podman build -t extra2000/elastic/elasticsearch -f Dockerfile.amd64 .
 
 Create Podman Network (the ``elknet``)
@@ -2118,7 +2117,7 @@ Deploy ``es-master-01``
 
 .. code-block:: bash
 
-    sudo podman play kube --network elknet --configmap configmaps/es-master-01.yaml --seccomp-profile-root ./seccomp elk-es-master-01-pod.yaml
+    podman play kube --network elknet --configmap configmaps/es-master-01.yaml --seccomp-profile-root ./seccomp elk-es-master-01-pod.yaml
 
 Deploy ``es-master-02``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -2131,7 +2130,7 @@ Deploy ``es-master-02``
 
 .. code-block:: bash
 
-    sudo podman play kube --network elknet --configmap configmaps/es-master-02.yaml --seccomp-profile-root ./seccomp elk-es-master-02-pod.yaml
+    podman play kube --network elknet --configmap configmaps/es-master-02.yaml --seccomp-profile-root ./seccomp elk-es-master-02-pod.yaml
 
 Deploy ``es-master-03``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -2145,7 +2144,7 @@ Deploy ``es-master-03``
 
 .. code-block:: bash
 
-    sudo podman play kube --network elknet --configmap configmaps/es-master-03.yaml --seccomp-profile-root ./seccomp elk-es-master-03-pod.yaml
+    podman play kube --network elknet --configmap configmaps/es-master-03.yaml --seccomp-profile-root ./seccomp elk-es-master-03-pod.yaml
 
 Deploy ``es-hot-01``
 ~~~~~~~~~~~~~~~~~~~~
@@ -2158,7 +2157,7 @@ Deploy ``es-hot-01``
 
 .. code-block:: bash
 
-    sudo podman play kube --network elknet --configmap configmaps/es-hot-01.yaml --seccomp-profile-root ./seccomp elk-es-hot-01-pod.yaml
+    podman play kube --network elknet --configmap configmaps/es-hot-01.yaml --seccomp-profile-root ./seccomp elk-es-hot-01-pod.yaml
 
 Deploy ``es-hot-02``
 ~~~~~~~~~~~~~~~~~~~~
@@ -2171,7 +2170,7 @@ Deploy ``es-hot-02``
 
 .. code-block:: bash
 
-    sudo podman play kube --network elknet --configmap configmaps/es-hot-02.yaml --seccomp-profile-root ./seccomp elk-es-hot-02-pod.yaml
+    podman play kube --network elknet --configmap configmaps/es-hot-02.yaml --seccomp-profile-root ./seccomp elk-es-hot-02-pod.yaml
 
 Deploy ``es-warm-01``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -2184,7 +2183,7 @@ Deploy ``es-warm-01``
 
 .. code-block:: bash
 
-    sudo podman play kube --network elknet --configmap configmaps/es-warm-01.yaml --seccomp-profile-root ./seccomp elk-es-warm-01-pod.yaml
+    podman play kube --network elknet --configmap configmaps/es-warm-01.yaml --seccomp-profile-root ./seccomp elk-es-warm-01-pod.yaml
 
 Deploy ``es-warm-02``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -2197,7 +2196,7 @@ Deploy ``es-warm-02``
 
 .. code-block:: bash
 
-    sudo podman play kube --network elknet --configmap configmaps/es-warm-02.yaml --seccomp-profile-root ./seccomp elk-es-warm-02-pod.yaml
+    podman play kube --network elknet --configmap configmaps/es-warm-02.yaml --seccomp-profile-root ./seccomp elk-es-warm-02-pod.yaml
 
 Deploy ``es-cold-01``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -2210,7 +2209,7 @@ Deploy ``es-cold-01``
 
 .. code-block:: bash
 
-    sudo podman play kube --network elknet --configmap configmaps/es-cold-01.yaml --seccomp-profile-root ./seccomp elk-es-cold-01-pod.yaml
+    podman play kube --network elknet --configmap configmaps/es-cold-01.yaml --seccomp-profile-root ./seccomp elk-es-cold-01-pod.yaml
 
 Deploy ``es-cold-02``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -2223,7 +2222,7 @@ Deploy ``es-cold-02``
 
 .. code-block:: bash
 
-    sudo podman play kube --network elknet --configmap configmaps/es-cold-02.yaml --seccomp-profile-root ./seccomp elk-es-cold-02-pod.yaml
+    podman play kube --network elknet --configmap configmaps/es-cold-02.yaml --seccomp-profile-root ./seccomp elk-es-cold-02-pod.yaml
 
 Deploy ``es-ml-01``
 ~~~~~~~~~~~~~~~~~~~
@@ -2236,7 +2235,7 @@ Deploy ``es-ml-01``
 
 .. code-block:: bash
 
-    sudo podman play kube --network elknet --configmap configmaps/es-ml-01.yaml --seccomp-profile-root ./seccomp elk-es-ml-01-pod.yaml
+    podman play kube --network elknet --configmap configmaps/es-ml-01.yaml --seccomp-profile-root ./seccomp elk-es-ml-01-pod.yaml
 
 Deploy ``es-ingest-01``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -2249,7 +2248,7 @@ Deploy ``es-ingest-01``
 
 .. code-block:: bash
 
-    sudo podman play kube --network elknet --configmap configmaps/es-ingest-01.yaml --seccomp-profile-root ./seccomp elk-es-ingest-01-pod.yaml
+    podman play kube --network elknet --configmap configmaps/es-ingest-01.yaml --seccomp-profile-root ./seccomp elk-es-ingest-01-pod.yaml
 
 Deploy ``es-transform-01``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2262,7 +2261,7 @@ Deploy ``es-transform-01``
 
 .. code-block:: bash
 
-    sudo podman play kube --network elknet --configmap configmaps/es-transform-01.yaml --seccomp-profile-root ./seccomp elk-es-transform-01-pod.yaml
+    podman play kube --network elknet --configmap configmaps/es-transform-01.yaml --seccomp-profile-root ./seccomp elk-es-transform-01-pod.yaml
 
 Deploy ``es-coord-01``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -2275,14 +2274,14 @@ Deploy ``es-coord-01``
 
 .. code-block:: bash
 
-    sudo podman play kube --network elknet --configmap configmaps/es-coord-01.yaml --seccomp-profile-root ./seccomp elk-es-coord-01-pod.yaml
+    podman play kube --network elknet --configmap configmaps/es-coord-01.yaml --seccomp-profile-root ./seccomp elk-es-coord-01-pod.yaml
 
 Setup Elasticsearch REST API Credentials
 ----------------------------------------
 
 .. code-block:: bash
 
-    sudo podman exec -it elk-es-coord-01-pod-es-coord-01 elasticsearch-setup-passwords interactive
+    podman exec -it elk-es-coord-01-pod-es-coord-01 elasticsearch-setup-passwords interactive
 
 .. note::
 
@@ -2293,7 +2292,7 @@ Check Cluster Health
 
 .. code-block:: bash
 
-    sudo podman run -it --rm --network elknet docker.io/curlimages/curl --insecure --user elastic:abcde12345 https://elk-es-coord-01-pod.elknet:9200/_cluster/health/?pretty
+    podman run -it --rm --network elknet docker.io/curlimages/curl --insecure --user elastic:abcde12345 https://elk-es-coord-01-pod.elknet:9200/_cluster/health/?pretty
 
 If success, the command above should produce the following output:
 
