@@ -22,7 +22,7 @@ cluster.initial_master_nodes:
   - es-master-01
   - es-master-02
   - es-master-03
-bootstrap.memory_lock: true
+bootstrap.memory_lock: false
 indices.fielddata.cache.size: 20%
 xpack.license.self_generated.type: basic
 xpack.security.enabled: true

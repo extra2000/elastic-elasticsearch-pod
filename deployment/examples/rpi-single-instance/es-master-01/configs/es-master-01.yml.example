@@ -5,7 +5,7 @@ network.host: elk-es-master-01-pod.elknet
 http.port: 9200
 transport.port: 9300
 discovery.type: single-node
-bootstrap.memory_lock: true
+bootstrap.memory_lock: false
 indices.fielddata.cache.size: 20%
 xpack.license.self_generated.type: basic
 xpack.security.enabled: true
