@@ -128,6 +128,12 @@ Create Config Files
     cp -v configmaps/es-master-01.yaml{.example,}
     cp -v configs/es-master-01.yml{.example,}
 
+Allow config files to be mounted into container:
+
+.. code-block:: bash
+
+    chcon -R -v -t container_file_t ./configs
+
 Creating Transport SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
