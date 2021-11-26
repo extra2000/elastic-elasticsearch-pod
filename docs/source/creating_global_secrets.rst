@@ -16,14 +16,20 @@ Clone repository `extra2000/elastic-elasticsearch-pod`_ on your laptop:
 
     git clone https://github.com/extra2000/elastic-elasticsearch-pod
 
-Build our Elasticsearch image
------------------------------
-
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/``:
+``cd`` into the project root's directory:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/
+    cd elastic-elasticsearch-pod
+
+Build our Elasticsearch image
+-----------------------------
+
+From the project's root directory, ``cd`` into ``deployment/examples/``:
+
+.. code-block:: bash
+
+    cd deployment/examples/
 
 Build our Elasticsearch image:
 
@@ -36,11 +42,11 @@ Build our Elasticsearch image:
 Creating ``elastic-ca.p12`` :term:`CA` Certificate
 --------------------------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment``:
+From the project's root directory ``cd`` into ``deployment``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment
+    cd deployment
 
 Ensure the ``./_global_secrets_`` directory is labeled as ``container_file_t``:
 

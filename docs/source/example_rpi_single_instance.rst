@@ -16,11 +16,17 @@ Create directory and clone our repository:
     cd ~/extra2000
     git clone https://github.com/extra2000/elastic-elasticsearch-pod.git
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/``:
+``cd`` into project's root directory:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/
+    cd elastic-elasticsearch-pod
+
+From the project's root directory, ``cd`` into ``deployment/examples/``:
+
+.. code-block:: bash
+
+    cd deployment/examples/
 
 Build our Elasticsearch image:
 
@@ -113,11 +119,11 @@ Deploy MinIO project from `extra2000/minio-pod`_ and use the following credentia
 Prerequisites for ``es-master-01``
 ----------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/rpi-single-instance/es-master-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/rpi-single-instance/es-master-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/rpi-single-instance/es-master-01
+    cd deployment/examples/rpi-single-instance/es-master-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -267,11 +273,11 @@ Deployment
 Deploy ``es-master-01``
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/rpi-single-instance/es-master-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/rpi-single-instance/es-master-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/rpi-single-instance/es-master-01
+    cd deployment/examples/rpi-single-instance/es-master-01
 
 .. code-block:: bash
 

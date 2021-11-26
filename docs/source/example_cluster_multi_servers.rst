@@ -24,11 +24,15 @@ On every nodes, create directory and clone our repository:
     cd ~/extra2000
     git clone https://github.com/extra2000/elastic-elasticsearch-pod.git
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/``:
+``cd`` into project's root directory:
+
+    cd elastic-elasticsearch-pod
+
+From the project's root directory, ``cd`` into ``deployment/examples/``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/
+    cd deployment/examples/
 
 Build our Elasticsearch image:
 
@@ -39,11 +43,11 @@ Build our Elasticsearch image:
 Distribute CA
 -------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/_global_secrets_/``:
+From the project's root directory, ``cd`` into ``deployment/_global_secrets_/``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/_global_secrets_/
+    cd deployment/_global_secrets_/
 
 Then, distribute into all nodes:
 
@@ -80,11 +84,11 @@ Deploy MinIO project from `extra2000/minio-pod`_ and use the following credentia
 Prerequisites for ``es-master-01``
 ----------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-multi-servers/es-master-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-01
+    cd deployment/examples/cluster-multi-servers/es-master-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -231,11 +235,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-master-02``
 ----------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-02``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-multi-servers/es-master-02``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-02
+    cd deployment/examples/cluster-multi-servers/es-master-02
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -382,11 +386,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-master-03``
 ----------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-03``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-multi-servers/es-master-03``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-03
+    cd deployment/examples/cluster-multi-servers/es-master-03
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -533,11 +537,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-hot-01``
 -------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-hot-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-multi-servers/es-hot-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-hot-01
+    cd deployment/examples/cluster-multi-servers/es-hot-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -684,11 +688,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-hot-02``
 -------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-hot-02``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-multi-servers/es-hot-02``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-hot-02
+    cd deployment/examples/cluster-multi-servers/es-hot-02
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -835,11 +839,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-warm-01``
 --------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-warm-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-multi-servers/es-warm-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-warm-01
+    cd deployment/examples/cluster-multi-servers/es-warm-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -986,11 +990,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-warm-02``
 --------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-warm-02``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-multi-servers/es-warm-02``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-warm-02
+    cd deployment/examples/cluster-multi-servers/es-warm-02
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -1137,11 +1141,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-cold-01``
 --------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-multi-servers/es-cold-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-01
+    cd deployment/examples/cluster-multi-servers/es-cold-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -1288,11 +1292,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-cold-02``
 --------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-02``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-multi-servers/es-cold-02``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-02
+    cd deployment/examples/cluster-multi-servers/es-cold-02
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -1451,11 +1455,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-ml-01``
 ------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-ml-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-multi-servers/es-ml-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-ml-01
+    cd deployment/examples/cluster-multi-servers/es-ml-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -1600,11 +1604,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-ingest-01``
 ----------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-ingest-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-multi-servers/es-ingest-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-ingest-01
+    cd deployment/examples/cluster-multi-servers/es-ingest-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -1751,11 +1755,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-transform-01``
 -------------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-transform-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-multi-servers/es-transform-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-transform-01
+    cd deployment/examples/cluster-multi-servers/es-transform-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -1902,11 +1906,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-coord-01``
 ---------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-coord-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-multi-servers/es-coord-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-coord-01
+    cd deployment/examples/cluster-multi-servers/es-coord-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~

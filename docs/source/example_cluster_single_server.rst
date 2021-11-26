@@ -24,11 +24,17 @@ Create directory and clone our repository:
     cd ~/extra2000
     git clone https://github.com/extra2000/elastic-elasticsearch-pod.git
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/``:
+``cd`` into project's root directory:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/
+    cd elastic-elasticsearch-pod
+
+From the project's root directory, ``cd`` into ``deployment/examples/``:
+
+.. code-block:: bash
+
+    cd deployment/examples/
 
 Build our Elasticsearch image:
 
@@ -92,11 +98,11 @@ Create ``/etc/cni/net.d/elknet.conflist`` file:
 Distribute CA
 -------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/``:
+From the project's root directory, ``cd`` into ``deployment/``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/
+    cd deployment/
 
 Then, distribute into all nodes:
 
@@ -133,11 +139,11 @@ Deploy MinIO project from `extra2000/minio-pod`_ and use the following credentia
 Prerequisites for ``es-master-01``
 ----------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-master-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-master-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-master-01
+    cd deployment/examples/cluster-single-server/es-master-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -284,11 +290,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-master-02``
 ----------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-master-02``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-master-02``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-master-02
+    cd deployment/examples/cluster-single-server/es-master-02
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -435,11 +441,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-master-03``
 ----------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-master-03``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-master-03``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-master-03
+    cd deployment/examples/cluster-single-server/es-master-03
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -586,11 +592,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-hot-01``
 -------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-hot-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-hot-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-hot-01
+    cd deployment/examples/cluster-single-server/es-hot-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -737,11 +743,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-hot-02``
 -------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-hot-02``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-hot-02``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-hot-02
+    cd deployment/examples/cluster-single-server/es-hot-02
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -888,11 +894,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-warm-01``
 --------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-warm-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-warm-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-warm-01
+    cd deployment/examples/cluster-single-server/es-warm-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -1039,11 +1045,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-warm-02``
 --------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-warm-02``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-warm-02``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-warm-02
+    cd deployment/examples/cluster-single-server/es-warm-02
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -1190,11 +1196,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-cold-01``
 --------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-cold-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-cold-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-cold-01
+    cd deployment/examples/cluster-single-server/es-cold-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -1504,11 +1510,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-ml-01``
 ------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-ml-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-ml-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-ml-01
+    cd deployment/examples/cluster-single-server/es-ml-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -1653,11 +1659,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-ingest-01``
 ----------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-ingest-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-ingest-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-ingest-01
+    cd deployment/examples/cluster-single-server/es-ingest-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -1804,11 +1810,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-transform-01``
 -------------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-transform-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-transform-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-transform-01
+    cd deployment/examples/cluster-single-server/es-transform-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -1955,11 +1961,11 @@ Verify that the SELinux module exists:
 Prerequisites for ``es-coord-01``
 ---------------------------------
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-coord-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-coord-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-coord-01
+    cd deployment/examples/cluster-single-server/es-coord-01
 
 Create Config Files
 ~~~~~~~~~~~~~~~~~~~
@@ -2109,11 +2115,11 @@ Deployment
 Deploy ``es-master-01``
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-master-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-master-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-master-01
+    cd deployment/examples/cluster-single-server/es-master-01
 
 .. code-block:: bash
 
@@ -2122,11 +2128,11 @@ Deploy ``es-master-01``
 Deploy ``es-master-02``
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-master-02``:
+From the project's root directory, ``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-master-02``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-master-02
+    cd deployment/examples/cluster-single-server/es-master-02
 
 .. code-block:: bash
 
@@ -2135,12 +2141,11 @@ Deploy ``es-master-02``
 Deploy ``es-master-03``
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-master-03``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-master-03``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-master-03
+    cd deployment/examples/cluster-single-server/es-master-03
 
 .. code-block:: bash
 
@@ -2149,11 +2154,11 @@ Deploy ``es-master-03``
 Deploy ``es-hot-01``
 ~~~~~~~~~~~~~~~~~~~~
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-hot-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-hot-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-hot-01
+    cd deployment/examples/cluster-single-server/es-hot-01
 
 .. code-block:: bash
 
@@ -2162,11 +2167,11 @@ Deploy ``es-hot-01``
 Deploy ``es-hot-02``
 ~~~~~~~~~~~~~~~~~~~~
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-hot-02``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-hot-02``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-hot-02
+    cd deployment/examples/cluster-single-server/es-hot-02
 
 .. code-block:: bash
 
@@ -2175,11 +2180,11 @@ Deploy ``es-hot-02``
 Deploy ``es-warm-01``
 ~~~~~~~~~~~~~~~~~~~~~
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-warm-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-warm-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-warm-01
+    cd deployment/examples/cluster-single-server/es-warm-01
 
 .. code-block:: bash
 
@@ -2188,11 +2193,11 @@ Deploy ``es-warm-01``
 Deploy ``es-warm-02``
 ~~~~~~~~~~~~~~~~~~~~~
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-warm-02``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-warm-02``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-warm-02
+    cd deployment/examples/cluster-single-server/es-warm-02
 
 .. code-block:: bash
 
@@ -2201,11 +2206,11 @@ Deploy ``es-warm-02``
 Deploy ``es-cold-01``
 ~~~~~~~~~~~~~~~~~~~~~
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-cold-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-cold-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-cold-01
+    cd deployment/examples/cluster-single-server/es-cold-01
 
 .. code-block:: bash
 
@@ -2214,11 +2219,11 @@ Deploy ``es-cold-01``
 Deploy ``es-cold-02``
 ~~~~~~~~~~~~~~~~~~~~~
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-cold-02``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-cold-02``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-cold-02
+    cd deployment/examples/cluster-single-server/es-cold-02
 
 .. code-block:: bash
 
@@ -2227,11 +2232,11 @@ Deploy ``es-cold-02``
 Deploy ``es-ml-01``
 ~~~~~~~~~~~~~~~~~~~
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-ml-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-ml-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-ml-01
+    cd deployment/examples/cluster-single-server/es-ml-01
 
 .. code-block:: bash
 
@@ -2240,11 +2245,11 @@ Deploy ``es-ml-01``
 Deploy ``es-ingest-01``
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-ingest-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-ingest-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-ingest-01
+    cd deployment/examples/cluster-single-server/es-ingest-01
 
 .. code-block:: bash
 
@@ -2253,11 +2258,11 @@ Deploy ``es-ingest-01``
 Deploy ``es-transform-01``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-transform-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-transform-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-transform-01
+    cd deployment/examples/cluster-single-server/es-transform-01
 
 .. code-block:: bash
 
@@ -2266,11 +2271,11 @@ Deploy ``es-transform-01``
 Deploy ``es-coord-01``
 ~~~~~~~~~~~~~~~~~~~~~~
 
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-coord-01``:
+From the project's root directory, ``cd`` into ``deployment/examples/cluster-single-server/es-coord-01``:
 
 .. code-block:: bash
 
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-single-server/es-coord-01
+    cd deployment/examples/cluster-single-server/es-coord-01
 
 .. code-block:: bash
 
