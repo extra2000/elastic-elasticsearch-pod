@@ -13,8 +13,6 @@ spec:
   - name: es-cold-02
     image: localhost/extra2000/elastic/elasticsearch
     securityContext:
-      runAsGroup: 1000
-      runAsUser: 1000
       allowPrivilegeEscalation: false
       privileged: false
       capabilities:
