@@ -1,5 +1,5 @@
-Example Cluster Single Server Deployment
-========================================
+Cluster Single Server Deployment
+================================
 
 Example how to deploy a basic ELK cluster (the ``elk-cluster-01``) on a single server as shown in Figure below.
 

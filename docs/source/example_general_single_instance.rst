@@ -1,5 +1,5 @@
-Example General Single Instance Deployment
-==========================================
+Single Instance Deployment
+==========================
 
 Example how to deploy a basic ELK cluster (the ``elk-cluster-01``) on AMD64 machines for general purpose.
 

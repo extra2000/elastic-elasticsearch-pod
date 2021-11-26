@@ -1,5 +1,5 @@
-Example Raspberry Pi Single Instance Deployment
-===============================================
+Raspberry Pi Single Instance Deployment
+=======================================
 
 Example how to deploy a basic ELK cluster (the ``elk-cluster-01``) on a Raspberry Pi 4 B single instance.
 

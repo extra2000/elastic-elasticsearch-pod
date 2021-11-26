@@ -1,5 +1,5 @@
-Example Cluster Multiple Servers Deployment
-===========================================
+Cluster Multiple Servers Deployment
+===================================
 
 Example how to deploy a basic ELK cluster (the ``elk-cluster-01``) on multiple servers as shown in Figure below.
 
