@@ -2070,9 +2070,10 @@ Generate ``systemd`` files and enable on ``boot``:
 
 .. code-block:: bash
 
-    cd /etc/systemd/system/
-    sudo podman generate systemd --files --name es-master-01-pod
-    sudo systemctl enable pod-es-master-01-pod.service container-es-master-01-pod-es-master-01.service
+    mkdir -pv ~/.config/systemd/user
+    cd ~/.config/systemd/user
+    podman generate systemd --files --name es-master-01-pod
+    systemctl --user enable pod-es-master-01-pod.service container-es-master-01-pod-es-master-01.service
 
 Deploy ``es-master-02``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -2091,9 +2092,10 @@ Generate ``systemd`` files and enable on ``boot``:
 
 .. code-block:: bash
 
-    cd /etc/systemd/system/
-    sudo podman generate systemd --files --name es-master-02-pod
-    sudo systemctl enable pod-es-master-02-pod.service container-es-master-02-pod-es-master-02.service
+    mkdir -pv ~/.config/systemd/user
+    cd ~/.config/systemd/user
+    podman generate systemd --files --name es-master-02-pod
+    systemctl --user enable pod-es-master-02-pod.service container-es-master-02-pod-es-master-02.service
 
 Deploy ``es-master-03``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -2113,9 +2115,10 @@ Generate ``systemd`` files and enable on ``boot``:
 
 .. code-block:: bash
 
-    cd /etc/systemd/system/
-    sudo podman generate systemd --files --name es-master-03-pod
-    sudo systemctl enable pod-es-master-03-pod.service container-es-master-03-pod-es-master-03.service
+    mkdir -pv ~/.config/systemd/user
+    cd ~/.config/systemd/user
+    podman generate systemd --files --name es-master-03-pod
+    systemctl --user enable pod-es-master-03-pod.service container-es-master-03-pod-es-master-03.service
 
 Deploy ``es-hot-01``
 ~~~~~~~~~~~~~~~~~~~~
@@ -2134,9 +2137,10 @@ Generate ``systemd`` files and enable on ``boot``:
 
 .. code-block:: bash
 
-    cd /etc/systemd/system/
-    sudo podman generate systemd --files --name es-hot-01-pod
-    sudo systemctl enable pod-es-hot-01-pod.service container-es-hot-01-pod-es-hot-01.service
+    mkdir -pv ~/.config/systemd/user
+    cd ~/.config/systemd/user
+    podman generate systemd --files --name es-hot-01-pod
+    systemctl --user enable pod-es-hot-01-pod.service container-es-hot-01-pod-es-hot-01.service
 
 Deploy ``es-hot-02``
 ~~~~~~~~~~~~~~~~~~~~
@@ -2155,9 +2159,10 @@ Generate ``systemd`` files and enable on ``boot``:
 
 .. code-block:: bash
 
-    cd /etc/systemd/system/
-    sudo podman generate systemd --files --name es-hot-02-pod
-    sudo systemctl enable pod-es-hot-02-pod.service container-es-hot-02-pod-es-hot-02.service
+    mkdir -pv ~/.config/systemd/user
+    cd ~/.config/systemd/user
+    podman generate systemd --files --name es-hot-02-pod
+    systemctl --user enable pod-es-hot-02-pod.service container-es-hot-02-pod-es-hot-02.service
 
 Deploy ``es-warm-01``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -2176,9 +2181,10 @@ Generate ``systemd`` files and enable on ``boot``:
 
 .. code-block:: bash
 
-    cd /etc/systemd/system/
-    sudo podman generate systemd --files --name es-warm-01-pod
-    sudo systemctl enable pod-es-warm-01-pod.service container-es-warm-01-pod-es-warm-01.service
+    mkdir -pv ~/.config/systemd/user
+    cd ~/.config/systemd/user
+    podman generate systemd --files --name es-warm-01-pod
+    systemctl --user enable pod-es-warm-01-pod.service container-es-warm-01-pod-es-warm-01.service
 
 Deploy ``es-warm-02``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -2197,9 +2203,10 @@ Generate ``systemd`` files and enable on ``boot``:
 
 .. code-block:: bash
 
-    cd /etc/systemd/system/
-    sudo podman generate systemd --files --name es-warm-02-pod
-    sudo systemctl enable pod-es-warm-02-pod.service container-es-warm-02-pod-es-warm-02.service
+    mkdir -pv ~/.config/systemd/user
+    cd ~/.config/systemd/user
+    podman generate systemd --files --name es-warm-02-pod
+    systemctl --user enable pod-es-warm-02-pod.service container-es-warm-02-pod-es-warm-02.service
 
 Deploy ``es-cold-01``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -2218,9 +2225,10 @@ Generate ``systemd`` files and enable on ``boot``:
 
 .. code-block:: bash
 
-    cd /etc/systemd/system/
-    sudo podman generate systemd --files --name es-cold-01-pod
-    sudo systemctl enable pod-es-cold-01-pod.service container-es-cold-01-pod-es-cold-01.service
+    mkdir -pv ~/.config/systemd/user
+    cd ~/.config/systemd/user
+    podman generate systemd --files --name es-cold-01-pod
+    systemctl --user enable pod-es-cold-01-pod.service container-es-cold-01-pod-es-cold-01.service
 
 Deploy ``es-cold-02``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -2239,9 +2247,10 @@ Generate ``systemd`` files and enable on ``boot``:
 
 .. code-block:: bash
 
-    cd /etc/systemd/system/
-    sudo podman generate systemd --files --name es-cold-02-pod
-    sudo systemctl enable pod-es-cold-02-pod.service container-es-cold-02-pod-es-cold-02.service
+    mkdir -pv ~/.config/systemd/user
+    cd ~/.config/systemd/user
+    podman generate systemd --files --name es-cold-02-pod
+    systemctl --user enable pod-es-cold-02-pod.service container-es-cold-02-pod-es-cold-02.service
 
 Deploy ``es-ml-01``
 ~~~~~~~~~~~~~~~~~~~
@@ -2260,9 +2269,10 @@ Generate ``systemd`` files and enable on ``boot``:
 
 .. code-block:: bash
 
-    cd /etc/systemd/system/
-    sudo podman generate systemd --files --name es-ml-01-pod
-    sudo systemctl enable pod-es-ml-01-pod.service container-es-ml-01-pod-es-ml-01.service
+    mkdir -pv ~/.config/systemd/user
+    cd ~/.config/systemd/user
+    podman generate systemd --files --name es-ml-01-pod
+    systemctl --user enable pod-es-ml-01-pod.service container-es-ml-01-pod-es-ml-01.service
 
 Deploy ``es-ingest-01``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -2281,9 +2291,10 @@ Generate ``systemd`` files and enable on ``boot``:
 
 .. code-block:: bash
 
-    cd /etc/systemd/system/
-    sudo podman generate systemd --files --name es-ingest-01-pod
-    sudo systemctl enable pod-es-ingest-01-pod.service container-es-ingest-01-pod-es-ingest-01.service
+    mkdir -pv ~/.config/systemd/user
+    cd ~/.config/systemd/user
+    podman generate systemd --files --name es-ingest-01-pod
+    systemctl --user enable pod-es-ingest-01-pod.service container-es-ingest-01-pod-es-ingest-01.service
 
 Deploy ``es-transform-01``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2302,9 +2313,10 @@ Generate ``systemd`` files and enable on ``boot``:
 
 .. code-block:: bash
 
-    cd /etc/systemd/system/
-    sudo podman generate systemd --files --name es-transform-01-pod
-    sudo systemctl enable pod-es-transform-01-pod.service container-es-transform-01-pod-es-transform-01.service
+    mkdir -pv ~/.config/systemd/user
+    cd ~/.config/systemd/user
+    podman generate systemd --files --name es-transform-01-pod
+    systemctl --user enable pod-es-transform-01-pod.service container-es-transform-01-pod-es-transform-01.service
 
 Deploy ``es-coord-01``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -2323,9 +2335,10 @@ Generate ``systemd`` files and enable on ``boot``:
 
 .. code-block:: bash
 
-    cd /etc/systemd/system/
-    sudo podman generate systemd --files --name es-coord-01-pod
-    sudo systemctl enable pod-es-coord-01-pod.service container-es-coord-01-pod-es-coord-01.service
+    mkdir -pv ~/.config/systemd/user
+    cd ~/.config/systemd/user
+    podman generate systemd --files --name es-coord-01-pod
+    systemctl --user enable pod-es-coord-01-pod.service container-es-coord-01-pod-es-coord-01.service
 
 Setup Elasticsearch REST API Credentials
 ----------------------------------------
