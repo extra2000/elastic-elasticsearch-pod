@@ -282,11 +282,11 @@ Setup Elasticsearch REST API Credentials
 
 .. code-block:: bash
 
-    podman exec -it elk-es-master-01-pod-es-master-01 elasticsearch-setup-passwords interactive
+    podman exec -it elk-es-master-01-pod-es-master-01 elasticsearch-setup-passwords interactive --url "https://fqdn-es-master-01:9200"
 
 .. note::
 
-    For testing purpose, use password ``abcde12345`` for all.
+    Replace ``fqdn-es-master-01`` with your ``es-master-01``'s FQDN. For testing purpose, use password ``abcde12345`` for all.
 
 Check Cluster Health
 --------------------
