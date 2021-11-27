@@ -139,6 +139,12 @@ Allow config files to be mounted into container:
 
     chcon -R -v -t container_file_t ./configs
 
+Create pod file:
+
+.. code-block:: bash
+
+    cp -v elk-es-master-01-pod.yaml{.example,}
+
 Creating Transport SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

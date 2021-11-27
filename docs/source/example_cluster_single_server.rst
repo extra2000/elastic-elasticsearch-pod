@@ -159,6 +159,12 @@ Allow config files to be mounted into container:
 
     chcon -R -v -t container_file_t ./configs
 
+Create pod file:
+
+.. code-block:: bash
+
+    cp -v elk-es-master-01-pod.yaml{.example,}
+
 Creating Transport SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -309,6 +315,12 @@ Allow config files to be mounted into container:
 .. code-block:: bash
 
     chcon -R -v -t container_file_t ./configs
+
+Create pod file:
+
+.. code-block:: bash
+
+    cp -v elk-es-master-02-pod.yaml{.example,}
 
 Creating Transport SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -461,6 +473,12 @@ Allow config files to be mounted into container:
 
     chcon -R -v -t container_file_t ./configs
 
+Create pod file:
+
+.. code-block:: bash
+
+    cp -v elk-es-master-03-pod.yaml{.example,}
+
 Creating Transport SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -611,6 +629,12 @@ Allow config files to be mounted into container:
 .. code-block:: bash
 
     chcon -R -v -t container_file_t ./configs
+
+Create pod file:
+
+.. code-block:: bash
+
+    cp -v elk-es-hot-01-pod.yaml{.example,}
 
 Creating Transport SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -763,6 +787,12 @@ Allow config files to be mounted into container:
 
     chcon -R -v -t container_file_t ./configs
 
+Create pod file:
+
+.. code-block:: bash
+
+    cp -v elk-es-hot-02-pod.yaml{.example,}
+
 Creating Transport SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -913,6 +943,12 @@ Allow config files to be mounted into container:
 .. code-block:: bash
 
     chcon -R -v -t container_file_t ./configs
+
+Create pod file:
+
+.. code-block:: bash
+
+    cp -v elk-es-warm-01-pod.yaml{.example,}
 
 Creating Transport SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1065,6 +1101,12 @@ Allow config files to be mounted into container:
 
     chcon -R -v -t container_file_t ./configs
 
+Create pod file:
+
+.. code-block:: bash
+
+    cp -v elk-es-warm-02-pod.yaml{.example,}
+
 Creating Transport SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1216,6 +1258,12 @@ Allow config files to be mounted into container:
 
     chcon -R -v -t container_file_t ./configs
 
+Create pod file:
+
+.. code-block:: bash
+
+    cp -v elk-es-cold-01-pod.yaml{.example,}
+
 Creating Transport SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1366,6 +1414,12 @@ Allow config files to be mounted into container:
 .. code-block:: bash
 
     chcon -R -v -t container_file_t ./configs
+
+Create pod file:
+
+.. code-block:: bash
+
+    cp -v elk-es-cold-02-pod.yaml{.example,}
 
 Creating Transport SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1530,6 +1584,12 @@ Allow config files to be mounted into container:
 
     chcon -R -v -t container_file_t ./configs
 
+Create pod file:
+
+.. code-block:: bash
+
+    cp -v elk-es-ml-01-pod.yaml{.example,}
+
 Creating Transport SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1678,6 +1738,12 @@ Allow config files to be mounted into container:
 .. code-block:: bash
 
     chcon -R -v -t container_file_t ./configs
+
+Create pod file:
+
+.. code-block:: bash
+
+    cp -v elk-es-ingest-01-pod.yaml{.example,}
 
 Creating Transport SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1830,6 +1896,12 @@ Allow config files to be mounted into container:
 
     chcon -R -v -t container_file_t ./configs
 
+Create pod file:
+
+.. code-block:: bash
+
+    cp -v elk-es-transform-01-pod.yaml{.example,}
+
 Creating Transport SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1980,6 +2052,12 @@ Allow config files to be mounted into container:
 .. code-block:: bash
 
     chcon -R -v -t container_file_t ./configs
+
+Create pod file:
+
+.. code-block:: bash
+
+    cp -v elk-es-coord-01-pod.yaml{.example,}
 
 Creating Transport SSL Certificate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
