@@ -6,3 +6,5 @@ configmaps/*
 
 configs/*
 !configs/*.example
+
+es-warm-02-pod.yaml

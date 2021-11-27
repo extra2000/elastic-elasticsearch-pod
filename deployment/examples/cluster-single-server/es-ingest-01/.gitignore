@@ -6,3 +6,5 @@ configmaps/*
 
 configs/*
 !configs/*.example
+
+elk-es-ingest-01-pod.yaml

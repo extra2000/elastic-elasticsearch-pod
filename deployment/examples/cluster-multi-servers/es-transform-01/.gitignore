@@ -6,3 +6,5 @@ configmaps/*
 
 configs/*
 !configs/*.example
+
+es-transform-01-pod.yaml

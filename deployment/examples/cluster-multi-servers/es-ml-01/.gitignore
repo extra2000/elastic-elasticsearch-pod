@@ -6,3 +6,5 @@ configmaps/*
 
 configs/*
 !configs/*.example
+
+es-ml-01-pod.yaml

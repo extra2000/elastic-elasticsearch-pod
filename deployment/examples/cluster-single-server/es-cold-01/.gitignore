@@ -6,3 +6,5 @@ configmaps/*
 
 configs/*
 !configs/*.example
+
+elk-es-cold-01-pod

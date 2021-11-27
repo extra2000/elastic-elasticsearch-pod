@@ -6,3 +6,5 @@ configmaps/*
 
 configs/*
 !configs/*.example
+
+es-hot-01-pod.yaml
