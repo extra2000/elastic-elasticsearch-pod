@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.1](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v2.0.0...v2.0.1) (2021-11-27)
+
+
+### Fixes
+
+* **es-master-03/.gitignore:** fix typo ([fdcbf83](https://github.com/extra2000/elastic-elasticsearch-pod/commit/fdcbf8312ac09d181eba66307dfb7ad826785983))
+
 ## [2.0.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v1.4.0...v2.0.0) (2021-11-27)
 
 
