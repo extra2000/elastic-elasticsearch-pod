@@ -95,8 +95,8 @@ Create ``/etc/cni/net.d/elknet.conflist`` file:
 
     If ``/etc/cni/net.d/`` is not exists, create the directory using ``sudo mkdir -pv /etc/cni/net.d/``.
 
-Distribute CA
--------------
+Distribute CA into Deployment Directories
+-----------------------------------------
 
 From the project's root directory, ``cd`` into ``deployment/``:
 

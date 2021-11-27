@@ -40,32 +40,36 @@ Build our Elasticsearch image:
 
     podman build -t extra2000/elastic/elasticsearch -f Dockerfile.amd64 .
 
-Distribute CA
--------------
+Distribute CA into Deployment Directories
+-----------------------------------------
 
-From the project's root directory, ``cd`` into ``deployment/_global_secrets_/``:
+From the project's root directory, ``cd`` into ``deployment/``:
 
 .. code-block:: bash
 
-    cd deployment/_global_secrets_/
+    cd deployment/
 
 Then, distribute into all nodes:
 
 .. code-block:: bash
 
-    scp -P 22 elastic-ca.p12 USER@SERVER:/path/to/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-coord-01/secrets/
-    scp -P 22 elastic-ca.p12 USER@SERVER:/path/to/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-01/secrets/
-    scp -P 22 elastic-ca.p12 USER@SERVER:/path/to/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-02/secrets/
-    scp -P 22 elastic-ca.p12 USER@SERVER:/path/to/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-03/secrets/
-    scp -P 22 elastic-ca.p12 USER@SERVER:/path/to/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-hot-01/secrets/
-    scp -P 22 elastic-ca.p12 USER@SERVER:/path/to/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-hot-02/secrets/
-    scp -P 22 elastic-ca.p12 USER@SERVER:/path/to/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-warm-01/secrets/
-    scp -P 22 elastic-ca.p12 USER@SERVER:/path/to/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-warm-02/secrets/
-    scp -P 22 elastic-ca.p12 USER@SERVER:/path/to/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-01/secrets/
-    scp -P 22 elastic-ca.p12 USER@SERVER:/path/to/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-02/secrets/
-    scp -P 22 elastic-ca.p12 USER@SERVER:/path/to/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-ml-01/secrets/
-    scp -P 22 elastic-ca.p12 USER@SERVER:/path/to/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-ingest-01/secrets/
-    scp -P 22 elastic-ca.p12 USER@SERVER:/path/to/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-transform-01/secrets/
+    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-coord-01/secrets/
+    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-master-01/secrets/
+    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-master-02/secrets/
+    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-master-03/secrets/
+    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-hot-01/secrets/
+    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-hot-02/secrets/
+    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-warm-01/secrets/
+    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-warm-02/secrets/
+    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-cold-01/secrets/
+    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-cold-02/secrets/
+    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-ml-01/secrets/
+    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-ingest-01/secrets/
+    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-transform-01/secrets/
+
+.. warning::
+
+    You should create certificates on your laptop and then distribute the created certificates into your nodes. Again, never distribute the ``elastic-ca.p12``.
 
 Deploy MinIO
 ------------
@@ -225,6 +229,21 @@ Create ``./secrets/es-master-01-pod.keystore`` file to store certificate passwor
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
     cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-master-01.keystore
 
+Distribute Secrets
+~~~~~~~~~~~~~~~~~~
+
+Copy the created certificates and keystore to the node:
+
+.. code-block:: bash
+
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-master-01.keystore USER@ES-MASTER-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-01/secrets/
+
+On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -R -v -t container_file_t ./secrets
+
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -381,6 +400,21 @@ Create ``./secrets/es-master-02-pod.keystore`` file to store certificate passwor
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
     cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-master-02.keystore
+
+Distribute Secrets
+~~~~~~~~~~~~~~~~~~
+
+Copy the created certificates and keystore to the node:
+
+.. code-block:: bash
+
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-master-02.keystore USER@ES-MASTER-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-02/secrets/
+
+On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -R -v -t container_file_t ./secrets
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -539,6 +573,21 @@ Create ``./secrets/es-master-03-pod.keystore`` file to store certificate passwor
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
     cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-master-03.keystore
 
+Distribute Secrets
+~~~~~~~~~~~~~~~~~~
+
+Copy the created certificates and keystore to the node:
+
+.. code-block:: bash
+
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-master-03.keystore USER@ES-MASTER-03:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-03/secrets/
+
+On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -R -v -t container_file_t ./secrets
+
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -695,6 +744,21 @@ Create ``./secrets/es-hot-01-pod.keystore`` file to store certificate passwords:
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
     cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-hot-01.keystore
+
+Distribute Secrets
+~~~~~~~~~~~~~~~~~~
+
+Copy the created certificates and keystore to the node:
+
+.. code-block:: bash
+
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-hot-01.keystore USER@ES-HOT-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-hot-01/secrets/
+
+On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -R -v -t container_file_t ./secrets
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -853,6 +917,21 @@ Create ``./secrets/es-hot-02-pod.keystore`` file to store certificate passwords:
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
     cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-hot-02.keystore
 
+Distribute Secrets
+~~~~~~~~~~~~~~~~~~
+
+Copy the created certificates and keystore to the node:
+
+.. code-block:: bash
+
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-hot-02.keystore USER@ES-HOT-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-hot-02/secrets/
+
+On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -R -v -t container_file_t ./secrets
+
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1009,6 +1088,21 @@ Create ``./secrets/es-warm-01-pod.keystore`` file to store certificate passwords
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
     cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-warm-01.keystore
+
+Distribute Secrets
+~~~~~~~~~~~~~~~~~~
+
+Copy the created certificates and keystore to the node:
+
+.. code-block:: bash
+
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-warm-01.keystore USER@ES-WARM-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-warm-01/secrets/
+
+On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -R -v -t container_file_t ./secrets
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1167,6 +1261,21 @@ Create ``./secrets/es-warm-02-pod.keystore`` file to store certificate passwords
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
     cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-warm-02.keystore
 
+Distribute Secrets
+~~~~~~~~~~~~~~~~~~
+
+Copy the created certificates and keystore to the node:
+
+.. code-block:: bash
+
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-warm-02.keystore USER@ES-WARM-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-warm-02/secrets/
+
+On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -R -v -t container_file_t ./secrets
+
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1323,6 +1432,21 @@ Create ``./secrets/es-cold-01-pod.keystore`` file to store certificate passwords
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
     cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-cold-01.keystore
+
+Distribute Secrets
+~~~~~~~~~~~~~~~~~~
+
+Copy the created certificates and keystore to the node:
+
+.. code-block:: bash
+
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-cold-01.keystore USER@ES-COLD-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-01/secrets/
+
+On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -R -v -t container_file_t ./secrets
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1493,6 +1617,21 @@ Create ``./secrets/es-cold-02-pod.keystore`` file to store certificate passwords
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
     cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-cold-02.keystore
 
+Distribute Secrets
+~~~~~~~~~~~~~~~~~~
+
+Copy the created certificates and keystore to the node:
+
+.. code-block:: bash
+
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-cold-02.keystore USER@ES-COLD-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-02/secrets/
+
+On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -R -v -t container_file_t ./secrets
+
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1647,6 +1786,21 @@ Create ``./secrets/es-ml-01-pod.keystore`` file to store certificate passwords:
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-ml-01.keystore
+
+Distribute Secrets
+~~~~~~~~~~~~~~~~~~
+
+Copy the created certificates and keystore to the node:
+
+.. code-block:: bash
+
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-ml-01.keystore USER@ES-ML-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-ml-01/secrets/
+
+On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -R -v -t container_file_t ./secrets
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1805,6 +1959,21 @@ Create ``./secrets/es-ingest-01-pod.keystore`` file to store certificate passwor
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-ingest-01.keystore
 
+Distribute Secrets
+~~~~~~~~~~~~~~~~~~
+
+Copy the created certificates and keystore to the node:
+
+.. code-block:: bash
+
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-ingest-01.keystore USER@ES-INGEST-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-ingest-01/secrets/
+
+On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -R -v -t container_file_t ./secrets
+
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1962,6 +2131,21 @@ Create ``./secrets/es-transform-01-pod.keystore`` file to store certificate pass
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-transform-01.keystore
 
+Distribute Secrets
+~~~~~~~~~~~~~~~~~~
+
+Copy the created certificates and keystore to the node:
+
+.. code-block:: bash
+
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-transform-01.keystore USER@ES-TRANSFORM-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-transform-01/secrets/
+
+On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -R -v -t container_file_t ./secrets
+
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2118,6 +2302,21 @@ Create ``./secrets/es-coord-01-pod.keystore`` file to store certificate password
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-coord-01.keystore
+
+Distribute Secrets
+~~~~~~~~~~~~~~~~~~
+
+Copy the created certificates and keystore to the node:
+
+.. code-block:: bash
+
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-coord-01.keystore secrets/es-coord-01.keystore USER@ES-COORD-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-coord-01/secrets/
+
+On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -R -v -t container_file_t ./secrets
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

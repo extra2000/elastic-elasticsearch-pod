@@ -67,3 +67,7 @@ Check and make sure the CA certificate is correct:
 .. code-block:: bash
 
     openssl pkcs12 -in _global_secrets_/elastic-ca.p12 -nodes | openssl x509 -noout -text | less
+
+.. warning::
+
+    The ``elastic-ca.p12`` file should be kept in a secure place and never distribute it.
