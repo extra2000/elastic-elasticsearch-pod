@@ -49,9 +49,6 @@ spec:
     - mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
       name: es-master-02-yml
       readOnly: true
-    - mountPath: /usr/share/elasticsearch/config/elastic-ca.p12
-      name: es-master-02-ssl-ca
-      readOnly: true
     - mountPath: /usr/share/elasticsearch/config/elastic-transport.p12
       name: es-master-02-ssl-transport
       readOnly: true
@@ -67,9 +64,6 @@ spec:
   - name: es-master-02-yml
     hostPath:
       path: ./configs/es-master-02.yml
-  - name: es-master-02-ssl-ca
-    hostPath:
-      path: ./secrets/elastic-ca.p12
   - name: es-master-02-ssl-transport
     hostPath:
       path: ./secrets/certificate-bundle/es-master-02/es-master-02.p12

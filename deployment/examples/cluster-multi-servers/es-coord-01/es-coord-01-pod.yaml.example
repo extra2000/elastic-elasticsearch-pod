@@ -40,9 +40,6 @@ spec:
     - mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
       name: es-coord-01-yml
       readOnly: true
-    - mountPath: /usr/share/elasticsearch/config/elastic-ca.p12
-      name: es-coord-01-ssl-ca
-      readOnly: true
     - mountPath: /usr/share/elasticsearch/config/elastic-transport.p12
       name: es-coord-01-ssl-transport
       readOnly: true
@@ -58,9 +55,6 @@ spec:
   - name: es-coord-01-yml
     hostPath:
       path: ./configs/es-coord-01.yml
-  - name: es-coord-01-ssl-ca
-    hostPath:
-      path: ./secrets/elastic-ca.p12
   - name: es-coord-01-ssl-transport
     hostPath:
       path: ./secrets/certificate-bundle/es-coord-01/es-coord-01.p12
