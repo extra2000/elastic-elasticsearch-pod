@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: es-coord-01-configmap
 data:
-  env_java_opts: "-Xms512m -Xmx512m"
+  env_java_opts: "-Xms512m -Xmx512m -Dlog4j2.formatMsgNoLookups=true"
