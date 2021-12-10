@@ -1,5 +1,17 @@
 # Changelog
 
+### [2.0.2](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v2.0.1...v2.0.2) (2021-12-10)
+
+
+### Security
+
+* **CVE-2021-44228:** apply log4j mitigation ([e1bbae6](https://github.com/extra2000/elastic-elasticsearch-pod/commit/e1bbae63f051ccdc0ffb04be380f223b3ce1b588))
+
+
+### Continuous Integrations
+
+* **semantic-release:** add `security()` release ([d9eebbb](https://github.com/extra2000/elastic-elasticsearch-pod/commit/d9eebbb8e4b2a6c878f79f5e9dacb22ed12090a2))
+
 ### [2.0.1](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v2.0.0...v2.0.1) (2021-11-27)
 
 
