@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.1.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v2.0.2...v2.1.0) (2021-12-14)
+
+
+### Features
+
+* **general-pods:** externalize JDK `cacerts` file to simplify importing MinIO CA ([56925b3](https://github.com/extra2000/elastic-elasticsearch-pod/commit/56925b31c89992c350e844e0d7bae9469162db08))
+
+
+### Code Refactoring
+
+* **config:** change default S3 protocol from HTTP to HTTPS ([70f15b6](https://github.com/extra2000/elastic-elasticsearch-pod/commit/70f15b6aa88c1243b8a20a40bfaec1d9a71a8885))
+
+
+### Documentations
+
+* **deployments:** add instructions to create JDK `cacerts` and import `minio-01` CA cert ([6124657](https://github.com/extra2000/elastic-elasticsearch-pod/commit/61246573e09318d45f76eff85985f022cfcbd46c))
+
 ### [2.0.2](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v2.0.1...v2.0.2) (2021-12-10)
 
 
