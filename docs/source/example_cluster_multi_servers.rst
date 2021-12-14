@@ -238,6 +238,40 @@ Copy the created certificates and keystore to the node:
 
     scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-master-01.keystore USER@ES-MASTER-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-01/secrets/
 
+Create JVM CA Certs
+~~~~~~~~~~~~~~~~~~~
+
+On the node, create ``./secrets/jdk-cacerts`` file:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch cp -v /usr/share/elasticsearch/jdk/lib/security/cacerts /secrets/jdk-cacerts
+
+Import MinIO CA Cert
+~~~~~~~~~~~~~~~~~~~~
+
+Copy your MinIO CA certificate (for example the ``minio-ca.crt`` file) into ``./secrets/`` directory and label it with ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -v -t container_file_t ./secrets/minio-ca.crt
+
+Then, convert the certificate to DER format:
+
+.. code-block:: bash
+
+    openssl x509 -outform der -in ./secrets/minio-ca.crt -out ./secrets/minio-ca.der
+
+On the node, import MinIO CA cert into JDK ``cacerts``:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch jdk/bin/keytool -import -alias your-alias -keystore /secrets/jdk-cacerts -file /secrets/minio-ca.der
+
+.. note::
+
+    The default password for the JDK ``cacerts`` is ``changeit``.
+
 On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
 
 .. code-block:: bash
@@ -416,6 +450,40 @@ On the node, don't forget to label the ``secrets`` directory as ``container_file
 
     chcon -R -v -t container_file_t ./secrets
 
+Create JVM CA Certs
+~~~~~~~~~~~~~~~~~~~
+
+On the node, create ``./secrets/jdk-cacerts`` file:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch cp -v /usr/share/elasticsearch/jdk/lib/security/cacerts /secrets/jdk-cacerts
+
+Import MinIO CA Cert
+~~~~~~~~~~~~~~~~~~~~
+
+Copy your MinIO CA certificate (for example the ``minio-ca.crt`` file) into ``./secrets/`` directory and label it with ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -v -t container_file_t ./secrets/minio-ca.crt
+
+Then, convert the certificate to DER format:
+
+.. code-block:: bash
+
+    openssl x509 -outform der -in ./secrets/minio-ca.crt -out ./secrets/minio-ca.der
+
+On the node, import MinIO CA cert into JDK ``cacerts``:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch jdk/bin/keytool -import -alias your-alias -keystore /secrets/jdk-cacerts -file /secrets/minio-ca.der
+
+.. note::
+
+    The default password for the JDK ``cacerts`` is ``changeit``.
+
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -587,6 +655,40 @@ On the node, don't forget to label the ``secrets`` directory as ``container_file
 .. code-block:: bash
 
     chcon -R -v -t container_file_t ./secrets
+
+Create JVM CA Certs
+~~~~~~~~~~~~~~~~~~~
+
+On the node, create ``./secrets/jdk-cacerts`` file:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch cp -v /usr/share/elasticsearch/jdk/lib/security/cacerts /secrets/jdk-cacerts
+
+Import MinIO CA Cert
+~~~~~~~~~~~~~~~~~~~~
+
+Copy your MinIO CA certificate (for example the ``minio-ca.crt`` file) into ``./secrets/`` directory and label it with ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -v -t container_file_t ./secrets/minio-ca.crt
+
+Then, convert the certificate to DER format:
+
+.. code-block:: bash
+
+    openssl x509 -outform der -in ./secrets/minio-ca.crt -out ./secrets/minio-ca.der
+
+On the node, import MinIO CA cert into JDK ``cacerts``:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch jdk/bin/keytool -import -alias your-alias -keystore /secrets/jdk-cacerts -file /secrets/minio-ca.der
+
+.. note::
+
+    The default password for the JDK ``cacerts`` is ``changeit``.
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -760,6 +862,40 @@ On the node, don't forget to label the ``secrets`` directory as ``container_file
 
     chcon -R -v -t container_file_t ./secrets
 
+Create JVM CA Certs
+~~~~~~~~~~~~~~~~~~~
+
+On the node, create ``./secrets/jdk-cacerts`` file:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch cp -v /usr/share/elasticsearch/jdk/lib/security/cacerts /secrets/jdk-cacerts
+
+Import MinIO CA Cert
+~~~~~~~~~~~~~~~~~~~~
+
+Copy your MinIO CA certificate (for example the ``minio-ca.crt`` file) into ``./secrets/`` directory and label it with ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -v -t container_file_t ./secrets/minio-ca.crt
+
+Then, convert the certificate to DER format:
+
+.. code-block:: bash
+
+    openssl x509 -outform der -in ./secrets/minio-ca.crt -out ./secrets/minio-ca.der
+
+On the node, import MinIO CA cert into JDK ``cacerts``:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch jdk/bin/keytool -import -alias your-alias -keystore /secrets/jdk-cacerts -file /secrets/minio-ca.der
+
+.. note::
+
+    The default password for the JDK ``cacerts`` is ``changeit``.
+
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -931,6 +1067,40 @@ On the node, don't forget to label the ``secrets`` directory as ``container_file
 .. code-block:: bash
 
     chcon -R -v -t container_file_t ./secrets
+
+Create JVM CA Certs
+~~~~~~~~~~~~~~~~~~~
+
+On the node, create ``./secrets/jdk-cacerts`` file:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch cp -v /usr/share/elasticsearch/jdk/lib/security/cacerts /secrets/jdk-cacerts
+
+Import MinIO CA Cert
+~~~~~~~~~~~~~~~~~~~~
+
+Copy your MinIO CA certificate (for example the ``minio-ca.crt`` file) into ``./secrets/`` directory and label it with ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -v -t container_file_t ./secrets/minio-ca.crt
+
+Then, convert the certificate to DER format:
+
+.. code-block:: bash
+
+    openssl x509 -outform der -in ./secrets/minio-ca.crt -out ./secrets/minio-ca.der
+
+On the node, import MinIO CA cert into JDK ``cacerts``:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch jdk/bin/keytool -import -alias your-alias -keystore /secrets/jdk-cacerts -file /secrets/minio-ca.der
+
+.. note::
+
+    The default password for the JDK ``cacerts`` is ``changeit``.
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1104,6 +1274,40 @@ On the node, don't forget to label the ``secrets`` directory as ``container_file
 
     chcon -R -v -t container_file_t ./secrets
 
+Create JVM CA Certs
+~~~~~~~~~~~~~~~~~~~
+
+On the node, create ``./secrets/jdk-cacerts`` file:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch cp -v /usr/share/elasticsearch/jdk/lib/security/cacerts /secrets/jdk-cacerts
+
+Import MinIO CA Cert
+~~~~~~~~~~~~~~~~~~~~
+
+Copy your MinIO CA certificate (for example the ``minio-ca.crt`` file) into ``./secrets/`` directory and label it with ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -v -t container_file_t ./secrets/minio-ca.crt
+
+Then, convert the certificate to DER format:
+
+.. code-block:: bash
+
+    openssl x509 -outform der -in ./secrets/minio-ca.crt -out ./secrets/minio-ca.der
+
+On the node, import MinIO CA cert into JDK ``cacerts``:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch jdk/bin/keytool -import -alias your-alias -keystore /secrets/jdk-cacerts -file /secrets/minio-ca.der
+
+.. note::
+
+    The default password for the JDK ``cacerts`` is ``changeit``.
+
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1276,6 +1480,40 @@ On the node, don't forget to label the ``secrets`` directory as ``container_file
 
     chcon -R -v -t container_file_t ./secrets
 
+Create JVM CA Certs
+~~~~~~~~~~~~~~~~~~~
+
+On the node, create ``./secrets/jdk-cacerts`` file:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch cp -v /usr/share/elasticsearch/jdk/lib/security/cacerts /secrets/jdk-cacerts
+
+Import MinIO CA Cert
+~~~~~~~~~~~~~~~~~~~~
+
+Copy your MinIO CA certificate (for example the ``minio-ca.crt`` file) into ``./secrets/`` directory and label it with ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -v -t container_file_t ./secrets/minio-ca.crt
+
+Then, convert the certificate to DER format:
+
+.. code-block:: bash
+
+    openssl x509 -outform der -in ./secrets/minio-ca.crt -out ./secrets/minio-ca.der
+
+On the node, import MinIO CA cert into JDK ``cacerts``:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch jdk/bin/keytool -import -alias your-alias -keystore /secrets/jdk-cacerts -file /secrets/minio-ca.der
+
+.. note::
+
+    The default password for the JDK ``cacerts`` is ``changeit``.
+
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1447,6 +1685,40 @@ On the node, don't forget to label the ``secrets`` directory as ``container_file
 .. code-block:: bash
 
     chcon -R -v -t container_file_t ./secrets
+
+Create JVM CA Certs
+~~~~~~~~~~~~~~~~~~~
+
+On the node, create ``./secrets/jdk-cacerts`` file:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch cp -v /usr/share/elasticsearch/jdk/lib/security/cacerts /secrets/jdk-cacerts
+
+Import MinIO CA Cert
+~~~~~~~~~~~~~~~~~~~~
+
+Copy your MinIO CA certificate (for example the ``minio-ca.crt`` file) into ``./secrets/`` directory and label it with ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -v -t container_file_t ./secrets/minio-ca.crt
+
+Then, convert the certificate to DER format:
+
+.. code-block:: bash
+
+    openssl x509 -outform der -in ./secrets/minio-ca.crt -out ./secrets/minio-ca.der
+
+On the node, import MinIO CA cert into JDK ``cacerts``:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch jdk/bin/keytool -import -alias your-alias -keystore /secrets/jdk-cacerts -file /secrets/minio-ca.der
+
+.. note::
+
+    The default password for the JDK ``cacerts`` is ``changeit``.
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1631,6 +1903,40 @@ On the node, don't forget to label the ``secrets`` directory as ``container_file
 .. code-block:: bash
 
     chcon -R -v -t container_file_t ./secrets
+
+Create JVM CA Certs
+~~~~~~~~~~~~~~~~~~~
+
+On the node, create ``./secrets/jdk-cacerts`` file:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch cp -v /usr/share/elasticsearch/jdk/lib/security/cacerts /secrets/jdk-cacerts
+
+Import MinIO CA Cert
+~~~~~~~~~~~~~~~~~~~~
+
+Copy your MinIO CA certificate (for example the ``minio-ca.crt`` file) into ``./secrets/`` directory and label it with ``container_file_t``:
+
+.. code-block:: bash
+
+    chcon -v -t container_file_t ./secrets/minio-ca.crt
+
+Then, convert the certificate to DER format:
+
+.. code-block:: bash
+
+    openssl x509 -outform der -in ./secrets/minio-ca.crt -out ./secrets/minio-ca.der
+
+On the node, import MinIO CA cert into JDK ``cacerts``:
+
+.. code-block:: bash
+
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch jdk/bin/keytool -import -alias your-alias -keystore /secrets/jdk-cacerts -file /secrets/minio-ca.der
+
+.. note::
+
+    The default password for the JDK ``cacerts`` is ``changeit``.
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
