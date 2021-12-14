@@ -35,7 +35,7 @@ xpack.security.transport.ssl.client_authentication: required
 xpack.security.transport.ssl.keystore.path: elastic-transport.p12
 xpack.security.transport.ssl.truststore.path: elastic-transport.p12
 xpack.monitoring.collection.enabled: true
-s3.client.default.protocol: http
+s3.client.default.protocol: https
 s3.client.default.endpoint: "SERVER_IP_FOR_minio-01:9000"
 s3.client.default.path_style_access: "true"
 reindex.remote.whitelist: []
