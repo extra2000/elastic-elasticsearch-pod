@@ -49,6 +49,9 @@ spec:
     - mountPath: /usr/share/elasticsearch/config/elasticsearch.keystore
       name: es-master-03-keystore
       readOnly: true
+    - mountPath: /usr/share/elasticsearch/jdk/lib/security/cacerts
+      name: es-master-03-jdk-cacerts
+      readOnly: true
     - mountPath: /usr/share/elasticsearch/data
       name: es-master-03-data
   volumes:
@@ -64,6 +67,9 @@ spec:
   - name: es-master-03-keystore
     hostPath:
       path: ./secrets/es-master-03.keystore
+  - name: es-master-03-jdk-cacerts
+    hostPath:
+      path: ./secrets/jdk-cacerts
   - name: es-master-03-data
     persistentVolumeClaim:
       claimName: es-master-03-data

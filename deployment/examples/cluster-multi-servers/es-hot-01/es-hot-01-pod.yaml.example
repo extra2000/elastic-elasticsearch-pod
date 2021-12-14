@@ -49,6 +49,9 @@ spec:
     - mountPath: /usr/share/elasticsearch/config/elasticsearch.keystore
       name: es-hot-01-keystore
       readOnly: true
+    - mountPath: /usr/share/elasticsearch/jdk/lib/security/cacerts
+      name: es-hot-01-jdk-cacerts
+      readOnly: true
     - mountPath: /usr/share/elasticsearch/data
       name: es-hot-01-data
   volumes:
@@ -64,6 +67,9 @@ spec:
   - name: es-hot-01-keystore
     hostPath:
       path: ./secrets/es-hot-01.keystore
+  - name: es-hot-01-jdk-cacerts
+    hostPath:
+      path: ./secrets/jdk-cacerts
   - name: es-hot-01-data
     persistentVolumeClaim:
       claimName: es-hot-01-data
