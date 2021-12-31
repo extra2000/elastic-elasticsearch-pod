@@ -1,5 +1,22 @@
 # Changelog
 
+## [3.0.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v2.1.0...v3.0.0) (2021-12-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* **configs:** Stack Monitoring with self-monitoring no longer works. Instead, use Metricbeat for Stack Monitoring.
+
+### Features
+
+* **dockerfile:** upgrade Elasticsearch from `7.15.2` to `7.16.2` ([ab3e687](https://github.com/extra2000/elastic-elasticsearch-pod/commit/ab3e687397dc84694c7957fb8e3f0dfb363a3d18))
+
+
+### Fixes
+
+* **configmaps:** add `-Des.transport.cname_in_publish_address=true` to preserve deprecated setting ([8bcea7f](https://github.com/extra2000/elastic-elasticsearch-pod/commit/8bcea7f9ae1a32632d4d38a333c6172617ea6da3))
+* **configs:** remove deprecated `xpack.monitoring` settings ([9c76313](https://github.com/extra2000/elastic-elasticsearch-pod/commit/9c76313c493ea949c0666f4749a3ef31250fcccf))
+
 ## [2.1.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v2.0.2...v2.1.0) (2021-12-14)
 
 
