@@ -40,6 +40,9 @@ spec:
     - mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
       name: es-master-02-yml
       readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/log4j2.properties
+      name: es-master-02-log4j-config
+      readOnly: true
     - mountPath: /usr/share/elasticsearch/config/elastic-transport.p12
       name: es-master-02-ssl-transport
       readOnly: true
@@ -54,10 +57,15 @@ spec:
       readOnly: true
     - mountPath: /usr/share/elasticsearch/data
       name: es-master-02-data
+    - mountPath: /usr/share/elasticsearch/logs
+      name: es-master-02-logs
   volumes:
   - name: es-master-02-yml
     hostPath:
       path: ./configs/es-master-02.yml
+  - name: es-master-02-log4j-config
+    hostPath:
+      path: ./configs/log4j2.properties
   - name: es-master-02-ssl-transport
     hostPath:
       path: ./secrets/certificate-bundle/es-master-02/es-master-02.p12
@@ -73,3 +81,6 @@ spec:
   - name: es-master-02-data
     persistentVolumeClaim:
       claimName: es-master-02-data
+  - name: es-master-02-logs
+    persistentVolumeClaim:
+      claimName: es-master-02-logs

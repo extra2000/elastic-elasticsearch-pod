@@ -40,6 +40,9 @@ spec:
     - mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
       name: es-hot-01-yml
       readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/log4j2.properties
+      name: es-hot-01-log4j-config
+      readOnly: true
     - mountPath: /usr/share/elasticsearch/config/elastic-transport.p12
       name: es-hot-01-ssl-transport
       readOnly: true
@@ -54,10 +57,15 @@ spec:
       readOnly: true
     - mountPath: /usr/share/elasticsearch/data
       name: es-hot-01-data
+    - mountPath: /usr/share/elasticsearch/logs
+      name: es-hot-01-logs
   volumes:
   - name: es-hot-01-yml
     hostPath:
       path: ./configs/es-hot-01.yml
+  - name: es-hot-01-log4j-config
+    hostPath:
+      path: ./configs/log4j2.properties
   - name: es-hot-01-ssl-transport
     hostPath:
       path: ./secrets/certificate-bundle/es-hot-01/es-hot-01.p12
@@ -73,3 +81,6 @@ spec:
   - name: es-hot-01-data
     persistentVolumeClaim:
       claimName: es-hot-01-data
+  - name: es-hot-01-logs
+    persistentVolumeClaim:
+      claimName: es-hot-01-logs

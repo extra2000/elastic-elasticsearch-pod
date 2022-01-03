@@ -40,6 +40,9 @@ spec:
     - mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
       name: es-transform-01-yml
       readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/log4j2.properties
+      name: es-transform-01-log4j-config
+      readOnly: true
     - mountPath: /usr/share/elasticsearch/config/elastic-transport.p12
       name: es-transform-01-ssl-transport
       readOnly: true
@@ -51,10 +54,15 @@ spec:
       readOnly: true
     - mountPath: /usr/share/elasticsearch/data
       name: es-transform-01-data
+    - mountPath: /usr/share/elasticsearch/logs
+      name: es-transform-01-logs
   volumes:
   - name: es-transform-01-yml
     hostPath:
       path: ./configs/es-transform-01.yml
+  - name: es-transform-01-log4j-config
+    hostPath:
+      path: ./configs/log4j2.properties
   - name: es-transform-01-ssl-transport
     hostPath:
       path: ./secrets/certificate-bundle/es-transform-01/es-transform-01.p12
@@ -67,3 +75,6 @@ spec:
   - name: es-transform-01-data
     persistentVolumeClaim:
       claimName: es-transform-01-data
+  - name: es-transform-01-logs
+    persistentVolumeClaim:
+      claimName: es-transform-01-logs
