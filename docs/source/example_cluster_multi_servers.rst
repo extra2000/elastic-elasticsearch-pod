@@ -101,6 +101,7 @@ Create Config Files
 
     cp -v configmaps/es-master-01.yaml{.example,}
     cp -v configs/es-master-01.yml{.example,}
+    cp -v configs/log4j2.properties{.example,}
 
 Allow config files to be mounted into container:
 
@@ -307,6 +308,7 @@ Create Config Files
 
     cp -v configmaps/es-master-02.yaml{.example,}
     cp -v configs/es-master-02.yml{.example,}
+    cp -v configs/log4j2.properties{.example,}
 
 Allow config files to be mounted into container:
 
@@ -513,6 +515,7 @@ Create Config Files
 
     cp -v configmaps/es-master-03.yaml{.example,}
     cp -v configs/es-master-03.yml{.example,}
+    cp -v configs/log4j2.properties{.example,}
 
 Allow config files to be mounted into container:
 
@@ -719,6 +722,7 @@ Create Config Files
 
     cp -v configmaps/es-hot-01.yaml{.example,}
     cp -v configs/es-hot-01.yml{.example,}
+    cp -v configs/log4j2.properties{.example,}
 
 Allow config files to be mounted into container:
 
@@ -925,6 +929,7 @@ Create Config Files
 
     cp -v configmaps/es-hot-02.yaml{.example,}
     cp -v configs/es-hot-02.yml{.example,}
+    cp -v configs/log4j2.properties{.example,}
 
 Allow config files to be mounted into container:
 
@@ -1131,6 +1136,7 @@ Create Config Files
 
     cp -v configmaps/es-warm-01.yaml{.example,}
     cp -v configs/es-warm-01.yml{.example,}
+    cp -v configs/log4j2.properties{.example,}
 
 Allow config files to be mounted into container:
 
@@ -1337,6 +1343,7 @@ Create Config Files
 
     cp -v configmaps/es-warm-02.yaml{.example,}
     cp -v configs/es-warm-02.yml{.example,}
+    cp -v configs/log4j2.properties{.example,}
 
 Allow config files to be mounted into container:
 
@@ -1543,6 +1550,7 @@ Create Config Files
 
     cp -v configmaps/es-cold-01.yaml{.example,}
     cp -v configs/es-cold-01.yml{.example,}
+    cp -v configs/log4j2.properties{.example,}
 
 Allow config files to be mounted into container:
 
@@ -1749,6 +1757,7 @@ Create Config Files
 
     cp -v configmaps/es-cold-02.yaml{.example,}
     cp -v configs/es-cold-02.yml{.example,}
+    cp -v configs/log4j2.properties{.example,}
 
 Allow config files to be mounted into container:
 
@@ -1967,6 +1976,7 @@ Create Config Files
 
     cp -v configmaps/es-ml-01.yaml{.example,}
     cp -v configs/es-ml-01.yml{.example,}
+    cp -v configs/log4j2.properties{.example,}
 
 Allow config files to be mounted into container:
 
@@ -2137,6 +2147,7 @@ Create Config Files
 
     cp -v configmaps/es-ingest-01.yaml{.example,}
     cp -v configs/es-ingest-01.yml{.example,}
+    cp -v configs/log4j2.properties{.example,}
 
 Allow config files to be mounted into container:
 
@@ -2309,6 +2320,7 @@ Create Config Files
 
     cp -v configmaps/es-transform-01.yaml{.example,}
     cp -v configs/es-transform-01.yml{.example,}
+    cp -v configs/log4j2.properties{.example,}
 
 Allow config files to be mounted into container:
 
@@ -2481,6 +2493,7 @@ Create Config Files
 
     cp -v configmaps/es-coord-01.yaml{.example,}
     cp -v configs/es-coord-01.yml{.example,}
+    cp -v configs/log4j2.properties{.example,}
 
 Allow config files to be mounted into container:
 
