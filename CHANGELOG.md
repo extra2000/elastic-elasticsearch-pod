@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v3.0.0...v3.1.0) (2022-01-04)
+
+
+### Features
+
+* **logging:** log cluster-multi-servers instances to files ([1d3b59e](https://github.com/extra2000/elastic-elasticsearch-pod/commit/1d3b59e08199e2a7317f0be667c5f88c495d79d5))
+
+
+### Documentations
+
+* **deployment:** add instruction to create `configs/log4j2.properties` ([6db57eb](https://github.com/extra2000/elastic-elasticsearch-pod/commit/6db57eb0cc0759eecb2f206ae8cdc8b1a646a47a))
+
 ## [3.0.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v2.1.0...v3.0.0) (2021-12-31)
 
 
