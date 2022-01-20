@@ -132,6 +132,7 @@ Create Config Files
 
     cp -v configmaps/es-master-01.yaml{.example,}
     cp -v configs/es-master-01.yml{.example,}
+    cp -v configs/log4j2.properties{.example,}
 
 Allow config files to be mounted into container:
 
