@@ -265,6 +265,15 @@ Create ``./secrets/es-master-01-pod.keystore`` file to store certificate passwor
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
     cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-master-01.keystore
 
+Distribute Secrets
+~~~~~~~~~~~~~~~~~~
+
+Copy the created certificates and keystore to the node:
+
+.. code-block:: bash
+
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-master-01.keystore USER@ES-MASTER-01:extra2000/elastic-elasticsearch-pod/deployment/examples/general-single-instance/es-master-01/secrets/
+
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
