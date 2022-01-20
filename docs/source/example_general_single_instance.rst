@@ -102,6 +102,10 @@ Then, distribute into ``es-master-01``:
 
     cp -v _global_secrets_/elastic-ca.p12 examples/general-single-instance/es-master-01/secrets/
 
+.. warning::
+
+    You should create certificates on your laptop and then distribute the created certificates into your nodes. Again, never distribute the ``elastic-ca.p12``.
+
 Deploy MinIO
 ------------
 
