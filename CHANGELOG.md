@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.2.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v3.1.0...v3.2.0) (2022-01-29)
+
+
+### Features
+
+* **dockerfile:** upgrade Elasticsearch from `7.16.2` to `7.16.3` ([ba91ab8](https://github.com/extra2000/elastic-elasticsearch-pod/commit/ba91ab8d310e39449dffddfea90160506325aaf0))
+* **general-single-instance:** log ES to file ([2fc7b1f](https://github.com/extra2000/elastic-elasticsearch-pod/commit/2fc7b1fbae7e67f6e9348a584365c3c83d64bf51))
+
+
+### Documentations
+
+* **general-single-instance:** add instructions to distribute secrets ([fd5c63a](https://github.com/extra2000/elastic-elasticsearch-pod/commit/fd5c63af790d833f62abe5c3428ce3309d243300))
+* **general-single-instance:** add warning not to distribute CA signer ([84b2116](https://github.com/extra2000/elastic-elasticsearch-pod/commit/84b21164864900ba39215c10c748ce7ab8a353c0))
+* **logo:** remove logo ([de54eca](https://github.com/extra2000/elastic-elasticsearch-pod/commit/de54eca5d5585598bc133c1b3020d38e179f5d8d))
+
 ## [3.1.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v3.0.0...v3.1.0) (2022-01-04)
 
 
