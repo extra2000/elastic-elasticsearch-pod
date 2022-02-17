@@ -480,11 +480,7 @@ On the node, import MinIO CA cert into JDK ``cacerts``:
 
 .. code-block:: bash
 
-    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch jdk/bin/keytool -import -alias your-alias -keystore /secrets/jdk-cacerts -file /secrets/minio-ca.der
-
-.. note::
-
-    The default password for the JDK ``cacerts`` is ``changeit``.
+    podman run -it --rm -v ./secrets:/secrets:rw extra2000/elastic/elasticsearch jdk/bin/keytool -import -storepass changeit -alias minio-ca -keystore /secrets/jdk-cacerts -file /secrets/minio-ca.der
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
