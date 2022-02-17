@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.3.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v3.2.0...v3.3.0) (2022-02-17)
+
+
+### Features
+
+* **dockerfile:** upgrade Elasticsearch from `7.16.3` to `7.17.0` ([feb7c54](https://github.com/extra2000/elastic-elasticsearch-pod/commit/feb7c5460ffa2ad28f3ebcc739682a5f67662a25))
+
+
+### Documentations
+
+* **deployments:** add `-storepass changeit` to `jdk/bin/keytool` cmd ([fdab911](https://github.com/extra2000/elastic-elasticsearch-pod/commit/fdab9110827d76ff1435249750a598548bf7ce02))
+* **general-single-instance:** add `cluster.routing.allocation.disk.watermark.enable_for_single_data_node: true` prior to Elasticsearch version 8.0 deprecation warning ([49a7201](https://github.com/extra2000/elastic-elasticsearch-pod/commit/49a7201c7cbd5b8b675b79686ed5a5baceba721d))
+
 ## [3.2.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v3.1.0...v3.2.0) (2022-01-29)
 
 
