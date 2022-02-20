@@ -217,27 +217,27 @@ Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
-Create ``./secrets/es-master-01-pod.keystore`` file to store certificate passwords:
+Create ``es-master-01-config`` volume and then create keystore into the volume:
 
 .. code-block:: bash
 
-    podman run -it --rm -v ./secrets:/tmp/secrets:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
+    podman volume create es-master-01-config
+    podman run -it --rm -v es-master-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-    cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-master-01.keystore
 
 Distribute Secrets
 ~~~~~~~~~~~~~~~~~~
 
-Copy the created certificates and keystore to the node:
+Copy the created certificates to the node:
 
 .. code-block:: bash
 
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-master-01.keystore USER@ES-MASTER-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-01/secrets/
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-MASTER-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-01/secrets/
 
 Create JVM CA Certs
 ~~~~~~~~~~~~~~~~~~~
@@ -424,27 +424,27 @@ Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
-Create ``./secrets/es-master-02-pod.keystore`` file to store certificate passwords:
+Create ``es-master-02-config`` volume and then create keystore into the volume:
 
 .. code-block:: bash
 
-    podman run -it --rm -v ./secrets:/tmp/secrets:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
+    podman volume create es-master-02-config
+    podman run -it --rm -v es-master-02-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-    cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-master-02.keystore
 
 Distribute Secrets
 ~~~~~~~~~~~~~~~~~~
 
-Copy the created certificates and keystore to the node:
+Copy the created certificates to the node:
 
 .. code-block:: bash
 
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-master-02.keystore USER@ES-MASTER-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-02/secrets/
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-MASTER-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-02/secrets/
 
 On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
 
@@ -627,27 +627,27 @@ Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
-Create ``./secrets/es-master-03-pod.keystore`` file to store certificate passwords:
+Create ``es-master-03-config`` volume and then create keystore into the volume:
 
 .. code-block:: bash
 
-    podman run -it --rm -v ./secrets:/tmp/secrets:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
+    podman volume create es-master-03-config
+    podman run -it --rm -v es-master-03-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-    cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-master-03.keystore
 
 Distribute Secrets
 ~~~~~~~~~~~~~~~~~~
 
-Copy the created certificates and keystore to the node:
+Copy the created certificates to the node:
 
 .. code-block:: bash
 
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-master-03.keystore USER@ES-MASTER-03:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-03/secrets/
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-MASTER-03:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-03/secrets/
 
 On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
 
@@ -834,27 +834,27 @@ Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
-Create ``./secrets/es-hot-01-pod.keystore`` file to store certificate passwords:
+Create ``es-hot-01-config`` volume and then create keystore into the volume:
 
 .. code-block:: bash
 
-    podman run -it --rm -v ./secrets:/tmp/secrets:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
+    podman volume create es-hot-01-config
+    podman run -it --rm -v es-hot-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-    cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-hot-01.keystore
 
 Distribute Secrets
 ~~~~~~~~~~~~~~~~~~
 
-Copy the created certificates and keystore to the node:
+Copy the created certificates to the node:
 
 .. code-block:: bash
 
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-hot-01.keystore USER@ES-HOT-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-hot-01/secrets/
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-HOT-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-hot-01/secrets/
 
 On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
 
@@ -1041,18 +1041,18 @@ Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
-Create ``./secrets/es-hot-02-pod.keystore`` file to store certificate passwords:
+Create ``es-hot-02-config`` volume and then create keystore into the volume:
 
 .. code-block:: bash
 
-    podman run -it --rm -v ./secrets:/tmp/secrets:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
+    podman volume create es-hot-02-config
+    podman run -it --rm -v es-hot-02-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-    cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-hot-02.keystore
 
 Distribute Secrets
 ~~~~~~~~~~~~~~~~~~
@@ -1061,7 +1061,7 @@ Copy the created certificates and keystore to the node:
 
 .. code-block:: bash
 
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-hot-02.keystore USER@ES-HOT-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-hot-02/secrets/
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-HOT-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-hot-02/secrets/
 
 On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
 
@@ -1248,27 +1248,27 @@ Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
-Create ``./secrets/es-warm-01-pod.keystore`` file to store certificate passwords:
+Create ``es-warm-01-config`` volume and then create keystore into the volume:
 
 .. code-block:: bash
 
-    podman run -it --rm -v ./secrets:/tmp/secrets:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
+    podman volume create es-warm-01-config
+    podman run -it --rm -v es-warm-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-    cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-warm-01.keystore
 
 Distribute Secrets
 ~~~~~~~~~~~~~~~~~~
 
-Copy the created certificates and keystore to the node:
+Copy the created certificates to the node:
 
 .. code-block:: bash
 
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-warm-01.keystore USER@ES-WARM-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-warm-01/secrets/
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-WARM-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-warm-01/secrets/
 
 On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
 
@@ -1455,27 +1455,27 @@ Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
-Create ``./secrets/es-warm-02-pod.keystore`` file to store certificate passwords:
+Create ``es-warm-02-config`` volume and then create keystore into the volume:
 
 .. code-block:: bash
 
-    podman run -it --rm -v ./secrets:/tmp/secrets:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
+    podman volume create es-warm-02-config
+    podman run -it --rm -v es-warm-02-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-    cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-warm-02.keystore
 
 Distribute Secrets
 ~~~~~~~~~~~~~~~~~~
 
-Copy the created certificates and keystore to the node:
+Copy the created certificates to the node:
 
 .. code-block:: bash
 
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-warm-02.keystore USER@ES-WARM-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-warm-02/secrets/
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-WARM-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-warm-02/secrets/
 
 On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
 
@@ -1662,27 +1662,27 @@ Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
-Create ``./secrets/es-cold-01-pod.keystore`` file to store certificate passwords:
+Create ``es-cold-01-config`` volume and then create keystore into the volume:
 
 .. code-block:: bash
 
-    podman run -it --rm -v ./secrets:/tmp/secrets:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
+    podman volume create es-cold-01-config
+    podman run -it --rm -v es-cold-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-    cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-cold-01.keystore
 
 Distribute Secrets
 ~~~~~~~~~~~~~~~~~~
 
-Copy the created certificates and keystore to the node:
+Copy the created certificates to the node:
 
 .. code-block:: bash
 
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-cold-01.keystore USER@ES-COLD-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-01/secrets/
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-COLD-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-01/secrets/
 
 On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
 
@@ -1881,27 +1881,27 @@ Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
-Create ``./secrets/es-cold-02-pod.keystore`` file to store certificate passwords:
+Create ``es-cold-02-config`` volume and then create keystore into the volume:
 
 .. code-block:: bash
 
-    podman run -it --rm -v ./secrets:/tmp/secrets:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
+    podman volume create es-cold-02-config
+    podman run -it --rm -v es-cold-02-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-    cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-cold-02.keystore
 
 Distribute Secrets
 ~~~~~~~~~~~~~~~~~~
 
-Copy the created certificates and keystore to the node:
+Copy the created certificates to the node:
 
 .. code-block:: bash
 
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-cold-02.keystore USER@ES-COLD-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-02/secrets/
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-COLD-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-02/secrets/
 
 On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
 
@@ -2088,25 +2088,25 @@ Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
-Create ``./secrets/es-ml-01-pod.keystore`` file to store certificate passwords:
+Create ``es-ml-01-config`` volume and then create keystore into the volume:
 
 .. code-block:: bash
 
-    podman run -it --rm -v ./secrets:/tmp/secrets:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
+    podman volume create es-ml-01-config
+    podman run -it --rm -v es-ml-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
-    cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-ml-01.keystore
 
 Distribute Secrets
 ~~~~~~~~~~~~~~~~~~
 
-Copy the created certificates and keystore to the node:
+Copy the created certificates to the node:
 
 .. code-block:: bash
 
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-ml-01.keystore USER@ES-ML-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-ml-01/secrets/
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-ML-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-ml-01/secrets/
 
 On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
 
@@ -2261,25 +2261,25 @@ Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
-Create ``./secrets/es-ingest-01-pod.keystore`` file to store certificate passwords:
+Create ``es-ingest-01-config`` volume and then create keystore into the volume:
 
 .. code-block:: bash
 
-    podman run -it --rm -v ./secrets:/tmp/secrets:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
+    podman volume create es-ingest-01-config
+    podman run -it --rm -v es-ingest-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
-    cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-ingest-01.keystore
 
 Distribute Secrets
 ~~~~~~~~~~~~~~~~~~
 
-Copy the created certificates and keystore to the node:
+Copy the created certificates to the node:
 
 .. code-block:: bash
 
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-ingest-01.keystore USER@ES-INGEST-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-ingest-01/secrets/
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-INGEST-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-ingest-01/secrets/
 
 On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
 
@@ -2434,25 +2434,25 @@ Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
-Create ``./secrets/es-transform-01-pod.keystore`` file to store certificate passwords:
+Create ``es-transform-01-config`` volume and then create keystore into the volume:
 
 .. code-block:: bash
 
-    podman run -it --rm -v ./secrets:/tmp/secrets:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
+    podman volume create es-transform-01-config
+    podman run -it --rm -v es-transform-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
-    cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-transform-01.keystore
 
 Distribute Secrets
 ~~~~~~~~~~~~~~~~~~
 
-Copy the created certificates and keystore to the node:
+Copy the created certificates to the node:
 
 .. code-block:: bash
 
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-transform-01.keystore USER@ES-TRANSFORM-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-transform-01/secrets/
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-TRANSFORM-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-transform-01/secrets/
 
 On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
 
@@ -2607,25 +2607,25 @@ Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
-Create ``./secrets/es-coord-01-pod.keystore`` file to store certificate passwords:
+Create ``es-coord-01-config`` volume and then create keystore into the volume:
 
 .. code-block:: bash
 
-    podman run -it --rm -v ./secrets:/tmp/secrets:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
+    podman volume create es-coord-01-config
+    podman run -it --rm -v es-coord-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
-    cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-coord-01.keystore
 
 Distribute Secrets
 ~~~~~~~~~~~~~~~~~~
 
-Copy the created certificates and keystore to the node:
+Copy the created certificates to the node:
 
 .. code-block:: bash
 
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-coord-01.keystore secrets/es-coord-01.keystore USER@ES-COORD-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-coord-01/secrets/
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-COORD-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-coord-01/secrets/
 
 On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
 

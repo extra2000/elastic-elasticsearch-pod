@@ -37,6 +37,8 @@ spec:
           name: es-warm-02-configmap
           key: env_java_opts
     volumeMounts:
+    - mountPath: /usr/share/elasticsearch/config
+      name: es-warm-02-config
     - mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
       name: es-warm-02-yml
       readOnly: true
@@ -48,9 +50,6 @@ spec:
       readOnly: true
     - mountPath: /usr/share/elasticsearch/config/elastic-http.p12
       name: es-warm-02-ssl-http
-      readOnly: true
-    - mountPath: /usr/share/elasticsearch/config/elasticsearch.keystore
-      name: es-warm-02-keystore
       readOnly: true
     - mountPath: /usr/share/elasticsearch/jdk/lib/security/cacerts
       name: es-warm-02-jdk-cacerts
@@ -72,12 +71,12 @@ spec:
   - name: es-warm-02-ssl-http
     hostPath:
       path: ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12
-  - name: es-warm-02-keystore
-    hostPath:
-      path: ./secrets/es-warm-02.keystore
   - name: es-warm-02-jdk-cacerts
     hostPath:
       path: ./secrets/jdk-cacerts
+  - name: es-warm-02-config
+    persistentVolumeClaim:
+      claimName: es-warm-02-config
   - name: es-warm-02-data
     persistentVolumeClaim:
       claimName: es-warm-02-data

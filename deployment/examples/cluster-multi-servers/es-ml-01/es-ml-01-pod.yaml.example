@@ -37,6 +37,8 @@ spec:
           name: es-ml-01-configmap
           key: env_java_opts
     volumeMounts:
+    - mountPath: /usr/share/elasticsearch/config
+      name: es-ml-01-config
     - mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
       name: es-ml-01-yml
       readOnly: true
@@ -45,9 +47,6 @@ spec:
       readOnly: true
     - mountPath: /usr/share/elasticsearch/config/elastic-http.p12
       name: es-ml-01-ssl-http
-      readOnly: true
-    - mountPath: /usr/share/elasticsearch/config/elasticsearch.keystore
-      name: es-ml-01-keystore
       readOnly: true
     - mountPath: /usr/share/elasticsearch/data
       name: es-ml-01-data
@@ -61,9 +60,9 @@ spec:
   - name: es-ml-01-ssl-http
     hostPath:
       path: ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12
-  - name: es-ml-01-keystore
-    hostPath:
-      path: ./secrets/es-ml-01.keystore
+  - name: es-ml-01-config
+    persistentVolumeClaim:
+      claimName: es-ml-01-config
   - name: es-ml-01-data
     persistentVolumeClaim:
       claimName: es-ml-01-data

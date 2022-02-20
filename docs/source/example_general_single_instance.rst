@@ -252,27 +252,27 @@ Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
-Create ``./secrets/es-master-01-pod.keystore`` file to store certificate passwords:
+Create ``elk-es-master-01-config`` volume and then create keystore into the volume:
 
 .. code-block:: bash
 
-    podman run -it --rm -v ./secrets:/tmp/secrets:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
+    podman volume create elk-es-master-01-config
+    podman run -it --rm -v elk-es-master-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
     ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-    cp -v /usr/share/elasticsearch/config/elasticsearch.keystore /tmp/secrets/es-master-01.keystore
 
 Distribute Secrets
 ~~~~~~~~~~~~~~~~~~
 
-Copy the created certificates and keystore to the node:
+Copy the created certificates to the node:
 
 .. code-block:: bash
 
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http secrets/es-master-01.keystore USER@ES-MASTER-01:extra2000/elastic-elasticsearch-pod/deployment/examples/general-single-instance/es-master-01/secrets/
+    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-MASTER-01:extra2000/elastic-elasticsearch-pod/deployment/examples/general-single-instance/es-master-01/secrets/
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
