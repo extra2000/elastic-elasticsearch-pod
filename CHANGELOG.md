@@ -1,5 +1,30 @@
 # Changelog
 
+## [4.0.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v3.3.0...v4.0.0) (2022-02-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deployments:** existing pods may no longer compatible because the whole config directory is mounted instead of keystore file
+* **dockerfiles:** Elasticsearch 8.0 upgrade has breaking changes
+
+### Features
+
+* **dockerfiles:** upgrade ES from `7.17.0` to `8.0.0` ([9a69794](https://github.com/extra2000/elastic-elasticsearch-pod/commit/9a697944df5d818eb507fd15e2647d1132f64dd6))
+
+
+### Documentations
+
+* add Chapter `Known Issues` ([e17e33f](https://github.com/extra2000/elastic-elasticsearch-pod/commit/e17e33f731985ed46cd9cf9b5cb7fb49d37a0dfc))
+
+
+### Code Refactoring
+
+* **deployments:** mount the whole config directory instead of keystore file ([c0ddfed](https://github.com/extra2000/elastic-elasticsearch-pod/commit/c0ddfed3db47bd83d15f4e0e05a4fae1f77d398c))
+* **deployments:** remove Cluster Single Server deployment ([7bc992d](https://github.com/extra2000/elastic-elasticsearch-pod/commit/7bc992da1c20fe6a6e3e45f6e42187698900c65a))
+* **deployments:** remove RPi Single Instance deployment ([2ee3fcb](https://github.com/extra2000/elastic-elasticsearch-pod/commit/2ee3fcb2242eb571c628377c917bed71b850e257))
+* **dockerfiles:** remove S3 plugin since ES `8.0` already include ([d24b8ae](https://github.com/extra2000/elastic-elasticsearch-pod/commit/d24b8ae8cd6203fad0812af7e48eb6b262d007b6))
+
 ## [3.3.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v3.2.0...v3.3.0) (2022-02-17)
 
 
