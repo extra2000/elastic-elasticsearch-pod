@@ -1,8 +1,0 @@
-(block elk_es_master_02_pod_es_master_02
-    (blockinherit container)
-    (blockinherit restricted_net_container)
-    (allow process wap_wsp_port_t ( tcp_socket ( name_bind )))
-    (allow process wap_wsp_port_t ( tcp_socket ( name_connect )))
-    (allow process unreserved_port_t ( tcp_socket ( name_bind )))
-    (allow process unreserved_port_t ( tcp_socket ( name_connect )))
-)
