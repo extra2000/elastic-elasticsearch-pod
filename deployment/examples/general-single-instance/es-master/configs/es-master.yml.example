@@ -1,7 +1,7 @@
 cluster.name: elk-cluster-01
-node.name: es-master-01
+node.name: es-master
 node.roles: [master, remote_cluster_client, data_hot, data_content, ingest, ml, transform]
-network.host: elk-es-master-01-pod.elknet
+network.host: es-master-01.mydomain
 http.port: 9200
 transport.port: 9300
 discovery.type: single-node
@@ -18,7 +18,7 @@ xpack.security.transport.ssl.client_authentication: required
 xpack.security.transport.ssl.keystore.path: elastic-transport.p12
 xpack.security.transport.ssl.truststore.path: elastic-transport.p12
 s3.client.default.protocol: https
-s3.client.default.endpoint: "elk-minio-01-pod.elknet:9000"
+s3.client.default.endpoint: "minio.mydomain:9000"
 s3.client.default.path_style_access: "true"
 reindex.remote.whitelist: []
 cluster.routing.allocation.disk.watermark.enable_for_single_data_node: true

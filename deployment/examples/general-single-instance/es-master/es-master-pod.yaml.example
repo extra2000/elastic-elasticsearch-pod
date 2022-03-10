@@ -2,15 +2,15 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    app: elk-es-master-01-pod
-  name: elk-es-master-01-pod
+    app: es-master-pod
+  name: es-master-pod
   annotations:
     seccomp.security.alpha.kubernetes.io/pod: localhost/default.json
 spec:
   restartPolicy: OnFailure
-  hostNetwork: false
+  hostNetwork: true
   containers:
-  - name: es-master-01
+  - name: srv01
     image: localhost/extra2000/elastic/elasticsearch
     securityContext:
       allowPrivilegeEscalation: false
@@ -22,7 +22,7 @@ spec:
         - CAP_NET_RAW
         - CAP_AUDIT_WRITE
       seLinuxOptions:
-        type: elk_es_master_01_pod_es_master_01.process
+        type: es_master_podman.process
     resources:
       requests:
         memory: 4000Mi
@@ -30,59 +30,59 @@ spec:
       limits:
         memory: 4000Mi
         cpu: 2000m
-    ports:
-    - containerPort: 9200
-      hostPort: 9200
-      hostIP: 0.0.0.0
-      protocol: tcp
-    - containerPort: 9300
-      hostPort: 9300
-      hostIP: 0.0.0.0
-      protocol: tcp
+    #ports:
+    #- containerPort: 9200
+    #  hostPort: 9200
+    #  hostIP: 127.0.0.1
+    #  protocol: tcp
+    #- containerPort: 9300
+    #  hostPort: 9300
+    #  hostIP: 127.0.0.1
+    #  protocol: tcp
     env:
     - name: ES_JAVA_OPTS
       valueFrom:
         configMapKeyRef:
-          name: es-master-01-configmap
+          name: es-master-configmap
           key: env_java_opts
     volumeMounts:
     - mountPath: /usr/share/elasticsearch/config
-      name: es-master-01-config
+      name: es-master-config
     - mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
-      name: es-master-01-yml
+      name: es-master-yml
       readOnly: true
     - mountPath: /usr/share/elasticsearch/config/log4j2.properties
-      name: es-master-01-log4j-config
+      name: es-master-log4j-config
       readOnly: true
     - mountPath: /usr/share/elasticsearch/config/elastic-transport.p12
-      name: es-master-01-ssl-transport
+      name: es-master-ssl-transport
       readOnly: true
     - mountPath: /usr/share/elasticsearch/config/elastic-http.p12
-      name: es-master-01-ssl-http
+      name: es-master-ssl-http
       readOnly: true
     - mountPath: /usr/share/elasticsearch/data
-      name: es-master-01-data
+      name: es-master-data
     - mountPath: /usr/share/elasticsearch/logs
-      name: es-master-01-logs
+      name: es-master-logs
   volumes:
-  - name: es-master-01-yml
+  - name: es-master-yml
     hostPath:
-      path: ./configs/es-master-01.yml
-  - name: es-master-01-log4j-config
+      path: ./configs/es-master.yml
+  - name: es-master-log4j-config
     hostPath:
       path: ./configs/log4j2.properties
-  - name: es-master-01-ssl-transport
+  - name: es-master-ssl-transport
     hostPath:
-      path: ./secrets/certificate-bundle/es-master-01/es-master-01.p12
-  - name: es-master-01-ssl-http
+      path: ./secrets/certificate-bundle/es-master/es-master.p12
+  - name: es-master-ssl-http
     hostPath:
       path: ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12
-  - name: es-master-01-config
+  - name: es-master-config
     persistentVolumeClaim:
-      claimName: elk-es-master-01-config
-  - name: es-master-01-data
+      claimName: es-master-config
+  - name: es-master-data
     persistentVolumeClaim:
-      claimName: elk-es-master-01-data
-  - name: es-master-01-logs
+      claimName: es-master-data
+  - name: es-master-logs
     persistentVolumeClaim:
-      claimName: elk-es-master-01-logs
+      claimName: es-master-logs

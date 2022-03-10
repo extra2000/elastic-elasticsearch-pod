@@ -7,4 +7,7 @@ configmaps/*
 configs/*
 !configs/*.example
 
-elk-es-master-01-pod.yaml
+selinux/*
+!selinux/*.example
+
+es-master-pod.yaml
