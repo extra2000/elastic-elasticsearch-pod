@@ -1,5 +1,22 @@
 # Changelog
 
+## [5.0.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v4.0.0...v5.0.0) (2022-03-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deployments:** Deployment directory for `general-single-instance` has been reorganized
+
+### Features
+
+* **dockerfiles:** update Elasticsearch from `8.0.0` to `8.0.1` ([d25cff5](https://github.com/extra2000/elastic-elasticsearch-pod/commit/d25cff5ffda9ad67d9db9047daaa4f9b4d189866))
+
+
+### Code Refactoring
+
+* **deployments:** reorganize `general-single-instance` ([bac2ed9](https://github.com/extra2000/elastic-elasticsearch-pod/commit/bac2ed949e6e80bf3439aeae1228c4a7df97b027))
+* **docs:** reorganize documentations for `general-single-instance` ([699d669](https://github.com/extra2000/elastic-elasticsearch-pod/commit/699d6695e96807e4818b7b832c3d4525845b543f))
+
 ## [4.0.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v3.3.0...v4.0.0) (2022-02-20)
 
 
