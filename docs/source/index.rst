@@ -10,7 +10,7 @@ Welcome to Elastic Elasticsearch Pod's documentation!
   legal_notices
   introduction
   host_preparations
-  creating_global_secrets
+  creating_ssl_certs
   example_cluster_multi_servers
   example_general_single_instance
   known_issues
