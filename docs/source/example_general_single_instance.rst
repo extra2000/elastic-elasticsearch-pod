@@ -159,7 +159,7 @@ Check Cluster Health
 
 .. code-block:: bash
 
-    podman run -it --rm docker.io/curlimages/curl --insecure --user elastic:abcde12345 https://es-master.mydomain:9200/_cluster/health/?pretty
+    curl --cacert ./secrets/elastic-ca.crt --user elastic:abcde12345 https://es-master.mydomain:9200/_cluster/health/?pretty
 
 If success, the command above should produce the following output:
 
