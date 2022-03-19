@@ -129,16 +129,30 @@ From the project's root directory, ``cd`` into ``deployment/examples/general-sin
 
     podman play kube --configmap configmaps/es-master.yaml --seccomp-profile-root ./seccomp es-master-pod.yaml
 
-Setup Elasticsearch REST API Credentials
-----------------------------------------
+Reset Built-in User Passwords
+-----------------------------
+
+Reset password for ``elastic`` user:
 
 .. code-block:: bash
 
-    podman exec -it es-master-pod-srv01 elasticsearch-setup-passwords interactive --url "https://es-master.mydomain:9200"
+    podman exec -it es-master-pod-srv01 elasticsearch-reset-password --interactive --username elastic --url "https://es-master.mydomain:9200"
+
+Reset password for ``kibana_system`` user:
+
+.. code-block:: bash
+
+    podman exec -it es-master-pod-srv01 elasticsearch-reset-password --interactive --username kibana_system --url "https://es-master.mydomain:9200"
+
+Reset password for ``remote_monitoring_user`` user:
+
+.. code-block:: bash
+
+    podman exec -it es-master-pod-srv01 elasticsearch-reset-password --interactive --username remote_monitoring_user --url "https://es-master.mydomain:9200"
 
 .. note::
 
-    Replace ``es-master.mydomain`` with your ``es-master``'s FQDN. For testing purpose, use password ``abcde12345`` for all.
+    Replace ``es-master.mydomain`` with your ``es-master``'s FQDN. For testing purpose, use password ``abcde12345`` for all users.
 
 Check Cluster Health
 --------------------
