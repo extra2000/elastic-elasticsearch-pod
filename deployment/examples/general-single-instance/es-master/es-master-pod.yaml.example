@@ -56,11 +56,20 @@ spec:
     - mountPath: /usr/share/elasticsearch/config/log4j2.properties
       name: es-master-log4j-config
       readOnly: true
-    - mountPath: /usr/share/elasticsearch/config/elastic-transport.p12
-      name: es-master-ssl-transport
+    - mountPath: /usr/share/elasticsearch/config/elastic-ca.crt
+      name: es-master-ssl-ca-crt
       readOnly: true
-    - mountPath: /usr/share/elasticsearch/config/elastic-http.p12
-      name: es-master-ssl-http
+    - mountPath: /usr/share/elasticsearch/config/es-master-http.crt
+      name: es-master-ssl-http-crt
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/es-master-http.key
+      name: es-master-ssl-http-key
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/es-master-transport.crt
+      name: es-master-ssl-transport-crt
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/es-master-transport.key
+      name: es-master-ssl-transport-key
       readOnly: true
     - mountPath: /usr/share/elasticsearch/data
       name: es-master-data
@@ -73,12 +82,21 @@ spec:
   - name: es-master-log4j-config
     hostPath:
       path: ./configs/log4j2.properties
-  - name: es-master-ssl-transport
+  - name: es-master-ssl-ca-crt
     hostPath:
-      path: ./secrets/certificate-bundle/es-master/es-master.p12
-  - name: es-master-ssl-http
+      path: ./secrets/elastic-ca.crt
+  - name: es-master-ssl-http-crt
     hostPath:
-      path: ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12
+      path: ./secrets/es-master-http.crt
+  - name: es-master-ssl-http-key
+    hostPath:
+      path: ./secrets/es-master-http.key
+  - name: es-master-ssl-transport-crt
+    hostPath:
+      path: ./secrets/es-master-transport.crt
+  - name: es-master-ssl-transport-key
+    hostPath:
+      path: ./secrets/es-master-transport.key
   - name: es-master-config
     persistentVolumeClaim:
       claimName: es-master-config
