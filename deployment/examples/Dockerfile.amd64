@@ -1,1 +1,1 @@
-FROM docker.elastic.co/elasticsearch/elasticsearch:8.1.0-amd64
+FROM docker.elastic.co/elasticsearch/elasticsearch:8.1.1-amd64
