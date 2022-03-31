@@ -1,5 +1,30 @@
 # Changelog
 
+## [6.0.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v5.0.0...v6.0.0) (2022-03-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* **pods:** types and mount points for certificate have changed
+* **docs:** Instructions for SSL certs has changed
+
+### Features
+
+* **dockerfiles:** upgrade ES from version `8.0.1` to `8.1.0` ([1626d96](https://github.com/extra2000/elastic-elasticsearch-pod/commit/1626d96e97417922106656f781551d01d05005e4))
+
+
+### Code Refactoring
+
+* **docs:** using OpenSSL to generate certs ([74330f7](https://github.com/extra2000/elastic-elasticsearch-pod/commit/74330f7b8848119e158c3ddbde37f9b1f8cf5242))
+* **pod:** add `runasuser` as comment ([5566340](https://github.com/extra2000/elastic-elasticsearch-pod/commit/556634046971d84576feae91f23223fcc5aa0baf))
+* **pods:** using certs generated from OpenSSL ([0f16222](https://github.com/extra2000/elastic-elasticsearch-pod/commit/0f1622245b578afe000dcf9ce04fd824344b29fb))
+
+
+### Documentations
+
+* **deployments:** simplify CuRL command ([c8ee24a](https://github.com/extra2000/elastic-elasticsearch-pod/commit/c8ee24a3a7680f849e109e3484624f76f53e51a0))
+* **deployments:** using `elasticsearch-reset-password` ([4fcfc3d](https://github.com/extra2000/elastic-elasticsearch-pod/commit/4fcfc3d062f810efc532679f65d42057c74640cf))
+
 ## [5.0.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v4.0.0...v5.0.0) (2022-03-10)
 
 
