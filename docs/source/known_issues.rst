@@ -6,64 +6,17 @@ Upgrade 7.17.x to 8.x
 
 Update this repository.
 
-Upgrade keystore:
+Create config volume, put keystore, and upgrade keystore:
 
 .. code:: bash
 
-    podman run -it --rm -v ./secrets:/tmp/secrets:rw --user=root --entrypoint=bash localhost/extra2000/elastic/elasticsearch
-    cp -v /tmp/secrets/es-master-01.keystore /usr/share/elasticsearch/config/elasticsearch.keystore
+    podman volume create es-master-config
+    podman run -it --rm -v es-master-config:/usr/share/elasticsearch/config:rw --user elasticsearch --name es-tmp localhost/extra2000/elastic/elasticsearch bash
+    podman cp ./secrets/es-master-01.keystore es-tmp:/usr/share/elasticsearch/config/elasticsearch.keystore
     ./bin/elasticsearch-keystore upgrade
-    chown elasticsearch:elasticsearch /tmp/secrets/es-master-01.keystore
+    exit
 
-Stop Kibana and Logstash. Also disable routes at NGINX if any.
-
-Temporary disable xpack security and comment all SSL related configs in ``configs/es-master-01.yml``:
-
-.. code:: yaml
-
-    xpack.security.enabled: false
-    xpack.security.http.ssl.enabled: false
-    #xpack.security.http.ssl.keystore.path: "elastic-http.p12"
-    #xpack.security.http.ssl.verification_mode: certificate
-    xpack.security.transport.ssl.enabled: false
-    #xpack.security.transport.ssl.verification_mode: full
-    #xpack.security.transport.ssl.client_authentication: required
-    #xpack.security.transport.ssl.keystore.path: elastic-transport.p12
-    #xpack.security.transport.ssl.truststore.path: elastic-transport.p12
-
-Remove keystore mount lines in pod file if any.
-
-Start pod and let the pod run until health is GREEN.
-
-Copy keystore:
-
-.. code:: bash
-
-    podman cp ./secrets/es-master-01.keystore elk-es-master-01-pod-es-master-01:/usr/share/elasticsearch/config/elasticsearch.keystore
-
-The old keystore can be safely deleted:
-
-.. code:: bash
-
-    rm ./secrets/es-master-01.keystore
-
-Stop and destroy pod.
-
-Re-enable xpack security and un-comment all SSL related configs in ``configs/es-master-01.yml``:
-
-.. code:: yaml
-
-    xpack.security.enabled: true
-    xpack.security.http.ssl.enabled: true
-    xpack.security.http.ssl.keystore.path: "elastic-http.p12"
-    xpack.security.http.ssl.verification_mode: certificate
-    xpack.security.transport.ssl.enabled: true
-    xpack.security.transport.ssl.verification_mode: full
-    xpack.security.transport.ssl.client_authentication: required
-    xpack.security.transport.ssl.keystore.path: elastic-transport.p12
-    xpack.security.transport.ssl.truststore.path: elastic-transport.p12
-
-Start pod as usual.
+Start new pod as usual.
 
 Index Template ``.monitoring-logstash-mb`` missing field mapping
 ----------------------------------------------------------------
