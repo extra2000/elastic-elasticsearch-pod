@@ -1,5 +1,17 @@
 # Changelog
 
+## [6.2.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v6.1.0...v6.2.0) (2022-04-02)
+
+
+### Features
+
+* **dockerfile:** update ES from `8.1.1` to `8.1.2` ([9c6e7ed](https://github.com/extra2000/elastic-elasticsearch-pod/commit/9c6e7ed68438ef97b72460805e247f8813b29918))
+
+
+### Documentations
+
+* **known-issues:** simplify instructions ([b86a249](https://github.com/extra2000/elastic-elasticsearch-pod/commit/b86a249ac50311359e2473656abb82c5af0adedc))
+
 ## [6.1.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v6.0.0...v6.1.0) (2022-03-31)
 
 
