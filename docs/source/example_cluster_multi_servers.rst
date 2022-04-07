@@ -14,8 +14,6 @@ Example how to deploy a basic ELK cluster (the ``elk-cluster-01``) on multiple s
 Getting Started
 ---------------
 
-Make sure to create global secrets according to Chapter :ref:`creating_global_secrets`.
-
 On every nodes, create directory and clone our repository:
 
 .. code-block:: bash
@@ -39,37 +37,6 @@ Build our Elasticsearch image:
 .. code-block:: bash
 
     podman build -t extra2000/elastic/elasticsearch -f Dockerfile.amd64 .
-
-Distribute CA into Deployment Directories
------------------------------------------
-
-From the project's root directory, ``cd`` into ``deployment/``:
-
-.. code-block:: bash
-
-    cd deployment/
-
-Then, distribute into all nodes:
-
-.. code-block:: bash
-
-    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-coord-01/secrets/
-    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-master-01/secrets/
-    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-master-02/secrets/
-    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-master-03/secrets/
-    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-hot-01/secrets/
-    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-hot-02/secrets/
-    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-warm-01/secrets/
-    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-warm-02/secrets/
-    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-cold-01/secrets/
-    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-cold-02/secrets/
-    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-ml-01/secrets/
-    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-ingest-01/secrets/
-    cp -v _global_secrets_/elastic-ca.p12 examples/cluster-single-server/es-transform-01/secrets/
-
-.. warning::
-
-    You should create certificates on your laptop and then distribute the created certificates into your nodes. Again, never distribute the ``elastic-ca.p12``.
 
 Deploy MinIO
 ------------
@@ -115,105 +82,6 @@ Create pod file:
 
     cp -v es-master-01-pod.yaml{.example,}
 
-Creating Transport SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ensure the ``./secrets`` directory is labeled as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
-
-Create transport SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil cert --ca /tmp/secrets/elastic-ca.p12 --multiple
-
-.. list-table:: Questions and answers for creating ``es-master-01``'s ``certificate-bundle.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Enter password for CA (``/tmp/secrets/elastic-ca.p12``)
-     - ``abcde12345``
-   * - Enter instance name
-     - ``es-master-01``
-   * - Enter name for directories and files of ``es-master-01``
-     - ``es-master-01``
-   * - Enter IP Addresses for instance
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Enter DNS names for instance
-     - ``SERVER_FQDN``, ``localhost``
-   * - Would you like to specify another instance?
-     - ``n``
-   * - Please enter the desired output file
-     - ``/tmp/secrets/certificate-bundle.zip``
-   * - Enter password for ``es-master-01/es-master-01.p12``
-     - ``abcde12345``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
-
-Verify the ``es-master-01.p12`` certificate:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/certificate-bundle/es-master-01/es-master-01.p12 -nodes | openssl x509 -noout -text | less
-
-Creating HTTP SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil http
-
-.. list-table:: Questions and answers for creating ``es-master-01``'s ``elasticsearch-ssl-http.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Do you wish to generate a Certificate Signing Request (CSR)?
-     - ``n``
-   * - Do you have an existing Certificate Authority (CA) key-pair that you wish to use to sign your certificate?
-     - ``y``
-   * - What is the path to your CA?
-     - ``/tmp/secrets/elastic-ca.p12``
-   * - Password for ``elastic-ca.p12``
-     - ``abcde12345``
-   * - How long should your certificates be valid?
-     - ``5y``
-   * - Generate a certificate per node? [y/N]
-     - ``n``
-   * - Which hostnames will be used to connect to your nodes?
-     - ``SERVER_FQDN``, ``localhost``
-   * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Other certificate options. Do you wish to change any of these options? [y/N]
-     - ``n``
-   * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
-     - ``abcde12345``
-   * - Where should we save the generated files?
-     - ``/tmp/secrets/elasticsearch-ssl-http.zip``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
-
-Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
-    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
-
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
@@ -224,20 +92,8 @@ Create ``es-master-01-config`` volume and then create keystore into the volume:
     podman volume create es-master-01-config
     podman run -it --rm -v es-master-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-
-Distribute Secrets
-~~~~~~~~~~~~~~~~~~
-
-Copy the created certificates to the node:
-
-.. code-block:: bash
-
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-MASTER-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-01/secrets/
 
 Create JVM CA Certs
 ~~~~~~~~~~~~~~~~~~~
@@ -322,105 +178,6 @@ Create pod file:
 
     cp -v es-master-02-pod.yaml{.example,}
 
-Creating Transport SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ensure the ``./secrets`` directory is labeled as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
-
-Create transport SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil cert --ca /tmp/secrets/elastic-ca.p12 --multiple
-
-.. list-table:: Questions and answers for creating ``es-master-01``'s ``certificate-bundle.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Enter password for CA (``/tmp/secrets/elastic-ca.p12``)
-     - ``abcde12345``
-   * - Enter instance name
-     - ``es-master-02``
-   * - Enter name for directories and files of ``es-master-02``
-     - ``es-master-02``
-   * - Enter IP Addresses for instance
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Enter DNS names for instance
-     - ``SERVER_FQDN``, ``localhost``
-   * - Would you like to specify another instance?
-     - ``n``
-   * - Please enter the desired output file
-     - ``/tmp/secrets/certificate-bundle.zip``
-   * - Enter password for ``es-master-02/es-master-02.p12``
-     - ``abcde12345``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
-
-Verify the ``es-master-02.p12`` certificate:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/certificate-bundle/es-master-02/es-master-02.p12 -nodes | openssl x509 -noout -text | less
-
-Creating HTTP SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil http
-
-.. list-table:: Questions and answers for creating ``es-master-02``'s ``elasticsearch-ssl-http.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Do you wish to generate a Certificate Signing Request (CSR)?
-     - ``n``
-   * - Do you have an existing Certificate Authority (CA) key-pair that you wish to use to sign your certificate?
-     - ``y``
-   * - What is the path to your CA?
-     - ``/tmp/secrets/elastic-ca.p12``
-   * - Password for ``elastic-ca.p12``
-     - ``abcde12345``
-   * - How long should your certificates be valid?
-     - ``5y``
-   * - Generate a certificate per node? [y/N]
-     - ``n``
-   * - Which hostnames will be used to connect to your nodes?
-     - ``SERVER_FQDN``, ``localhost``
-   * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Other certificate options. Do you wish to change any of these options? [y/N]
-     - ``n``
-   * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
-     - ``abcde12345``
-   * - Where should we save the generated files?
-     - ``/tmp/secrets/elasticsearch-ssl-http.zip``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
-
-Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
-    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
-
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
@@ -431,26 +188,8 @@ Create ``es-master-02-config`` volume and then create keystore into the volume:
     podman volume create es-master-02-config
     podman run -it --rm -v es-master-02-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-
-Distribute Secrets
-~~~~~~~~~~~~~~~~~~
-
-Copy the created certificates to the node:
-
-.. code-block:: bash
-
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-MASTER-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-02/secrets/
-
-On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
 
 Create JVM CA Certs
 ~~~~~~~~~~~~~~~~~~~
@@ -525,105 +264,6 @@ Create pod file:
 
     cp -v es-master-03-pod.yaml{.example,}
 
-Creating Transport SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ensure the ``./secrets`` directory is labeled as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
-
-Create transport SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil cert --ca /tmp/secrets/elastic-ca.p12 --multiple
-
-.. list-table:: Questions and answers for creating ``es-master-03``'s ``certificate-bundle.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Enter password for CA (``/tmp/secrets/elastic-ca.p12``)
-     - ``abcde12345``
-   * - Enter instance name
-     - ``es-master-03``
-   * - Enter name for directories and files of ``es-master-03``
-     - ``es-master-03``
-   * - Enter IP Addresses for instance
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Enter DNS names for instance
-     - ``SERVER_FQDN``, ``localhost``
-   * - Would you like to specify another instance?
-     - ``n``
-   * - Please enter the desired output file
-     - ``/tmp/secrets/certificate-bundle.zip``
-   * - Enter password for ``es-master-03/es-master-03.p12``
-     - ``abcde12345``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
-
-Verify the ``es-master-03.p12`` certificate:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/certificate-bundle/es-master-03/es-master-03.p12 -nodes | openssl x509 -noout -text | less
-
-Creating HTTP SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil http
-
-.. list-table:: Questions and answers for creating ``es-master-03``'s ``elasticsearch-ssl-http.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Do you wish to generate a Certificate Signing Request (CSR)?
-     - ``n``
-   * - Do you have an existing Certificate Authority (CA) key-pair that you wish to use to sign your certificate?
-     - ``y``
-   * - What is the path to your CA?
-     - ``/tmp/secrets/elastic-ca.p12``
-   * - Password for ``elastic-ca.p12``
-     - ``abcde12345``
-   * - How long should your certificates be valid?
-     - ``5y``
-   * - Generate a certificate per node? [y/N]
-     - ``n``
-   * - Which hostnames will be used to connect to your nodes?
-     - ``SERVER_FQDN``, ``localhost``
-   * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Other certificate options. Do you wish to change any of these options? [y/N]
-     - ``n``
-   * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
-     - ``abcde12345``
-   * - Where should we save the generated files?
-     - ``/tmp/secrets/elasticsearch-ssl-http.zip``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
-
-Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
-    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
-
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
@@ -634,26 +274,8 @@ Create ``es-master-03-config`` volume and then create keystore into the volume:
     podman volume create es-master-03-config
     podman run -it --rm -v es-master-03-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-
-Distribute Secrets
-~~~~~~~~~~~~~~~~~~
-
-Copy the created certificates to the node:
-
-.. code-block:: bash
-
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-MASTER-03:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-master-03/secrets/
-
-On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
 
 Create JVM CA Certs
 ~~~~~~~~~~~~~~~~~~~
@@ -732,105 +354,6 @@ Create pod file:
 
     cp -v es-hot-01-pod.yaml{.example,}
 
-Creating Transport SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ensure the ``./secrets`` directory is labeled as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
-
-Create transport SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil cert --ca /tmp/secrets/elastic-ca.p12 --multiple
-
-.. list-table:: Questions and answers for creating ``es-hot-01``'s ``certificate-bundle.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Enter password for CA (``/tmp/secrets/elastic-ca.p12``)
-     - ``abcde12345``
-   * - Enter instance name
-     - ``es-hot-01``
-   * - Enter name for directories and files of ``es-hot-01``
-     - ``es-hot-01``
-   * - Enter IP Addresses for instance
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Enter DNS names for instance
-     - ``SERVER_FQDN``, ``localhost``
-   * - Would you like to specify another instance?
-     - ``n``
-   * - Please enter the desired output file
-     - ``/tmp/secrets/certificate-bundle.zip``
-   * - Enter password for ``es-hot-01/es-hot-01.p12``
-     - ``abcde12345``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
-
-Verify the ``es-hot-01.p12`` certificate:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/certificate-bundle/es-hot-01/es-hot-01.p12 -nodes | openssl x509 -noout -text | less
-
-Creating HTTP SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil http
-
-.. list-table:: Questions and answers for creating ``es-hot-01``'s ``elasticsearch-ssl-http.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Do you wish to generate a Certificate Signing Request (CSR)?
-     - ``n``
-   * - Do you have an existing Certificate Authority (CA) key-pair that you wish to use to sign your certificate?
-     - ``y``
-   * - What is the path to your CA?
-     - ``/tmp/secrets/elastic-ca.p12``
-   * - Password for ``elastic-ca.p12``
-     - ``abcde12345``
-   * - How long should your certificates be valid?
-     - ``5y``
-   * - Generate a certificate per node? [y/N]
-     - ``n``
-   * - Which hostnames will be used to connect to your nodes?
-     - ``SERVER_FQDN``, ``localhost``
-   * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Other certificate options. Do you wish to change any of these options? [y/N]
-     - ``n``
-   * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
-     - ``abcde12345``
-   * - Where should we save the generated files?
-     - ``/tmp/secrets/elasticsearch-ssl-http.zip``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
-
-Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
-    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
-
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
@@ -841,26 +364,8 @@ Create ``es-hot-01-config`` volume and then create keystore into the volume:
     podman volume create es-hot-01-config
     podman run -it --rm -v es-hot-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-
-Distribute Secrets
-~~~~~~~~~~~~~~~~~~
-
-Copy the created certificates to the node:
-
-.. code-block:: bash
-
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-HOT-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-hot-01/secrets/
-
-On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
 
 Create JVM CA Certs
 ~~~~~~~~~~~~~~~~~~~
@@ -939,105 +444,6 @@ Create pod file:
 
     cp -v es-hot-02-pod.yaml{.example,}
 
-Creating Transport SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ensure the ``./secrets`` directory is labeled as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
-
-Create transport SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil cert --ca /tmp/secrets/elastic-ca.p12 --multiple
-
-.. list-table:: Questions and answers for creating ``es-hot-02``'s ``certificate-bundle.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Enter password for CA (``/tmp/secrets/elastic-ca.p12``)
-     - ``abcde12345``
-   * - Enter instance name
-     - ``es-hot-02``
-   * - Enter name for directories and files of ``es-hot-02``
-     - ``es-hot-02``
-   * - Enter IP Addresses for instance
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Enter DNS names for instance
-     - ``SERVER_FQDN``, ``localhost``
-   * - Would you like to specify another instance?
-     - ``n``
-   * - Please enter the desired output file
-     - ``/tmp/secrets/certificate-bundle.zip``
-   * - Enter password for ``es-hot-02/es-hot-02.p12``
-     - ``abcde12345``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
-
-Verify the ``es-hot-02.p12`` certificate:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/certificate-bundle/es-hot-02/es-hot-02.p12 -nodes | openssl x509 -noout -text | less
-
-Creating HTTP SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil http
-
-.. list-table:: Questions and answers for creating ``es-hot-02``'s ``elasticsearch-ssl-http.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Do you wish to generate a Certificate Signing Request (CSR)?
-     - ``n``
-   * - Do you have an existing Certificate Authority (CA) key-pair that you wish to use to sign your certificate?
-     - ``y``
-   * - What is the path to your CA?
-     - ``/tmp/secrets/elastic-ca.p12``
-   * - Password for ``elastic-ca.p12``
-     - ``abcde12345``
-   * - How long should your certificates be valid?
-     - ``5y``
-   * - Generate a certificate per node? [y/N]
-     - ``n``
-   * - Which hostnames will be used to connect to your nodes?
-     - ``SERVER_FQDN``, ``localhost``
-   * - Which IP addresses will be used to connect to your nodes?
-     - ``<ENTER>``
-   * - Other certificate options. Do you wish to change any of these options? [y/N]
-     - ``n``
-   * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
-     - ``abcde12345``
-   * - Where should we save the generated files?
-     - ``/tmp/secrets/elasticsearch-ssl-http.zip``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
-
-Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
-    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
-
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
@@ -1048,26 +454,8 @@ Create ``es-hot-02-config`` volume and then create keystore into the volume:
     podman volume create es-hot-02-config
     podman run -it --rm -v es-hot-02-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-
-Distribute Secrets
-~~~~~~~~~~~~~~~~~~
-
-Copy the created certificates and keystore to the node:
-
-.. code-block:: bash
-
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-HOT-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-hot-02/secrets/
-
-On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
 
 Create JVM CA Certs
 ~~~~~~~~~~~~~~~~~~~
@@ -1146,105 +534,6 @@ Create pod file:
 
     cp -v es-warm-01-pod.yaml{.example,}
 
-Creating Transport SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ensure the ``./secrets`` directory is labeled as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
-
-Create transport SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil cert --ca /tmp/secrets/elastic-ca.p12 --multiple
-
-.. list-table:: Questions and answers for creating ``es-warm-01``'s ``certificate-bundle.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Enter password for CA (``/tmp/secrets/elastic-ca.p12``)
-     - ``abcde12345``
-   * - Enter instance name
-     - ``es-warm-01``
-   * - Enter name for directories and files of ``es-warm-01``
-     - ``es-warm-01``
-   * - Enter IP Addresses for instance
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Enter DNS names for instance
-     - ``SERVER_FQDN``, ``localhost``
-   * - Would you like to specify another instance?
-     - ``n``
-   * - Please enter the desired output file
-     - ``/tmp/secrets/certificate-bundle.zip``
-   * - Enter password for ``es-warm-01/es-warm-01.p12``
-     - ``abcde12345``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
-
-Verify the ``es-warm-01.p12`` certificate:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/certificate-bundle/es-warm-01/es-warm-01.p12 -nodes | openssl x509 -noout -text | less
-
-Creating HTTP SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil http
-
-.. list-table:: Questions and answers for creating ``es-warm-01``'s ``elasticsearch-ssl-http.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Do you wish to generate a Certificate Signing Request (CSR)?
-     - ``n``
-   * - Do you have an existing Certificate Authority (CA) key-pair that you wish to use to sign your certificate?
-     - ``y``
-   * - What is the path to your CA?
-     - ``/tmp/secrets/elastic-ca.p12``
-   * - Password for ``elastic-ca.p12``
-     - ``abcde12345``
-   * - How long should your certificates be valid?
-     - ``5y``
-   * - Generate a certificate per node? [y/N]
-     - ``n``
-   * - Which hostnames will be used to connect to your nodes?
-     - ``SERVER_FQDN``, ``localhost``
-   * - Which IP addresses will be used to connect to your nodes?
-     - ``<ENTER>``
-   * - Other certificate options. Do you wish to change any of these options? [y/N]
-     - ``n``
-   * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
-     - ``abcde12345``
-   * - Where should we save the generated files?
-     - ``/tmp/secrets/elasticsearch-ssl-http.zip``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
-
-Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
-    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
-
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
@@ -1255,26 +544,8 @@ Create ``es-warm-01-config`` volume and then create keystore into the volume:
     podman volume create es-warm-01-config
     podman run -it --rm -v es-warm-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-
-Distribute Secrets
-~~~~~~~~~~~~~~~~~~
-
-Copy the created certificates to the node:
-
-.. code-block:: bash
-
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-WARM-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-warm-01/secrets/
-
-On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
 
 Create JVM CA Certs
 ~~~~~~~~~~~~~~~~~~~
@@ -1353,105 +624,6 @@ Create pod file:
 
     cp -v es-warm-02-pod.yaml{.example,}
 
-Creating Transport SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ensure the ``./secrets`` directory is labeled as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
-
-Create transport SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil cert --ca /tmp/secrets/elastic-ca.p12 --multiple
-
-.. list-table:: Questions and answers for creating ``es-warm-02``'s ``certificate-bundle.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Enter password for CA (``/tmp/secrets/elastic-ca.p12``)
-     - ``abcde12345``
-   * - Enter instance name
-     - ``es-warm-02``
-   * - Enter name for directories and files of ``es-warm-02``
-     - ``es-warm-02``
-   * - Enter IP Addresses for instance
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Enter DNS names for instance
-     - ``SERVER_FQDN``, ``localhost``
-   * - Would you like to specify another instance?
-     - ``n``
-   * - Please enter the desired output file
-     - ``/tmp/secrets/certificate-bundle.zip``
-   * - Enter password for ``es-warm-02/es-warm-02.p12``
-     - ``abcde12345``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
-
-Verify the ``es-warm-02.p12`` certificate:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/certificate-bundle/es-warm-02/es-warm-02.p12 -nodes | openssl x509 -noout -text | less
-
-Creating HTTP SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil http
-
-.. list-table:: Questions and answers for creating ``es-warm-02``'s ``elasticsearch-ssl-http.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Do you wish to generate a Certificate Signing Request (CSR)?
-     - ``n``
-   * - Do you have an existing Certificate Authority (CA) key-pair that you wish to use to sign your certificate?
-     - ``y``
-   * - What is the path to your CA?
-     - ``/tmp/secrets/elastic-ca.p12``
-   * - Password for ``elastic-ca.p12``
-     - ``abcde12345``
-   * - How long should your certificates be valid?
-     - ``5y``
-   * - Generate a certificate per node? [y/N]
-     - ``n``
-   * - Which hostnames will be used to connect to your nodes?
-     - ``SERVER_FQDN``, ``localhost``
-   * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Other certificate options. Do you wish to change any of these options? [y/N]
-     - ``n``
-   * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
-     - ``abcde12345``
-   * - Where should we save the generated files?
-     - ``/tmp/secrets/elasticsearch-ssl-http.zip``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
-
-Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
-    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
-
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
@@ -1462,26 +634,8 @@ Create ``es-warm-02-config`` volume and then create keystore into the volume:
     podman volume create es-warm-02-config
     podman run -it --rm -v es-warm-02-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-
-Distribute Secrets
-~~~~~~~~~~~~~~~~~~
-
-Copy the created certificates to the node:
-
-.. code-block:: bash
-
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-WARM-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-warm-02/secrets/
-
-On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
 
 Create JVM CA Certs
 ~~~~~~~~~~~~~~~~~~~
@@ -1560,105 +714,6 @@ Create pod file:
 
     cp -v es-cold-01-pod.yaml{.example,}
 
-Creating Transport SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ensure the ``./secrets`` directory is labeled as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
-
-Create transport SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil cert --ca /tmp/secrets/elastic-ca.p12 --multiple
-
-.. list-table:: Questions and answers for creating ``es-cold-01``'s ``certificate-bundle.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Enter password for CA (``/tmp/secrets/elastic-ca.p12``)
-     - ``abcde12345``
-   * - Enter instance name
-     - ``es-cold-01``
-   * - Enter name for directories and files of ``es-cold-01``
-     - ``es-cold-01``
-   * - Enter IP Addresses for instance
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Enter DNS names for instance
-     - ``SERVER_FQDN``, ``localhost``
-   * - Would you like to specify another instance?
-     - ``n``
-   * - Please enter the desired output file
-     - ``/tmp/secrets/certificate-bundle.zip``
-   * - Enter password for ``es-cold-01/es-cold-01.p12``
-     - ``abcde12345``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
-
-Verify the ``es-cold-01.p12`` certificate:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/certificate-bundle/es-cold-01/es-cold-01.p12 -nodes | openssl x509 -noout -text | less
-
-Creating HTTP SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil http
-
-.. list-table:: Questions and answers for creating ``es-cold-01``'s ``elasticsearch-ssl-http.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Do you wish to generate a Certificate Signing Request (CSR)?
-     - ``n``
-   * - Do you have an existing Certificate Authority (CA) key-pair that you wish to use to sign your certificate?
-     - ``y``
-   * - What is the path to your CA?
-     - ``/tmp/secrets/elastic-ca.p12``
-   * - Password for ``elastic-ca.p12``
-     - ``abcde12345``
-   * - How long should your certificates be valid?
-     - ``5y``
-   * - Generate a certificate per node? [y/N]
-     - ``n``
-   * - Which hostnames will be used to connect to your nodes?
-     - ``SERVER_FQDN``, ``localhost``
-   * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Other certificate options. Do you wish to change any of these options? [y/N]
-     - ``n``
-   * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
-     - ``abcde12345``
-   * - Where should we save the generated files?
-     - ``/tmp/secrets/elasticsearch-ssl-http.zip``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
-
-Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
-    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
-
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
@@ -1669,26 +724,8 @@ Create ``es-cold-01-config`` volume and then create keystore into the volume:
     podman volume create es-cold-01-config
     podman run -it --rm -v es-cold-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-
-Distribute Secrets
-~~~~~~~~~~~~~~~~~~
-
-Copy the created certificates to the node:
-
-.. code-block:: bash
-
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-COLD-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-01/secrets/
-
-On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
 
 Create JVM CA Certs
 ~~~~~~~~~~~~~~~~~~~
@@ -1767,117 +804,6 @@ Create pod file:
 
     cp -v es-cold-02-pod.yaml{.example,}
 
-Creating Transport SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ensure the ``./secrets`` directory is labeled as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
-
-Create transport SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil cert --ca /tmp/secrets/elastic-ca.p12 --multiple
-
-.. list-table:: Questions and answers for creating ``es-cold-02``'s ``certificate-bundle.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Enter password for CA (``/tmp/secrets/elastic-ca.p12``)
-     - ``abcde12345``
-   * - Enter instance name
-     - ``es-cold-02``
-   * - Enter name for directories and files of ``es-cold-02``
-     - ``es-cold-02``
-   * - Enter IP Addresses for instance
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Enter DNS names for instance
-     - ``SERVER_FQDN``, ``localhost``
-   * - Would you like to specify another instance?
-     - ``n``
-   * - Please enter the desired output file
-     - ``/tmp/secrets/certificate-bundle.zip``
-   * - Enter password for ``es-cold-02/es-cold-02.p12``
-     - ``abcde12345``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
-
-Verify the ``es-cold-02.p12`` certificate:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/certificate-bundle/es-cold-02/es-cold-02.p12 -nodes | openssl x509 -noout -text | less
-
-Creating HTTP SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-``cd`` into ``elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-02``:
-
-.. code-block:: bash
-
-    cd elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-02
-
-Ensure the ``./secrets`` directory is labeled as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil http
-
-.. list-table:: Questions and answers for creating ``es-cold-02``'s ``elasticsearch-ssl-http.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Do you wish to generate a Certificate Signing Request (CSR)?
-     - ``n``
-   * - Do you have an existing Certificate Authority (CA) key-pair that you wish to use to sign your certificate?
-     - ``y``
-   * - What is the path to your CA?
-     - ``/tmp/secrets/elastic-ca.p12``
-   * - Password for ``elastic-ca.p12``
-     - ``abcde12345``
-   * - How long should your certificates be valid?
-     - ``5y``
-   * - Generate a certificate per node? [y/N]
-     - ``n``
-   * - Which hostnames will be used to connect to your nodes?
-     - ``SERVER_FQDN``, ``localhost``
-   * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Other certificate options. Do you wish to change any of these options? [y/N]
-     - ``n``
-   * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
-     - ``abcde12345``
-   * - Where should we save the generated files?
-     - ``/tmp/secrets/elasticsearch-ssl-http.zip``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
-
-Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
-    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
-
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
@@ -1888,26 +814,8 @@ Create ``es-cold-02-config`` volume and then create keystore into the volume:
     podman volume create es-cold-02-config
     podman run -it --rm -v es-cold-02-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
     ./bin/elasticsearch-keystore add s3.client.default.access_key
     ./bin/elasticsearch-keystore add s3.client.default.secret_key
-
-Distribute Secrets
-~~~~~~~~~~~~~~~~~~
-
-Copy the created certificates to the node:
-
-.. code-block:: bash
-
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-COLD-02:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-cold-02/secrets/
-
-On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
 
 Create JVM CA Certs
 ~~~~~~~~~~~~~~~~~~~
@@ -1986,105 +894,6 @@ Create pod file:
 
     cp -v es-ml-01-pod.yaml{.example,}
 
-Creating Transport SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ensure the ``./secrets`` directory is labeled as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
-
-Create transport SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil cert --ca /tmp/secrets/elastic-ca.p12 --multiple
-
-.. list-table:: Questions and answers for creating ``es-ml-01``'s ``certificate-bundle.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Enter password for CA (``/tmp/secrets/elastic-ca.p12``)
-     - ``abcde12345``
-   * - Enter instance name
-     - ``es-ml-01``
-   * - Enter name for directories and files of ``es-ml-01``
-     - ``es-ml-01``
-   * - Enter IP Addresses for instance
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Enter DNS names for instance
-     - ``SERVER_FQDN``, ``localhost``
-   * - Would you like to specify another instance?
-     - ``n``
-   * - Please enter the desired output file
-     - ``/tmp/secrets/certificate-bundle.zip``
-   * - Enter password for ``es-ml-01/es-ml-01.p12``
-     - ``abcde12345``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
-
-Verify the ``es-ml-01.p12`` certificate:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/certificate-bundle/es-ml-01/es-ml-01.p12 -nodes | openssl x509 -noout -text | less
-
-Creating HTTP SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil http
-
-.. list-table:: Questions and answers for creating ``es-ml-01``'s ``elasticsearch-ssl-http.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Do you wish to generate a Certificate Signing Request (CSR)?
-     - ``n``
-   * - Do you have an existing Certificate Authority (CA) key-pair that you wish to use to sign your certificate?
-     - ``y``
-   * - What is the path to your CA?
-     - ``/tmp/secrets/elastic-ca.p12``
-   * - Password for ``elastic-ca.p12``
-     - ``abcde12345``
-   * - How long should your certificates be valid?
-     - ``5y``
-   * - Generate a certificate per node? [y/N]
-     - ``n``
-   * - Which hostnames will be used to connect to your nodes?
-     - ``SERVER_FQDN``, ``localhost``
-   * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Other certificate options. Do you wish to change any of these options? [y/N]
-     - ``n``
-   * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
-     - ``abcde12345``
-   * - Where should we save the generated files?
-     - ``/tmp/secrets/elasticsearch-ssl-http.zip``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
-
-Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
-    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
-
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
@@ -2095,24 +904,6 @@ Create ``es-ml-01-config`` volume and then create keystore into the volume:
     podman volume create es-ml-01-config
     podman run -it --rm -v es-ml-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
-
-Distribute Secrets
-~~~~~~~~~~~~~~~~~~
-
-Copy the created certificates to the node:
-
-.. code-block:: bash
-
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-ML-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-ml-01/secrets/
-
-On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2157,107 +948,6 @@ Create pod file:
 
     cp -v es-ingest-01-pod.yaml{.example,}
 
-Creating Transport SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ensure the ``./secrets`` directory is labeled as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
-
-Create transport SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil cert --ca /tmp/secrets/elastic-ca.p12 --multiple
-
-.. list-table:: Questions and answers for creating ``es-ingest-01``'s ``certificate-bundle.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Enter password for CA (``/tmp/secrets/elastic-ca.p12``)
-     - ``abcde12345``
-   * - Enter instance name
-     - ``es-ingest-01``
-   * - Enter name for directories and files of ``es-ingest-01``
-     - ``es-ingest-01``
-   * - Enter IP Addresses for instance
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Enter DNS names for instance
-     - ``SERVER_FQDN``, ``localhost``
-   * - Would you like to specify another instance?
-     - ``n``
-   * - Please enter the desired output file
-     - ``/tmp/secrets/certificate-bundle.zip``
-   * - Enter password for ``es-ingest-01/es-ingest-01.p12``
-     - ``abcde12345``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
-
-Verify the ``es-ingest-01.p12`` certificate:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/certificate-bundle/es-ingest-01/es-ingest-01.p12 -nodes | openssl x509 -noout -text | less
-
-Creating HTTP SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Create HTTP SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil http
-
-.. list-table:: Questions and answers for creating ``es-ingest-01``'s ``elasticsearch-ssl-http.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Do you wish to generate a Certificate Signing Request (CSR)?
-     - ``n``
-   * - Do you have an existing Certificate Authority (CA) key-pair that you wish to use to sign your certificate?
-     - ``y``
-   * - What is the path to your CA?
-     - ``/tmp/secrets/elastic-ca.p12``
-   * - Password for ``elastic-ca.p12``
-     - ``abcde12345``
-   * - How long should your certificates be valid?
-     - ``5y``
-   * - Generate a certificate per node? [y/N]
-     - ``n``
-   * - Which hostnames will be used to connect to your nodes?
-     - ``SERVER_FQDN``, ``localhost``
-   * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Other certificate options. Do you wish to change any of these options? [y/N]
-     - ``n``
-   * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
-     - ``abcde12345``
-   * - Where should we save the generated files?
-     - ``/tmp/secrets/elasticsearch-ssl-http.zip``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
-
-Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
-    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
-
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
@@ -2268,24 +958,6 @@ Create ``es-ingest-01-config`` volume and then create keystore into the volume:
     podman volume create es-ingest-01-config
     podman run -it --rm -v es-ingest-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
-
-Distribute Secrets
-~~~~~~~~~~~~~~~~~~
-
-Copy the created certificates to the node:
-
-.. code-block:: bash
-
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-INGEST-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-ingest-01/secrets/
-
-On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2330,107 +1002,6 @@ Create pod file:
 
     cp -v es-transform-01-pod.yaml{.example,}
 
-Creating Transport SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ensure the ``./secrets`` directory is labeled as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
-
-Create transport SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil cert --ca /tmp/secrets/elastic-ca.p12 --multiple
-
-.. list-table:: Questions and answers for creating ``es-transform-01``'s ``certificate-bundle.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Enter password for CA (``/tmp/secrets/elastic-ca.p12``)
-     - ``abcde12345``
-   * - Enter instance name
-     - ``es-transform-01``
-   * - Enter name for directories and files of ``es-transform-01``
-     - ``es-transform-01``
-   * - Enter IP Addresses for instance
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Enter DNS names for instance
-     - ``SERVER_FQDN``, ``localhost``
-   * - Would you like to specify another instance?
-     - ``n``
-   * - Please enter the desired output file
-     - ``/tmp/secrets/certificate-bundle.zip``
-   * - Enter password for ``es-transform-01/es-transform-01.p12``
-     - ``abcde12345``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
-
-Verify the ``es-transform-01.p12`` certificate:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/certificate-bundle/es-transform-01/es-transform-01.p12 -nodes | openssl x509 -noout -text | less
-
-Creating HTTP SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Create HTTP SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil http
-
-.. list-table:: Questions and answers for creating ``es-transform-01``'s ``elasticsearch-ssl-http.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Do you wish to generate a Certificate Signing Request (CSR)?
-     - ``n``
-   * - Do you have an existing Certificate Authority (CA) key-pair that you wish to use to sign your certificate?
-     - ``y``
-   * - What is the path to your CA?
-     - ``/tmp/secrets/elastic-ca.p12``
-   * - Password for ``elastic-ca.p12``
-     - ``abcde12345``
-   * - How long should your certificates be valid?
-     - ``5y``
-   * - Generate a certificate per node? [y/N]
-     - ``n``
-   * - Which hostnames will be used to connect to your nodes?
-     - ``SERVER_FQDN``, ``localhost``
-   * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Other certificate options. Do you wish to change any of these options? [y/N]
-     - ``n``
-   * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
-     - ``abcde12345``
-   * - Where should we save the generated files?
-     - ``/tmp/secrets/elasticsearch-ssl-http.zip``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
-
-Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
-    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
-
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
@@ -2441,24 +1012,6 @@ Create ``es-transform-01-config`` volume and then create keystore into the volum
     podman volume create es-transform-01-config
     podman run -it --rm -v es-transform-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
-
-Distribute Secrets
-~~~~~~~~~~~~~~~~~~
-
-Copy the created certificates to the node:
-
-.. code-block:: bash
-
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-TRANSFORM-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-transform-01/secrets/
-
-On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2503,107 +1056,6 @@ Create pod file:
 
     cp -v es-coord-01-pod.yaml{.example,}
 
-Creating Transport SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ensure the ``./secrets`` directory is labeled as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
-
-Create transport SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil cert --ca /tmp/secrets/elastic-ca.p12 --multiple
-
-.. list-table:: Questions and answers for creating ``es-coord-01``'s ``certificate-bundle.zip``
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Enter password for CA (``/tmp/secrets/elastic-ca.p12``)
-     - ``abcde12345``
-   * - Enter instance name
-     - ``es-coord-01``
-   * - Enter name for directories and files of ``es-coord-01``
-     - ``es-coord-01``
-   * - Enter IP Addresses for instance
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Enter DNS names for instance
-     - ``SERVER_FQDN``, ``localhost``
-   * - Would you like to specify another instance?
-     - ``n``
-   * - Please enter the desired output file
-     - ``/tmp/secrets/certificate-bundle.zip``
-   * - Enter password for ``es-coord-01/es-coord-01.p12``
-     - ``abcde12345``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/certificate-bundle.zip -d ./secrets/certificate-bundle
-
-Verify the ``es-coord-01.p12`` certificate:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/certificate-bundle/es-coord-01/es-coord-01.p12 -nodes | openssl x509 -noout -text | less
-
-Creating HTTP SSL Certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Create HTTP SSL certificate:
-
-.. code-block:: bash
-
-    podman run -it --network none --rm -v ./secrets:/tmp/secrets:rw localhost/extra2000/elastic/elasticsearch ./bin/elasticsearch-certutil http
-
-.. list-table:: Questions and answers for creating ``es-coord-01``'s ``elasticsearch-ssl-http.zip``.
-   :widths: 50 50
-   :header-rows: 1
-
-   * - Question
-     - Answer
-   * - Do you wish to generate a Certificate Signing Request (CSR)?
-     - ``n``
-   * - Do you have an existing Certificate Authority (CA) key-pair that you wish to use to sign your certificate?
-     - ``y``
-   * - What is the path to your CA?
-     - ``/tmp/secrets/elastic-ca.p12``
-   * - Password for ``elastic-ca.p12``
-     - ``abcde12345``
-   * - How long should your certificates be valid?
-     - ``5y``
-   * - Generate a certificate per node? [y/N]
-     - ``n``
-   * - Which hostnames will be used to connect to your nodes?
-     - ``SERVER_FQDN``, ``localhost``
-   * - Which IP addresses will be used to connect to your nodes?
-     - ``SERVER_IP``, ``127.0.0.1``
-   * - Other certificate options. Do you wish to change any of these options? [y/N]
-     - ``n``
-   * - What password do you want for your private key(s)? Provide a password for the "http.p12" file:
-     - ``abcde12345``
-   * - Where should we save the generated files?
-     - ``/tmp/secrets/elasticsearch-ssl-http.zip``
-
-Extract the certificate archive:
-
-.. code-block:: bash
-
-    unzip ./secrets/elasticsearch-ssl-http.zip -d ./secrets/elasticsearch-ssl-http
-
-Verify the ``http.p12`` and ``elasticsearch-ca.pem`` certificates:
-
-.. code-block:: bash
-
-    openssl pkcs12 -in ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12 -nodes | openssl x509 -noout -text | less
-    cat ./secrets/elasticsearch-ssl-http/kibana/elasticsearch-ca.pem | openssl x509 -noout -text | less
-
 Creating Keystore
 ~~~~~~~~~~~~~~~~~
 
@@ -2614,24 +1066,6 @@ Create ``es-coord-01-config`` volume and then create keystore into the volume:
     podman volume create es-coord-01-config
     podman run -it --rm -v es-coord-01-config:/usr/share/elasticsearch/config:rw --entrypoint=bash localhost/extra2000/elastic/elasticsearch
     ./bin/elasticsearch-keystore create
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-    ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
-
-Distribute Secrets
-~~~~~~~~~~~~~~~~~~
-
-Copy the created certificates to the node:
-
-.. code-block:: bash
-
-    scp -r -P 22 secrets/certificate-bundle secrets/elasticsearch-ssl-http USER@ES-COORD-01:extra2000/elastic-elasticsearch-pod/deployment/examples/cluster-multi-servers/es-coord-01/secrets/
-
-On the node, don't forget to label the ``secrets`` directory as ``container_file_t``:
-
-.. code-block:: bash
-
-    chcon -R -v -t container_file_t ./secrets
 
 Load SELinux Security Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
