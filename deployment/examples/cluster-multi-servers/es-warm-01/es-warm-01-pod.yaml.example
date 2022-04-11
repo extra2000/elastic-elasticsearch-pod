@@ -10,7 +10,7 @@ spec:
   restartPolicy: OnFailure
   hostNetwork: true
   containers:
-  - name: es-warm-01
+  - name: srv01
     image: localhost/extra2000/elastic/elasticsearch
     securityContext:
       allowPrivilegeEscalation: false
