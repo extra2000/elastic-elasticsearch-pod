@@ -42,11 +42,20 @@ spec:
     - mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
       name: es-ml-01-yml
       readOnly: true
-    - mountPath: /usr/share/elasticsearch/config/elastic-transport.p12
-      name: es-ml-01-ssl-transport
+    - mountPath: /usr/share/elasticsearch/config/elastic-ca.crt
+      name: es-ml-01-ssl-ca-crt
       readOnly: true
-    - mountPath: /usr/share/elasticsearch/config/elastic-http.p12
-      name: es-ml-01-ssl-http
+    - mountPath: /usr/share/elasticsearch/config/es-ml-01-http.crt
+      name: es-ml-01-ssl-http-crt
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/es-ml-01-http.key
+      name: es-ml-01-ssl-http-key
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/es-ml-01-transport.crt
+      name: es-ml-01-ssl-transport-crt
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/es-ml-01-transport.key
+      name: es-ml-01-ssl-transport-key
       readOnly: true
     - mountPath: /usr/share/elasticsearch/data
       name: es-ml-01-data
@@ -54,12 +63,21 @@ spec:
   - name: es-ml-01-yml
     hostPath:
       path: ./configs/es-ml-01.yml
-  - name: es-ml-01-ssl-transport
+  - name: es-ml-01-ssl-ca-crt
     hostPath:
-      path: ./secrets/certificate-bundle/es-ml-01/es-ml-01.p12
-  - name: es-ml-01-ssl-http
+      path: ./secrets/elastic-ca.crt
+  - name: es-ml-01-ssl-http-crt
     hostPath:
-      path: ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12
+      path: ./secrets/es-ml-01-http.crt
+  - name: es-ml-01-ssl-http-key
+    hostPath:
+      path: ./secrets/es-ml-01-http.key
+  - name: es-ml-01-ssl-transport-crt
+    hostPath:
+      path: ./secrets/es-ml-01-transport.crt
+  - name: es-ml-01-ssl-transport-key
+    hostPath:
+      path: ./secrets/es-ml-01-transport.key
   - name: es-ml-01-config
     persistentVolumeClaim:
       claimName: es-ml-01-config

@@ -45,11 +45,20 @@ spec:
     - mountPath: /usr/share/elasticsearch/config/log4j2.properties
       name: es-coord-01-log4j-config
       readOnly: true
-    - mountPath: /usr/share/elasticsearch/config/elastic-transport.p12
-      name: es-coord-01-ssl-transport
+    - mountPath: /usr/share/elasticsearch/config/elastic-ca.crt
+      name: es-coord-01-ssl-ca-crt
       readOnly: true
-    - mountPath: /usr/share/elasticsearch/config/elastic-http.p12
-      name: es-coord-01-ssl-http
+    - mountPath: /usr/share/elasticsearch/config/es-coord-01-http.crt
+      name: es-coord-01-ssl-http-crt
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/es-coord-01-http.key
+      name: es-coord-01-ssl-http-key
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/es-coord-01-transport.crt
+      name: es-coord-01-ssl-transport-crt
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/es-coord-01-transport.key
+      name: es-coord-01-ssl-transport-key
       readOnly: true
     - mountPath: /usr/share/elasticsearch/data
       name: es-coord-01-data
@@ -62,12 +71,21 @@ spec:
   - name: es-coord-01-log4j-config
     hostPath:
       path: ./configs/log4j2.properties
-  - name: es-coord-01-ssl-transport
+  - name: es-coord-01-ssl-ca-crt
     hostPath:
-      path: ./secrets/certificate-bundle/es-coord-01/es-coord-01.p12
-  - name: es-coord-01-ssl-http
+      path: ./secrets/elastic-ca.crt
+  - name: es-coord-01-ssl-http-crt
     hostPath:
-      path: ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12
+      path: ./secrets/es-coord-01-http.crt
+  - name: es-coord-01-ssl-http-key
+    hostPath:
+      path: ./secrets/es-coord-01-http.key
+  - name: es-coord-01-ssl-transport-crt
+    hostPath:
+      path: ./secrets/es-coord-01-transport.crt
+  - name: es-coord-01-ssl-transport-key
+    hostPath:
+      path: ./secrets/es-coord-01-transport.key
   - name: es-coord-01-config
     persistentVolumeClaim:
       claimName: es-coord-01-config

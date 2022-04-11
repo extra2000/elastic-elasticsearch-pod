@@ -45,11 +45,20 @@ spec:
     - mountPath: /usr/share/elasticsearch/config/log4j2.properties
       name: es-master-01-log4j-config
       readOnly: true
-    - mountPath: /usr/share/elasticsearch/config/elastic-transport.p12
-      name: es-master-01-ssl-transport
+    - mountPath: /usr/share/elasticsearch/config/elastic-ca.crt
+      name: es-master-01-ssl-ca-crt
       readOnly: true
-    - mountPath: /usr/share/elasticsearch/config/elastic-http.p12
-      name: es-master-01-ssl-http
+    - mountPath: /usr/share/elasticsearch/config/es-master-01-http.crt
+      name: es-master-01-ssl-http-crt
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/es-master-01-http.key
+      name: es-master-01-ssl-http-key
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/es-master-01-transport.crt
+      name: es-master-01-ssl-transport-crt
+      readOnly: true
+    - mountPath: /usr/share/elasticsearch/config/es-master-01-transport.key
+      name: es-master-01-ssl-transport-key
       readOnly: true
     - mountPath: /usr/share/elasticsearch/jdk/lib/security/cacerts
       name: es-master-01-jdk-cacerts
@@ -65,12 +74,21 @@ spec:
   - name: es-master-01-log4j-config
     hostPath:
       path: ./configs/log4j2.properties
-  - name: es-master-01-ssl-transport
+  - name: es-master-01-ssl-ca-crt
     hostPath:
-      path: ./secrets/certificate-bundle/es-master-01/es-master-01.p12
-  - name: es-master-01-ssl-http
+      path: ./secrets/elastic-ca.crt
+  - name: es-master-01-ssl-http-crt
     hostPath:
-      path: ./secrets/elasticsearch-ssl-http/elasticsearch/http.p12
+      path: ./secrets/es-master-01-http.crt
+  - name: es-master-01-ssl-http-key
+    hostPath:
+      path: ./secrets/es-master-01-http.key
+  - name: es-master-01-ssl-transport-crt
+    hostPath:
+      path: ./secrets/es-master-01-transport.crt
+  - name: es-master-01-ssl-transport-key
+    hostPath:
+      path: ./secrets/es-master-01-transport.key
   - name: es-master-01-jdk-cacerts
     hostPath:
       path: ./secrets/jdk-cacerts
