@@ -22,7 +22,7 @@ spec:
         - CAP_NET_RAW
         - CAP_AUDIT_WRITE
       seLinuxOptions:
-        type: es_hot_01_pod_es_hot_01.process
+        type: es_hot_01_podman.process
     resources:
       requests:
         memory: 1000Mi
