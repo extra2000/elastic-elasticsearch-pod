@@ -1,4 +1,4 @@
-(block es_master_02_pod_es_master_02
+(block es_master_02_podman
     (blockinherit container)
     (blockinherit restricted_net_container)
     (allow process wap_wsp_port_t ( tcp_socket ( name_bind )))
