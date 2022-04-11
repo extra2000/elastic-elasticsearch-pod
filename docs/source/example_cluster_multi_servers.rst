@@ -140,13 +140,13 @@ Load SELinux Security Policy
 
 .. code-block:: bash
 
-    sudo semodule -i selinux/es_master_01_pod_es_master_01.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
+    sudo semodule -i selinux/es_master_01_podman.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
 
 Verify that the SELinux module exists:
 
 .. code-block:: bash
 
-    sudo semodule --list | grep -e "es_master_01_pod_es_master_01"
+    sudo semodule --list | grep -e "es_master_01_podman"
 
 Prerequisites for ``es-master-02``
 ----------------------------------
@@ -226,13 +226,13 @@ Load SELinux Security Policy
 
 .. code-block:: bash
 
-    sudo semodule -i selinux/es_master_02_pod_es_master_02.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
+    sudo semodule -i selinux/es_master_02_podman.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
 
 Verify that the SELinux module exists:
 
 .. code-block:: bash
 
-    sudo semodule --list | grep -e "es_master_02_pod_es_master_02"
+    sudo semodule --list | grep -e "es_master_02_podman"
 
 Prerequisites for ``es-master-03``
 ----------------------------------
@@ -316,13 +316,13 @@ Load SELinux Security Policy
 
 .. code-block:: bash
 
-    sudo semodule -i selinux/es_master_03_pod_es_master_03.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
+    sudo semodule -i selinux/es_master_03_podman.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
 
 Verify that the SELinux module exists:
 
 .. code-block:: bash
 
-    sudo semodule --list | grep -e "es_master_03_pod_es_master_03"
+    sudo semodule --list | grep -e "es_master_03_podman"
 
 Prerequisites for ``es-hot-01``
 -------------------------------
@@ -406,13 +406,13 @@ Load SELinux Security Policy
 
 .. code-block:: bash
 
-    sudo semodule -i selinux/es_hot_01_pod_es_hot_01.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
+    sudo semodule -i selinux/es_hot_01_podman.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
 
 Verify that the SELinux module exists:
 
 .. code-block:: bash
 
-    sudo semodule --list | grep -e "es_hot_01_pod_es_hot_01"
+    sudo semodule --list | grep -e "es_hot_01_podman"
 
 Prerequisites for ``es-hot-02``
 -------------------------------
@@ -496,13 +496,13 @@ Load SELinux Security Policy
 
 .. code-block:: bash
 
-    sudo semodule -i selinux/es_hot_02_pod_es_hot_02.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
+    sudo semodule -i selinux/es_hot_02_podman.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
 
 Verify that the SELinux module exists:
 
 .. code-block:: bash
 
-    sudo semodule --list | grep -e "es_hot_02_pod_es_hot_02"
+    sudo semodule --list | grep -e "es_hot_02_podman"
 
 Prerequisites for ``es-warm-01``
 --------------------------------
@@ -586,13 +586,13 @@ Load SELinux Security Policy
 
 .. code-block:: bash
 
-    sudo semodule -i selinux/es_warm_01_pod_es_warm_01.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
+    sudo semodule -i selinux/es_warm_01_podman.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
 
 Verify that the SELinux module exists:
 
 .. code-block:: bash
 
-    sudo semodule --list | grep -e "es_warm_01_pod_es_warm_01"
+    sudo semodule --list | grep -e "es_warm_01_podman"
 
 Prerequisites for ``es-warm-02``
 --------------------------------
@@ -676,13 +676,13 @@ Load SELinux Security Policy
 
 .. code-block:: bash
 
-    sudo semodule -i selinux/es_warm_02_pod_es_warm_02.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
+    sudo semodule -i selinux/es_warm_02_podman.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
 
 Verify that the SELinux module exists:
 
 .. code-block:: bash
 
-    sudo semodule --list | grep -e "es_warm_02_pod_es_warm_02"
+    sudo semodule --list | grep -e "es_warm_02_podman"
 
 Prerequisites for ``es-cold-01``
 --------------------------------
@@ -766,13 +766,13 @@ Load SELinux Security Policy
 
 .. code-block:: bash
 
-    sudo semodule -i selinux/es_cold_01_pod_es_cold_01.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
+    sudo semodule -i selinux/es_cold_01_podman.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
 
 Verify that the SELinux module exists:
 
 .. code-block:: bash
 
-    sudo semodule --list | grep -e "es_cold_01_pod_es_cold_01"
+    sudo semodule --list | grep -e "es_cold_01_podman"
 
 Prerequisites for ``es-cold-02``
 --------------------------------
@@ -856,13 +856,13 @@ Load SELinux Security Policy
 
 .. code-block:: bash
 
-    sudo semodule -i selinux/es_cold_02_pod_es_cold_02.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
+    sudo semodule -i selinux/es_cold_02_podman.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
 
 Verify that the SELinux module exists:
 
 .. code-block:: bash
 
-    sudo semodule --list | grep -e "es_cold_02_pod_es_cold_02"
+    sudo semodule --list | grep -e "es_cold_02_podman"
 
 Prerequisites for ``es-ml-01``
 ------------------------------
@@ -910,13 +910,13 @@ Load SELinux Security Policy
 
 .. code-block:: bash
 
-    sudo semodule -i selinux/es_ml_01_pod_es_ml_01.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
+    sudo semodule -i selinux/es_ml_01_podman.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
 
 Verify that the SELinux module exists:
 
 .. code-block:: bash
 
-    sudo semodule --list | grep -e "es_ml_01_pod_es_ml_01"
+    sudo semodule --list | grep -e "es_ml_01_podman"
 
 Prerequisites for ``es-ingest-01``
 ----------------------------------
@@ -964,13 +964,13 @@ Load SELinux Security Policy
 
 .. code-block:: bash
 
-    sudo semodule -i selinux/es_ingest_01_pod_es_ingest_01.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
+    sudo semodule -i selinux/es_ingest_01_podman.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
 
 Verify that the SELinux module exists:
 
 .. code-block:: bash
 
-    sudo semodule --list | grep -e "es_ingest_01_pod_es_ingest_01"
+    sudo semodule --list | grep -e "es_ingest_01_podman"
 
 Prerequisites for ``es-transform-01``
 -------------------------------------
@@ -1018,13 +1018,13 @@ Load SELinux Security Policy
 
 .. code-block:: bash
 
-    sudo semodule -i selinux/es_transform_01_pod_es_transform_01.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
+    sudo semodule -i selinux/es_transform_01_podman.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
 
 Verify that the SELinux module exists:
 
 .. code-block:: bash
 
-    sudo semodule --list | grep -e "es_transform_01_pod_es_transform_01"
+    sudo semodule --list | grep -e "es_transform_01_podman"
 
 Prerequisites for ``es-coord-01``
 ---------------------------------
@@ -1072,13 +1072,13 @@ Load SELinux Security Policy
 
 .. code-block:: bash
 
-    sudo semodule -i selinux/es_coord_01_pod_es_coord_01.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
+    sudo semodule -i selinux/es_coord_01_podman.cil /usr/share/udica/templates/{base_container.cil,net_container.cil}
 
 Verify that the SELinux module exists:
 
 .. code-block:: bash
 
-    sudo semodule --list | grep -e "es_coord_01_pod_es_coord_01"
+    sudo semodule --list | grep -e "es_coord_01_podman"
 
 Deployment
 ----------
