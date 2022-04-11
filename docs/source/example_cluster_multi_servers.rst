@@ -1102,8 +1102,8 @@ Generate ``systemd`` files and enable on ``boot``:
 
     mkdir -pv ~/.config/systemd/user
     cd ~/.config/systemd/user
-    podman generate systemd --files --name es-master-01-pod-es-master-01
-    systemctl --user enable container-es-master-01-pod-es-master-01.service
+    podman generate systemd --files --name es-master-01-pod-srv01
+    systemctl --user enable container-es-master-01-pod-srv01.service
 
 Deploy ``es-master-02``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -1124,8 +1124,8 @@ Generate ``systemd`` files and enable on ``boot``:
 
     mkdir -pv ~/.config/systemd/user
     cd ~/.config/systemd/user
-    podman generate systemd --files --name es-master-02-pod-es-master-02
-    systemctl --user enable container-es-master-02-pod-es-master-02.service
+    podman generate systemd --files --name es-master-02-pod-srv01
+    systemctl --user enable container-es-master-02-pod-srv01.service
 
 Deploy ``es-master-03``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -1147,8 +1147,8 @@ Generate ``systemd`` files and enable on ``boot``:
 
     mkdir -pv ~/.config/systemd/user
     cd ~/.config/systemd/user
-    podman generate systemd --files --name es-master-03-pod-es-master-03
-    systemctl --user enable container-es-master-03-pod-es-master-03.service
+    podman generate systemd --files --name es-master-03-pod-srv01
+    systemctl --user enable container-es-master-03-pod-srv01.service
 
 Deploy ``es-hot-01``
 ~~~~~~~~~~~~~~~~~~~~
@@ -1169,8 +1169,8 @@ Generate ``systemd`` files and enable on ``boot``:
 
     mkdir -pv ~/.config/systemd/user
     cd ~/.config/systemd/user
-    podman generate systemd --files --name es-hot-01-pod-es-hot-01
-    systemctl --user enable container-es-hot-01-pod-es-hot-01.service
+    podman generate systemd --files --name es-hot-01-pod-srv01
+    systemctl --user enable container-es-hot-01-pod-srv01.service
 
 Deploy ``es-hot-02``
 ~~~~~~~~~~~~~~~~~~~~
@@ -1191,8 +1191,8 @@ Generate ``systemd`` files and enable on ``boot``:
 
     mkdir -pv ~/.config/systemd/user
     cd ~/.config/systemd/user
-    podman generate systemd --files --name es-hot-02-pod-es-hot-02
-    systemctl --user enable container-es-hot-02-pod-es-hot-02.service
+    podman generate systemd --files --name es-hot-02-pod-srv01
+    systemctl --user enable container-es-hot-02-pod-srv01.service
 
 Deploy ``es-warm-01``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -1213,8 +1213,8 @@ Generate ``systemd`` files and enable on ``boot``:
 
     mkdir -pv ~/.config/systemd/user
     cd ~/.config/systemd/user
-    podman generate systemd --files --name es-warm-01-pod-es-warm-01
-    systemctl --user enable container-es-warm-01-pod-es-warm-01.service
+    podman generate systemd --files --name es-warm-01-pod-srv01
+    systemctl --user enable container-es-warm-01-pod-srv01.service
 
 Deploy ``es-warm-02``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -1235,8 +1235,8 @@ Generate ``systemd`` files and enable on ``boot``:
 
     mkdir -pv ~/.config/systemd/user
     cd ~/.config/systemd/user
-    podman generate systemd --files --name es-warm-02-pod-es-warm-02
-    systemctl --user enable container-es-warm-02-pod-es-warm-02.service
+    podman generate systemd --files --name es-warm-02-pod-srv01
+    systemctl --user enable container-es-warm-02-pod-srv01.service
 
 Deploy ``es-cold-01``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -1257,8 +1257,8 @@ Generate ``systemd`` files and enable on ``boot``:
 
     mkdir -pv ~/.config/systemd/user
     cd ~/.config/systemd/user
-    podman generate systemd --files --name es-cold-01-pod-es-cold-01
-    systemctl --user enable container-es-cold-01-pod-es-cold-01.service
+    podman generate systemd --files --name es-cold-01-pod-srv01
+    systemctl --user enable container-es-cold-01-pod-srv01.service
 
 Deploy ``es-cold-02``
 ~~~~~~~~~~~~~~~~~~~~~
@@ -1279,8 +1279,8 @@ Generate ``systemd`` files and enable on ``boot``:
 
     mkdir -pv ~/.config/systemd/user
     cd ~/.config/systemd/user
-    podman generate systemd --files --name es-cold-02-pod-es-cold-02
-    systemctl --user enable container-es-cold-02-pod-es-cold-02.service
+    podman generate systemd --files --name es-cold-02-pod-srv01
+    systemctl --user enable container-es-cold-02-pod-srv01.service
 
 Deploy ``es-ml-01``
 ~~~~~~~~~~~~~~~~~~~
@@ -1301,8 +1301,8 @@ Generate ``systemd`` files and enable on ``boot``:
 
     mkdir -pv ~/.config/systemd/user
     cd ~/.config/systemd/user
-    podman generate systemd --files --name es-ml-01-pod-es-ml-01
-    systemctl --user enable container-es-ml-01-pod-es-ml-01.service
+    podman generate systemd --files --name es-ml-01-pod-srv01
+    systemctl --user enable container-es-ml-01-pod-srv01.service
 
 Deploy ``es-ingest-01``
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -1323,8 +1323,8 @@ Generate ``systemd`` files and enable on ``boot``:
 
     mkdir -pv ~/.config/systemd/user
     cd ~/.config/systemd/user
-    podman generate systemd --files --name es-ingest-01-pod-es-ingest-01
-    systemctl --user enable container-es-ingest-01-pod-es-ingest-01.service
+    podman generate systemd --files --name es-ingest-01-pod-srv01
+    systemctl --user enable container-es-ingest-01-pod-srv01.service
 
 Deploy ``es-transform-01``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1345,8 +1345,8 @@ Generate ``systemd`` files and enable on ``boot``:
 
     mkdir -pv ~/.config/systemd/user
     cd ~/.config/systemd/user
-    podman generate systemd --files --name es-transform-01-pod-es-transform-01
-    systemctl --user enable container-es-transform-01-pod-es-transform-01.service
+    podman generate systemd --files --name es-transform-01-pod-srv01
+    systemctl --user enable container-es-transform-01-pod-srv01.service
 
 Deploy ``es-coord-01``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1367,8 +1367,8 @@ Generate ``systemd`` files and enable on ``boot``:
 
     mkdir -pv ~/.config/systemd/user
     cd ~/.config/systemd/user
-    podman generate systemd --files --name es-coord-01-pod-es-coord-01
-    systemctl --user enable container-es-coord-01-pod-es-coord-01.service
+    podman generate systemd --files --name es-coord-01-pod-srv01
+    systemctl --user enable container-es-coord-01-pod-srv01.service
 
 Setup Elasticsearch REST API Credentials
 ----------------------------------------
