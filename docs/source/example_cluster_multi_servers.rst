@@ -1377,7 +1377,7 @@ Setup Elasticsearch REST API Credentials
 
 .. code-block:: bash
 
-    podman exec -it es-coord-01-pod-es-coord-01 elasticsearch-setup-passwords interactive --url "https://fqdn-es-coord-01:9200"
+    podman exec -it es-coord-01-pod-srv01 elasticsearch-setup-passwords interactive --url "https://fqdn-es-coord-01:9200"
 
 .. note::
 
