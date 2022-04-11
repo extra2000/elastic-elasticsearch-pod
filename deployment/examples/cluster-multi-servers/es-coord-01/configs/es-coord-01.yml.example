@@ -27,11 +27,14 @@ indices.fielddata.cache.size: 20%
 xpack.license.self_generated.type: basic
 xpack.security.enabled: true
 xpack.security.http.ssl.enabled: true
-xpack.security.http.ssl.keystore.path: "elastic-http.p12"
+xpack.security.http.ssl.certificate_authorities: [elastic-ca.crt]
+xpack.security.http.ssl.certificate: es-coord-01-http.crt
+xpack.security.http.ssl.key: es-coord-01-http.key
 xpack.security.http.ssl.verification_mode: full
 xpack.security.transport.ssl.enabled: true
 xpack.security.transport.ssl.verification_mode: full
+xpack.security.transport.ssl.certificate_authorities: [elastic-ca.crt]
+xpack.security.transport.ssl.certificate: es-coord-01-transport.crt
+xpack.security.transport.ssl.key: es-coord-01-transport.key
 xpack.security.transport.ssl.client_authentication: required
-xpack.security.transport.ssl.keystore.path: elastic-transport.p12
-xpack.security.transport.ssl.truststore.path: elastic-transport.p12
 s3.client.default.path_style_access: "true"
