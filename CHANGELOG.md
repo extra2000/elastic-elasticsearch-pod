@@ -1,5 +1,32 @@
 # Changelog
 
+## [7.0.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v6.2.0...v7.0.0) (2022-04-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* **pods:** SSL type and name has changed from P12 to PEM for all pods in `cluster-multi-server`
+* **pods:** SELinux name has changed for `cluster-multi-server`
+* **pods:** container name has changed to `srv01` for all containers in `cluster-multi-server`
+* **configs:** certs name and type has changed from P12 to PEM in `cluster-multi-server` configs
+* **selinux:** SELinux files and names for `cluster-multi-server` have changed
+
+### Documentations
+
+* **cluster-multi-server:** remove old SSL instructions ([f9edc65](https://github.com/extra2000/elastic-elasticsearch-pod/commit/f9edc65d0ad1ac4453becac7d247b5a62638fa98))
+* **cluster-multi-server:** update container filename for systemd ([7820480](https://github.com/extra2000/elastic-elasticsearch-pod/commit/7820480881535aae58930d1072dfa4bf90c4bc2e))
+* **cluster-multi-server:** update es-coord container name for setup pswd ([8710b02](https://github.com/extra2000/elastic-elasticsearch-pod/commit/8710b02e59d9cf67795adc877f37f8e1ef6f4a9d))
+* **cluster-multi-server:** update SELinux instructions for new name ([5549ba2](https://github.com/extra2000/elastic-elasticsearch-pod/commit/5549ba2b4e14910c9b3d60a8aebd9c592b8ecb9b))
+
+
+### Code Refactoring
+
+* **configs:** change certs type and name for cluster multi server ([b274809](https://github.com/extra2000/elastic-elasticsearch-pod/commit/b274809a669a897adcdc71d5d6cf0b519a6a2a44))
+* **pods:** change SSL type and name for cluster multi server ([1b19092](https://github.com/extra2000/elastic-elasticsearch-pod/commit/1b19092bdbc8580f6ef4932a63e6e8b755e027ea))
+* **pods:** rename container name to srv01 for cluster multi server ([b99b74b](https://github.com/extra2000/elastic-elasticsearch-pod/commit/b99b74b29383b9b5f64720804ec91ea3e02b2a3a))
+* **pods:** rename SELinux name for cluster multi server ([b141f71](https://github.com/extra2000/elastic-elasticsearch-pod/commit/b141f7102b359b1db8bd7aa2339e5161c463e290))
+* **selinux:** rename SELinux name for cluster multi server ([1edce99](https://github.com/extra2000/elastic-elasticsearch-pod/commit/1edce991c020c1bb5631449cc270e51f04011231))
+
 ## [6.2.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v6.1.0...v6.2.0) (2022-04-02)
 
 
