@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.1.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v7.0.0...v7.1.0) (2022-05-05)
+
+
+### Features
+
+* **dockerfiles:** upgrade ES from `8.1.2` to `8.2.0` ([3baad94](https://github.com/extra2000/elastic-elasticsearch-pod/commit/3baad94a2f084884263c8c9ad02d4baad6c2276f))
+
 ## [7.0.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v6.2.0...v7.0.0) (2022-04-11)
 
 
