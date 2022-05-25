@@ -1,19 +1,19 @@
 os: Ubuntu2004
 platform:
   - x64
-install:
-  - sudo apt update
-  - sudo apt install ca-certificates
-  - . /etc/os-release
-  - echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
-  - curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key | sudo apt-key add -
-  - sudo apt update
-  - sudo apt -y upgrade
-  - sudo apt -y install podman
-build_script:
-  - cd ${APPVEYOR_BUILD_FOLDER}/deployment/examples/
-  - sudo podman build -t extra2000/elastic/elasticsearch -f Dockerfile.amd64 .
-  - cd ${APPVEYOR_BUILD_FOLDER}
+# install:
+#   - sudo apt update
+#   - sudo apt install ca-certificates
+#   - . /etc/os-release
+#   - echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
+#   - curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key | sudo apt-key add -
+#   - sudo apt update
+#   - sudo apt -y upgrade
+#   - sudo apt -y install podman
+# build_script:
+#   - cd ${APPVEYOR_BUILD_FOLDER}/deployment/examples/
+#   - sudo podman build -t extra2000/elastic/elasticsearch -f Dockerfile.amd64 .
+#   - cd ${APPVEYOR_BUILD_FOLDER}
 on_success:
   - wget https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh
   - sudo bash install.sh
