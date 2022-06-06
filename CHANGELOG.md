@@ -1,5 +1,17 @@
 # Changelog
 
+## [7.3.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v7.2.0...v7.3.0) (2022-06-06)
+
+
+### Features
+
+* **dockerfiles:** upgrade ES from `8.2.1` to `8.2.2` ([bed87af](https://github.com/extra2000/elastic-elasticsearch-pod/commit/bed87af547bccfc19a51b91fb9453c2e179c7e58))
+
+
+### Continuous Integrations
+
+* **AppVeyor:** revert "disable test due to Kubic broken mirror" ([f532ca1](https://github.com/extra2000/elastic-elasticsearch-pod/commit/f532ca1abf7fb677fe1b9a60aad0ccfba84bdb65))
+
 ## [7.2.0](https://github.com/extra2000/elastic-elasticsearch-pod/compare/v7.1.0...v7.2.0) (2022-05-25)
 
 
